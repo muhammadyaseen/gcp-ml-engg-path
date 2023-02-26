@@ -74,7 +74,7 @@ CREATE OR REPLACE MODEL `model_name`
 WITH OPTIONS(model_type, input_label_cols) AS
 <training dataset>
 ```
-![[Pasted image 20230202181526.png]]
+![[images/Pasted image 20230202181526.png]]
 
 ## ML Options on GCP
 
@@ -83,9 +83,9 @@ GCP offers **4 options for building ML models**
 - Pre-Built APIs: for models built and trained by Google
 - AutoML: point and click NoCode interface
 - Custom Training: full flexibility and control over ML pipeline
-![[Pasted image 20230202183051.png]]
+![[images/Pasted image 20230202183051.png]]
 Comparison - in depth
-![[Pasted image 20230202183234.png]]
+![[images/Pasted image 20230202183234.png]]
 
 **Pre-Built APIs**: offered as a service, for Speech-to-Text, NLP, translation, text-to-speech, vision api, video intelligence.
 
