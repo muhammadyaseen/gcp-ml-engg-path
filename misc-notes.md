@@ -41,3 +41,6 @@ There are 2 types of notebooks. You have to select a `region` to create NBs.
 - **Storage and GPU**: You can still attach a GPU and get a persistant storage which keeps your notebooks saved.
 - You can specify your own Docker container. [Details here](https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container)
 - **Imp difference**: Most imp difference when compared to managed notebooks is tht you CANNOT change hardware config (cpu,ram,gpu) on-the-fly. You'll have to create a new instance.
+
+## Vertex AI Pipelines
+https://codelabs.developers.google.com/vertex-pipelines-intro#0
