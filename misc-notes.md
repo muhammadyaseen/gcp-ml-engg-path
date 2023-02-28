@@ -1,6 +1,7 @@
 | Abkürzung | Explanation |
 | ----|----|
 | QFD | quoted from documentation / Google's own tutorial |
+| NB | notebook |
 
 
 ## Compute Engine VM
@@ -9,6 +10,7 @@
 
 ## Vertex AI Workbench
 
+There are 2 types of notebooks. You have to select a `region` to create NBs.
 #### Managed Notebooks
 
 [Google Cloud documentation on Managed Notebooks](https://cloud.google.com/vertex-ai/docs/workbench/managed/introduction)
@@ -30,12 +32,12 @@
 ![](Pasted%20image%2020230228103901.png)
 
 #### User-managed Notebooks
-After clicking 'New Notebook', you have to select an environment.
-
+- After clicking 'New Notebook', you have to select an environment, so it is not completely bare bones. You get basic packages installed depending on the env you choose.
 ![](Pasted%20image%2020230228102606.png)
 
-![](Pasted%20image%2020230228110231.png)
-
-Can specify your own Docker container
-
 ![](Pasted%20image%2020230228111210.png)
+- As can be seen, the selection of Kernels is very limited compared to the managed notebook. Some of this stuff may be mitigated by installing relevant packages in the boot script etc.
+![](Pasted%20image%2020230228110231.png)
+- **Storage and GPU**: You can still attach a GPU and get a persistant storage which keeps your notebooks saved.
+- You can specify your own Docker container. [Details here](https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container)
+- **Imp difference**: Most imp difference when compared to managed notebooks is tht you CANNOT change hardware config (cpu,ram,gpu) on-the-fly. You'll have to create a new instance.
