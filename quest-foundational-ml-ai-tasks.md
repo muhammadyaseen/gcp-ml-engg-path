@@ -77,14 +77,41 @@ It has a DSL called Wrangler to apply transformations to columns and data.
 ## Lab # 3 - Dataflow: Qwik Start - Templates or Python
 **Synopsis**: In this lab, you will learn how to create a streaming pipeline using one of [Google's Cloud Dataflow templates](https://cloud.google.com/dataflow/docs/templates/provided-templates). More specifically, you will use the Cloud Pub/Sub to BigQuery template, which reads messages written in JSON from a Pub/Sub topic and pushes them to a BigQuery table.
 
+In this lab, we have a choice of either using Console (UI) or Cloud Shell (Cmdline) to complete the tasks. I chose cmdline, bcz imo it makes things more clear.
+
 #### Task 1. Create a Cloud BigQuery dataset and table Using Cloud Shell
 #### Task 2. Run the pipeline
+![](Pasted%20image%2020230326150402.png)
+
+![](Pasted%20image%2020230326164506.png)
+
 #### Task 3. Submit a query
 #### Task 4. Test your understanding
+- Dataflow supports both stream and batch workflows, here we worked with Pub/Sub topic to BigQuery -- which is a stream dataflow.
+- Dataflow is a distribution of Apache Beam
 
-## Lab # 4 - Dataflow: Qwik Start - Console or Cmdline
+
+**Synopsis**: In this lab you will set up your Python development environment, get the Cloud Dataflow SDK for Python, and run an example pipeline using the Cloud Console
+
+## Lab # 4 - Dataproc: Qwik Start - Console or Cmdline
+![](Pasted%20image%2020230326164557.png)
+
+Job creation
+![](Pasted%20image%2020230326165606.png)
+![](Pasted%20image%2020230326165629.png)
+
 ## Lab # 5 - Cloud Natural Language API: Qwik Start
 ## Lab # 6 - Cloud Speech API: Qwik Start
+
+The Google Cloud Speech API enables easy integration of Google speech recognition technologies into developer applications. The Speech API allows you to send audio and receive a text transcription from the service.
+
+**Synopsis**:
+Learn to create an API Key, Create and Call Speech API request
+
+#### Task 1. Create an API key
+#### Task 2. Create your Speech API request
+#### Task 3. Call the Speech API
+
 ## Lab # 7 - Video Intelligence: Qwik Start
 ## Lab # 8 - Perform Foundational Data, ML, and AI Tasks in Google Cloud: Challenge Lab
 
