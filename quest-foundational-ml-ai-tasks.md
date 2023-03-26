@@ -39,7 +39,33 @@ We get the following after cloning.
 
 #### Task 5. Install lab dependencies
 
+We install the dependencies specified in the `requirements.txt` file.
+Then, open the notebook and follow the instructions given in it.
+
+Essentially, we:
+- Download a `.xlsx` dataset from internet and convert it to `.csv`
+- Creata Bucket for our BQ dataset
+- Create a BQ dataset and load csv data into it
+- Use BQ queries to load data into pandas dataframes
+- Create a simple baseline model in BQ, using SQL stat functions (could have also used BQ ML)
+- Pass those dfs to TensorFlow to create a DNN Regressor model
+Up to this point, we have a 'local' workflow, now we will work towards making it 'cloud native'
+- adssad
+- a
+- a
+- a
+
 ## Lab # 2 - Dataprep: Qwik Start
+
+#### Task 1. Create a Cloud Storage bucket in your project
+#### Task 2. Initialize Cloud Dataprep
+#### Task 3. Create a flow
+#### Task 4. Import datasets
+#### Task 5. Prep the candidate file
+#### Task 6. Wrangle the Contributions file and join it to the Candidates file
+#### Task 7. Summary of data
+#### Task 8. Rename Columns
+
 ## Lab # 3 - Dataflow: Qwik Start - Templates
 ## Lab # 4 - Dataflow: Qwik Start - Python
 ## Lab # 5 - Dataflow: Qwik Start - Console or Cmdline
