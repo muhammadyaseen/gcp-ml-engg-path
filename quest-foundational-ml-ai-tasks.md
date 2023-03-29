@@ -125,6 +125,35 @@ Once the job has been submitted we can see output and details in the Job Details
 ![](Pasted%20image%2020230326165629.png)
 
 ## Lab # 5 - Cloud Natural Language API: Qwik Start
+Cloud Natural Language API lets you extract information about people, places, events, (and more) mentioned in text documents, news articles, or blog posts. Can be used for sentiment and intent analysis.
+
+Cloud Natural Language API features: syntax analysis, Entity Recognition, Sentiment Analysis, Content Classification (pre-define categories), Multi-Language, Integrated REST API.
+
+**Synopsis**: In this lab you'll use the `analyze-entities` method to ask the Cloud Natural Language API to extract "entities" (e.g. people, places, and events) from a snippet of text.
+
+#### Task 1. Create an API key
+
+Console: Go to API & Services and Create and API key. This need so that we can access resources within our project.
+
+Cmdline: 
+1. Get the project ID: `export GOOGLE_CLOUD_PROJECT=$(gcloud config get-value core/project)`
+2. Create Service Account to access NL API: `gcloud iam service-accounts create my-natlang-sa --display-name "my natural language service account"`
+3.  create credentials to log in as your new service account and save them in json file. 
+```
+gcloud iam service-accounts keys create ~/key.json \
+  --iam-account my-natlang-sa@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com
+```
+4. Set env var that points to the key. 
+`export GOOGLE_APPLICATION_CREDENTIALS="/home/USER/key.json"`
+
+#### Task 2. Make an Entity Analysis request
+
+To make a request, a Compute Engine instance has been provision already. (why can't we make request directly from Cloud Shell?). We SSH into the instance and run:
+```
+gcloud ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'." > result.json
+```
+
+
 ## Lab # 6 - Cloud Speech API: Qwik Start
 
 The Google Cloud Speech API enables easy integration of Google speech recognition technologies into developer applications. The Speech API allows you to send audio and receive a text transcription from the service.
