@@ -171,6 +171,13 @@ Create a json file with required format.
 Query the SPeech API endpoint and provide the json file as data. It returns a json response
 
 ## Lab # 7 - Video Intelligence: Qwik Start
+
+Google Cloud Video Intelligence makes videos searchable and discoverable by extracting metadata with an easy to use REST API. You can now search every moment of every video file in your catalog. It helps you identify key entities (nouns) within your video; and when they occur within the video. Separate signal from noise by retrieving relevant information within the entire video, shot-by-shot, -or per frame.
+
+#### Task 1. Enable the Video Intelligence API
+#### Task 2. Set up authorization
+#### Task 3. Make an annotate video request
+
 ## Lab # 8 - Perform Foundational Data, ML, and AI Tasks in Google Cloud: Challenge Lab
 
 
