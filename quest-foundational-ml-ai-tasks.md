@@ -144,7 +144,7 @@ gcloud iam service-accounts keys create ~/key.json \
   --iam-account my-natlang-sa@${GOOGLE_CLOUD_PROJECT}.iam.gserviceaccount.com
 ```
 4. Set env var that points to the key. 
-`export GOOGLE_APPLICATION_CREDENTIALS="/home/USER/key.json"`
+`export GOOGLE_APPLICATION_CREDENTIALS="/home/${USER}/key.json"`
 
 #### Task 2. Make an Entity Analysis request
 
