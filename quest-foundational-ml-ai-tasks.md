@@ -214,5 +214,9 @@ curl -s -H 'Content-Type: application/json' \
 
 ## Lab # 8 - Perform Foundational Data, ML, and AI Tasks in Google Cloud: Challenge Lab
 
+#### Task 1: Run a simple Dataflow job
+#### Task 2: Run a simple Dataproc job
+#### Task 3: Run a simple Dataprep job
+#### Task 4: AI
 
 
