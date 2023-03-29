@@ -148,11 +148,12 @@ gcloud iam service-accounts keys create ~/key.json \
 
 #### Task 2. Make an Entity Analysis request
 
-To make a request, a Compute Engine instance has been provision already. (why can't we make request directly from Cloud Shell?). We SSH into the instance and run:
+To make a request, a Compute Engine instance has been provision already. (why can't we make request directly from Cloud Shell? - we can). We SSH into the instance and run:
 ```
 gcloud ml language analyze-entities --content="Michelangelo Caravaggio, Italian painter, is known for 'The Calling of Saint Matthew'." > result.json
 ```
 
+Where exactly was the SA that we created was used?
 
 ## Lab # 6 - Cloud Speech API: Qwik Start
 
