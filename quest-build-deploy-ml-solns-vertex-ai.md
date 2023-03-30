@@ -58,6 +58,22 @@ Cloud Run is a managed compute platform that lets you run containers directly on
 
 ## Lab # 3 - Deploy a BigQuery ML Customer Churn Classifier to Vertex AI for Online Predictions
 
+![](Pasted%20image%2020230330134248.png)
+
+**Synopsis:** In this lab, you will go one step further and focus on how Vertex AI extends BigQuery ML's capabilities through online prediction so you can incorporate both customer churn predictions into decision making UIs such as [Looker dashboards](https://looker.com/google-cloud) but also online predictions directly into customer applications to power targeted interventions such as targeted incentives.
+
+In this lab, you will train, tune, evaluate, explain, and generate batch and online predictions with a BigQuery ML XGBoost model. You will use a Google Analytics 4 dataset from a real mobile application, Flood it!, to determine the likelihood of users returning to the application. You will generate batch predictions with your BigQuery ML model as well as export and deploy it to **Vertex AI** for online predictions using the Vertex Python SDK.
+
+![](Pasted%20image%2020230330134216.png)
+
+#### Task 1. Enable Google Cloud services
+#### Task 2. Deploy Vertex Notebook instance
+#### Task 3. Clone the lab repository
+#### Task 4. Create a BigQuery dataset
+#### Task 5. Create a BigQuery ML XGBoost churn propensity model
+#### Task 6. Evaluate your BigQuery ML model
+#### Task 7. Batch predict user churn with your BigQuery ML model
+
 ## Lab # 4 - Vertex Pipelines: Quick Start
 
 ## Lab # 5 - Challenge Lab
