@@ -74,6 +74,11 @@ In this lab, you will train, tune, evaluate, explain, and generate batch and onl
 #### Task 6. Evaluate your BigQuery ML model
 #### Task 7. Batch predict user churn with your BigQuery ML model
 
+After having trained and tested the model, we 'extract' it and store the assets in GCS Bucket. We then create an Endpoint to deploy the Model. This endpoint uses the GCS bucket and makes it available as an online prediction service.
+
+This is what the bucket folder looks like:
+![](Pasted%20image%2020230331172755.png)
+
 ## Lab # 4 - Vertex Pipelines: Quick Start
 
 ## Lab # 5 - Challenge Lab
