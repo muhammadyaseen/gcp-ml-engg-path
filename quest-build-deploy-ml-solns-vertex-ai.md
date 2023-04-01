@@ -292,6 +292,13 @@ small_pipeline_df
 ```
 
 You've now learned how to build, run, and get metadata for an end-to-end ML pipeline on Vertex Pipelines.
+
 ## Lab # 5 - Challenge Lab
 
+#### Task 1. Create an Vertex Notebooks instance
+#### Task 2. Download the challenge notebook
+#### Task 3. Build and train your model locally in a Vertex notebook
+#### Task 4. Use Cloud Build to build and submit your model container to Google Cloud Artifact Registry
+#### Task 5. Define a pipeline using the KFP SDK
+#### Task 6. Query deployed model on Vertex Endpoint for online predictions
 
