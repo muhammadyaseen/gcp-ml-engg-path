@@ -295,6 +295,8 @@ You've now learned how to build, run, and get metadata for an end-to-end ML pipe
 
 ## Lab # 5 - Challenge Lab
 
+![](Pasted%20image%2020230401141650.png)
+
 #### Task 1. Create an Vertex Notebooks instance
 #### Task 2. Download the challenge notebook
 #### Task 3. Build and train your model locally in a Vertex notebook

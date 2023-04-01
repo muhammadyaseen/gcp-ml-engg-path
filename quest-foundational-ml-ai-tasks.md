@@ -50,10 +50,8 @@ Essentially, we:
 - Create a simple baseline model in BQ, using SQL stat functions (could have also used BQ ML)
 - Pass those dfs to TensorFlow to create a DNN Regressor model
 Up to this point, we have a 'local' workflow, now we will work towards making it 'cloud native'
-- adssad
-- a
-- a
-- a
+
+The details are in this notebook:
 https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/self-paced-labs/vertex-ai/vertex-ai-qwikstart/lab_exercise_long.ipynb
 
 ## Lab # 2 - Dataprep: Qwik Start

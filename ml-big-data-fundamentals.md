@@ -30,6 +30,18 @@ Right storage depends on data and business need
 - Analytics: BigQuery, Data Studio, Looker
 - ML: Vertex AI, Auto ML
 
+**Data lake storage**: Storage layer for the data lake needs to consider the nature of the data being ingested and the purpose it will be used for. The image below provides a decision tree for storage service selection based on these considerations.
+
+![](Pasted%20image%2020230401181636.png)
+
+**Also relevant are the following 2 blog posts for a comparison of different storage offerings:**
+
+[Design an optimal storage strategy for your cloud workload](https://cloud.google.com/architecture/storage-advisor)
+
+[A map of storage options in Google Cloud](https://cloud.google.com/blog/topics/developers-practitioners/map-storage-options-google-cloud)
+
+[Choosing the right compute option in GCP: a decision tree](https://cloud.google.com/blog/products/compute/choosing-the-right-compute-option-in-gcp-a-decision-tree)
+
 ## Data Engg for Streaming Data
 
 **Pub/Sub**: 
@@ -76,6 +88,10 @@ WITH OPTIONS(model_type, input_label_cols) AS
 ```
 ![](images/Pasted%20image%2020230202181526.png)
 
+**Comparison of type of Data Engg workload and GCP Solutions**:
+![](Pasted%20image%2020230401181757.png)
+
+Source: [Architect your data lake on Google Cloud with Data Fusion and Composer](https://cloud.google.com/blog/topics/developers-practitioners/architect-your-data-lake-google-cloud-data-fusion-and-composer)
 ## ML Options on GCP
 
 GCP offers **4 options for building ML models**
