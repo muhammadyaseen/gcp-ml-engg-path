@@ -231,6 +231,8 @@ The component definitions defined above created factory functions that can be us
 
 This pipeline will take **5-6 minutes** to run
 
+![](Pasted%20image%2020230401134114.png)
+
 #### Task 4. Creating an end-to-end ML pipeline
 
 It's time to build your first ML pipeline. In this pipeline, you'll use the UCI Machine Learning Dry Beans dataset, from: KOKLU, M. and OZKAN, I.A., (2020), "Multiclass Classification of Dry Beans Using Computer Vision and Machine Learning Techniques." This is a tabular dataset, and in your pipeline you'll use the dataset to train, evaluate, and deploy an AutoML model that classifies beans into one of 7 types based on their characteristics.
@@ -273,9 +275,9 @@ response = api_client.create_run_from_job_spec(
 
 Click on the link shown after running the cell above to see your pipeline in the console. If you toggle the "Expand artifacts" button at the top, you'll be able to see details for the different artifacts created from your pipeline. For example, if you click on the `dataset` artifact, you'll see details on the Vertex AI dataset that was created. You can click the link here to go to the page for that dataset. Similarly, to see the resulting metric visualizations from your custom evaluation component, click on the artifact called **metricsc**
 
+![](Pasted%20image%2020230401134506.png)
+
 To see the model and endpoint created from this pipeline run, go to the models section and click on the model named `automl-beans`. There you should see this model deployed to an endpoint
-
-
 
 ##### Step 4: Comparing metrics across pipeline runs
 

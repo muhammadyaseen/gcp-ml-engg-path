@@ -1,0 +1,1278 @@
+
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<title>Vertex Pipelines: Qwik Start | Google Cloud Skills Boost</title>
+<script>
+//<![CDATA[
+window.gon={};gon.deployment="google-run";
+//]]>
+</script>
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',"GTM-5XSKHDX");
+</script>
+<script src="https://www.googletagmanager.com/gtag/js?id=G-2X30ZRBDSG" async="async"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', "G-2X30ZRBDSG", {
+    user_id: "9690557"
+  });
+</script>
+<script>
+  const properties = JSON.parse(atob('eyJsb2NhbGUiOiJlbiIsInN1YnNjcmlwdGlvbiI6Im1vbnRobHkiLCJ1c2VyX3JvbGVzIjoic3R1ZGVudCIsImZlYXR1cmVfb2F1dGhfcmlzY19zaHV0b2ZmIjp0cnVlLCJmZWF0dXJlX3Byb2dyYW1fcmVzb3VyY2VzIjp0cnVlLCJmZWF0dXJlX3BlcnNvbmFsaXplZF9xdWVzdHMiOmZhbHNlLCJmZWF0dXJlX3RlYW1zIjpmYWxzZSwiZmVhdHVyZV9wcm9ncmFtX2dyb3VwcyI6dHJ1ZSwiZmVhdHVyZV9hYl9jb250ZW50X2djcC1vbmRlbWFuZC1jb250ZW50L1QtR09PR0FWLUJ8cHJvamVjdC1zZWVraG8tcHVibGljLWNhdGFsb2d8MS4wfDEuMSI6dHJ1ZSwiZmVhdHVyZV9lbmZvcmNlX2NvZGVidWlsZF92ZXJkaWN0cyI6dHJ1ZSwiZmVhdHVyZV9sb2dfY29va2llcyI6ZmFsc2UsImZlYXR1cmVfY291cnNlX3VwZ3JhZGUiOnRydWUsImZlYXR1cmVfYWxleGFuZHJpYV9zaG93X2J1bmRsZV9lcnJvcnMiOnRydWUsImZlYXR1cmVfcHJvZ3JhbXMiOnRydWUsImZlYXR1cmVfc2hvd19hbm51YWxfcHVyY2hhc2Vfbm93Ijp0cnVlLCJmZWF0dXJlX3Byb2dyYW1fbGVhcm5pbmdfYXNzaWdubWVudCI6dHJ1ZSwiZmVhdHVyZV9jaGF0X29mZl9mb3Jfc2lnbmVkX291dF91c2VycyI6dHJ1ZSwiZmVhdHVyZV9sZWFybmluZ19jZW50ZXIiOnRydWUsImZlYXR1cmVfdXNlZF9pbiI6dHJ1ZSwiZmVhdHVyZV9jb21wbGV0aW9uc19kYXNoYm9hcmQiOmZhbHNlLCJmZWF0dXJlX2NvbW11bml0eV9mb3J1bSI6ZmFsc2UsImZlYXR1cmVfY2Fub25pY2FsX2RvbWFpbl9yZWRpcmVjdCI6dHJ1ZSwiZ3JvdXBfc3VhZG1pbnMiOmZhbHNlLCJncm91cF9ub25fc3VhZG1pbnMiOnRydWUsImdyb3VwX2FkbWlucyI6ZmFsc2UsImdyb3VwX3RyYWluZXJzIjpmYWxzZSwiZ3JvdXBfY29vcmRpbmF0b3JzIjpmYWxzZSwiZ3JvdXBfY3JlYXRvcnMiOmZhbHNlLCJncm91cF9zdHVkZW50cyI6dHJ1ZSwiZ3JvdXBfbm9uX29yZ2FuaXphdGlvbiI6dHJ1ZSwiZ3JvdXBfbm9uX3Byb2dyYW0iOnRydWUsImdyb3VwX2luX3RhcmdldGVkX29yZ2FuaXphdGlvbiI6ZmFsc2V9'));
+  gtag('set', 'user_properties', properties);
+</script>
+<script src="https://cdn.qwiklabs.com/assets/hallofmirrors/polyfills/webcomponents-loader-8583b47b01e40e6ea7bf1ad443a20b7e79bbdd5eafac009806a228c91a97282c.js"></script>
+<script src="https://cdn.qwiklabs.com/assets/vendor-3feabe0d357b8558a6cda1abf105dc09ea5ea9a60c72ab0dc46afc2c93215343.js"></script>
+<script src="https://cdn.qwiklabs.com/assets/application-b05f7d4041acd192ad555c5bde9ee051cc0f74b96e3b64374c3b666982c47bbb.js"></script>
+<script src="https://cdn.qwiklabs.com/assets/hallofmirrors/hallofmirrors-5b03f4e7f65b17021874767ce6c285257df2d7531035a95d738fde881ead6fb7.js"></script>
+<!--[if lt IE 9]>
+<script src='http://html5shim.googlecode.com/svn/trunk/html5.js' type='text/javascript'></script>
+<![endif]-->
+<!--[endif]>  <![endif]-->
+<script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key=511e4158-0aec-4e3c-b2e6-4daa1769f51e'></script>
+
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="br/g35skLz2IOYfaJSVc8ZdptI4mgWO85tvrbkzJp9lF/1rM5N+TN6urOGRcJn3CMbeKfVC3A0GOO1PR1hIYYQ==" />
+<meta content='width=device-width, initial-scale=1.0, user-scalable=yes' name='viewport'>
+<meta content='1rRsY0INj8RvwB5EF5pwdxt2A2P9aDgAlsICaJ0d5w0' name='google-site-verification'>
+<meta content='#3681E4' property='msapplication-TileColor'>
+<meta content='/favicon-144.png' property='msapplication-TileImage'>
+<meta content='[{&quot;id&quot;:&quot;recaptcha_experiment&quot;,&quot;optimize_id&quot;:&quot;dpViOcLkT3qS4TvL2mRojA&quot;,&quot;title&quot;:&quot;No Recaptcha shown for trusted users&quot;,&quot;variant_index&quot;:0,&quot;variant&quot;:&quot;original&quot;}]' name='active-experiments'>
+<meta content='{&quot;userId&quot;:9690557,&quot;experimentIds&quot;:[&quot;oauth_risc_shutoff&quot;,&quot;program_resources&quot;,&quot;program_groups&quot;,&quot;ab_content_gcp-ondemand-content/T-GOOGAV-B|project-seekho-public-catalog|1.0|1.1&quot;,&quot;enforce_codebuild_verdicts&quot;,&quot;course_upgrade&quot;,&quot;alexandria_show_bundle_errors&quot;,&quot;programs&quot;,&quot;show_annual_purchase_now&quot;,&quot;program_learning_assignment&quot;,&quot;chat_off_for_signed_out_users&quot;,&quot;learning_center&quot;,&quot;used_in&quot;,&quot;canonical_domain_redirect&quot;]}' name='help-api-product-data'>
+<meta content='{&quot;groupIds&quot;:[&quot;non_suadmins&quot;,&quot;students&quot;,&quot;non_organization&quot;,&quot;non_program&quot;]}' name='help-api-custom-data'>
+<meta content='In this lab you will create ML Pipelines using Vertex AI' name='description'>
+<meta content='Qwiklabs' name='author'>
+<meta content='Vertex Pipelines: Qwik Start | Google Cloud Skills Boost' property='og:title'>
+<meta content='website' property='og:type'>
+<meta content='/favicon-144.png' property='og:image'>
+<meta content='Qwiklabs' property='og:site_name'>
+<meta content='In this lab you will create ML Pipelines using Vertex AI' property='og:description'>
+<meta content='/qwiklabs_logo_900x887.png' property='og:logo' size='900x887'>
+<meta content='/qwiklabs_logo_994x187.png' property='og:logo' size='994x187'>
+
+
+<meta property="og:url" content="https://www.cloudskillsboost.google/focuses/21234?parent=catalog" /><link href="https://www.cloudskillsboost.google/focuses/21234?parent=catalog" rel="canonical" />
+<link color='#3681E4' href='/favicon-svg.svg' rel='mask-icon'>
+<link href='/favicon-180.png' rel='apple-touch-icon-precomposed'>
+<link href='https://cdn.qwiklabs.com/X46FrQX4iLxHW5MxL8jICvgZM0evMEKscCeQO%2BazGdo%3D' rel='shortcut icon' type='image/x-icon'>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400|Roboto+Mono:400,700|Roboto:300,400,500,700|Google+Sans:300,400,500,700|Google+Sans+Display:400|Material+Icons|Google+Material+Icons" media="screen" />
+
+<link rel="stylesheet" href="https://cdn.qwiklabs.com/assets/application-7ade652309a380d269d5d1c111c599461841b149bfc5c64962320de28da1e189.css" media="all" />
+
+
+<style>
+  :root {
+    --primary-text-on-surface-color: #1a73e8;
+    --primary-text-on-surface-color-dark: #1568d6;
+    --primary-text-on-surface-color-darker: #135ec1;
+    --primary-text-on-surface-color-darkest: #1154ac;
+    --primary-surface-color: #1a73e8;
+    --primary-surface-color-rgb: 26,115,232;
+    --primary-surface-color-light: #d1e3fa;
+    --primary-surface-color-lightest: #e8f1fd;
+    --text-on-primary-color: #ffffff;
+    --accent-text-on-surface-color: #f29900;
+    --accent-surface-color: #f9ab00;
+    --accent-surface-color-rgb: 249,171,0;
+    --accent-surface-color-light: #ffefcc;
+    --text-on-accent-color: #202124;
+  }
+</style>
+
+<style>
+  :root {
+    --navbar-height: 112px;
+  }
+</style>
+
+
+
+</head>
+<body class='lab-show l-full no-nav application-new focuses focuses-show lab-show l-full no-nav '>
+<div class='header-container light-theme'>
+<div class='header'>
+<ql-toolbar jumpEnabled>
+<div class='header__title' slot='title'>
+<ql-icon-button label="Back" href="https://www.cloudskillsboost.google/quests/183" id="07294e0323f99adb" target="_self" tip="Back">arrow_back</ql-icon-button>
+<h1 class='ql-headline-6'>Vertex Pipelines: Qwik Start</h1>
+</div>
+<div class='header__actions' slot='action'>
+<ql-icon-button icon='share' id='share_4078' label='Share on social media' tip='Share'></ql-icon-button>
+<ql-menu for='share_4078'>
+<ql-menu-item data-analytics-action='Shared to LinkedIn Feed.' data-analytics-category='Lab' data-analytics-label='Vertex Pipelines: Qwik Start' href='https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.cloudskillsboost.google%2Fcatalog_lab%2F4078%3Futm_medium%3Dsocial%26utm_source%3Dlinkedin%26utm_campaign%3Dql-social-share' icon='post_linkedin' label='Share on LinkedIn Feed' role='link' target='_blank'>
+<span class='label'>Share on LinkedIn Feed</span>
+</ql-menu-item>
+
+<ql-menu-item data-analytics-action='Shared to Twitter.' data-analytics-category='Lab' data-analytics-label='Vertex Pipelines: Qwik Start' href='https://twitter.com/intent/tweet?text=Excited%20to%20share%20what%20I%E2%80%99m%20learning%20on%20%23GoogleCloudSkillsBoost&amp;url=https%3A%2F%2Fwww.cloudskillsboost.google%2Fcatalog_lab%2F4078%3Futm_medium%3Dsocial%26utm_source%3Dtwitter%26utm_campaign%3Dql-social-share&amp;hashtags=' icon='post_twitter' label='Twitter' role='link' target='_blank'>
+<span class='label'>Twitter</span>
+</ql-menu-item>
+
+<ql-menu-item data-analytics-action='Shared to Facebook.' data-analytics-category='Lab' data-analytics-label='Vertex Pipelines: Qwik Start' href='https://facebook.com/sharer.php?display=popup&amp;u=https%3A%2F%2Fwww.cloudskillsboost.google%2Fcatalog_lab%2F4078%3Futm_medium%3Dsocial%26utm_source%3Dfacebook%26utm_campaign%3Dql-social-share' icon='post_facebook' label='Facebook' role='link' target='_blank'>
+<span class='label'>Facebook</span>
+</ql-menu-item>
+
+<ql-copyable-input label='Share Link' value='https://www.cloudskillsboost.google/catalog_lab/4078'></ql-copyable-input>
+</ql-menu>
+
+<ql-icon-button class='icon-button js-favorite-button favorite-button' data-id='21234' data-name='Vertex Pipelines: Qwik Start' data-type='CatalogItem' href='/favorite.json?item_id=21234&amp;item_type=CatalogItem' id='CatalogItem-21234-favorite-button' label='Add to favorites' tip='Add to favorites'>
+favorite_border
+</ql-icon-button>
+
+
+
+<ql-icon-button id='control-panel-target' style='display: none;'>
+dashboard
+</ql-icon-button>
+<ql-menu for='control-panel-target' id='control-panel-menu'></ql-menu>
+<ql-icon-button class='mobile-hide' icon='help_outline' id='help-menu-button' label='Open help menu' tip='Help'></ql-icon-button>
+<ql-menu for='help-menu-button' id='help-menu'>
+<ql-menu-item data-analytics-action='opened_help' data-analytics-label='lab' label='Help Center' onclick='hallofmirrors.helpService.startHelp({&quot;productData&quot;:{&quot;userId&quot;:9690557},&quot;context&quot;:&quot;lab&quot;})'></ql-menu-item>
+<ql-menu-item href='mailto:support@qwiklabs.com' label='Email support'></ql-menu-item>
+<ql-menu-item label='Chat support' onClick='ql.chat.open()'></ql-menu-item>
+</ql-menu>
+
+<ql-icon-button class='mobile-hide' icon='language' id='language' label='Select your language preference' tip='Language'></ql-icon-button>
+<ql-menu for='language'>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='ar' href='/focuses/21234?locale=ar&amp;parent=catalog' label='العربية‬‎' lang='ar'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='de' href='/focuses/21234?locale=de&amp;parent=catalog' label='Deutsch' lang='de'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='en' href='/focuses/21234?locale=en&amp;parent=catalog' label='English' lang='en'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='es' href='/focuses/21234?locale=es&amp;parent=catalog' label='español (Latinoamérica)' lang='es'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='fr' href='/focuses/21234?locale=fr&amp;parent=catalog' label='français' lang='fr'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='fr_CA' href='/focuses/21234?locale=fr_CA&amp;parent=catalog' label='français (Canada)' lang='fr-CA'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='he' href='/focuses/21234?locale=he&amp;parent=catalog' label='עברית' lang='he'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='id' href='/focuses/21234?locale=id&amp;parent=catalog' label='bahasa Indonesia' lang='id'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='it' href='/focuses/21234?locale=it&amp;parent=catalog' label='Italiano' lang='it'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='ja' href='/focuses/21234?locale=ja&amp;parent=catalog' label='日本語' lang='ja'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='ko' href='/focuses/21234?locale=ko&amp;parent=catalog' label='한국어' lang='ko'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='pl' href='/focuses/21234?locale=pl&amp;parent=catalog' label='Polski' lang='pl'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='pt_BR' href='/focuses/21234?locale=pt_BR&amp;parent=catalog' label='português (Brasil)' lang='pt-BR'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='pt_PT' href='/focuses/21234?locale=pt_PT&amp;parent=catalog' label='português (Portugal)' lang='pt-PT'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='ru' href='/focuses/21234?locale=ru&amp;parent=catalog' label='русский' lang='ru'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='tr' href='/focuses/21234?locale=tr&amp;parent=catalog' label='Türkçe' lang='tr'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='uk' href='/focuses/21234?locale=uk&amp;parent=catalog' label='український' lang='uk'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='zh' href='/focuses/21234?locale=zh&amp;parent=catalog' label='简体中文' lang='zh'></ql-menu-item>
+<ql-menu-item data-analytics-action='changed_locale' data-analytics-label='zh_TW' href='/focuses/21234?locale=zh_TW&amp;parent=catalog' label='繁體中文' lang='zh-TW'></ql-menu-item>
+</ql-menu>
+
+<ql-icon-button id='my_account' label='My account' tip='My account'>
+<ql-avatar src='https://lh3.googleusercontent.com/a/AGNmyxbUNyaYZt9hvEfGPISpunKu9oY1-XemgbT3Ycri=s320-c'></ql-avatar>
+</ql-icon-button>
+<ql-menu for='my_account' id='my_account_menu' style='max-height: 640px'>
+<div class='my-account-menu'>
+<ql-avatar class='l-mtl l-mbl' size='120' src='https://lh3.googleusercontent.com/a/AGNmyxbUNyaYZt9hvEfGPISpunKu9oY1-XemgbT3Ycri=s320-c'></ql-avatar>
+<div class='my-account-menu__user-info l-mbl'>
+<h4 class='ql-subhead-1'>Muhammad Yaseen</h4>
+<p class='ql-body-2 text--light'>myaseen.de@gmail.com</p>
+<p class='ql-body-2 text--light'>
+</p>
+<a class="text--green ql-subhead-2" href="/my_account/payments"><ql-chip positive>
+Monthly Subscription
+</ql-chip>
+</a></div>
+<div class='buttons l-mbl'>
+<a class="button button--hairline l-mrm" id="profile" href="/public_profiles/d85f8295-b522-4522-964c-f0fcf9375090">Public Profile</a>
+<a class="button button--hairline" id="settings" href="/my_account/profile">Settings</a>
+</div>
+<hr>
+<ql-button data-analytics-action='clicked_sign_out' href='/users/sign_out' method='delete'>
+Sign Out
+</ql-button>
+<div class='privacy l-mtl'>
+<a target="_blank" class="ql-caption text--light" href="/privacy_policy">Privacy</a>
+<span class='ql-caption text--light l-mls l-mrs'>&middot;</span>
+<a class="ql-caption text--light" href="/terms_of_service">Terms</a>
+</div>
+</div>
+</ql-menu>
+
+</div>
+</ql-toolbar>
+
+</div>
+</div>
+
+<nav class='nav-panel js-nav-panel'>
+<div class='nav-panel__logo'>
+<div class="custom-logo"><img alt="Google Cloud Skills Boost" height="24" aria-label="Google Cloud Skills Boost" src="https://cdn.qwiklabs.com/PGyhmgS3zZncIEGywnx5UXsKwepRRFQ9BhAg%2FWHNrlQ%3D" /></div>
+</div>
+<nav class='ql-sidenav'>
+<ql-sidenav-item href='/' icon='home' label='Paths'></ql-sidenav-item>
+
+<ql-sidenav-item active href='/catalog' icon='school' label='Explore'></ql-sidenav-item>
+
+<ql-sidenav-item href='/profile' icon='event_note' label='Profile'></ql-sidenav-item>
+
+</nav>
+
+</nav>
+<div class='nav-panel__overlay js-nav-toggle'></div>
+
+<main class='js-main' id='jump-content'>
+<div class='l-main-wrapper' id='main-wrapper'>
+
+
+
+
+<div class='lab-assessment__tab js-open-lab-assessment-panel'>
+<button class='js-lab-assessment-total-score'>
+—/100
+</button>
+</div>
+<div aria-labelledby='lab-assessment-checkpoint' class='lab-assessment__panel js-lab-assessment-panel' role='dialog'>
+<div class='lab-assessment__panel__header'>
+<h4 id='lab-assessment-checkpoint'>Checkpoints</h4>
+<ql-icon-button class='js-close-lab-assessment-panel' icon='arrow_forward' label='Close dialog'></ql-icon-button>
+</div>
+<div class='lab-assessment__step'>
+<p class='lab-assessment__step__title' id='lab-assessment-step-title'>
+Notebook created
+</p>
+<div class='lab-assessment__step__action'>
+<ql-button class='js-show-run-step-button' description='Notebook created' step_no='1'>
+Check my progress
+</ql-button>
+<p class='lab-assessment__step__score'>
+<span class='js-assessment-step-score-1'>
+</span>
+/ 20
+</p>
+</div>
+</div>
+
+<div class='lab-assessment__step'>
+<p class='lab-assessment__step__title' id='lab-assessment-step-title'>
+Emoji pipeline has completed
+</p>
+<div class='lab-assessment__step__action'>
+<ql-button class='js-show-run-step-button' description='Emoji pipeline has completed' step_no='2'>
+Check my progress
+</ql-button>
+<p class='lab-assessment__step__score'>
+<span class='js-assessment-step-score-2'>
+</span>
+/ 40
+</p>
+</div>
+</div>
+
+<div class='lab-assessment__step'>
+<p class='lab-assessment__step__title' id='lab-assessment-step-title'>
+End-to-end ML pipeline training job has started
+</p>
+<div class='lab-assessment__step__action'>
+<ql-button class='js-show-run-step-button' description='End-to-end ML pipeline training job has started' step_no='3'>
+Check my progress
+</ql-button>
+<p class='lab-assessment__step__score'>
+<span class='js-assessment-step-score-3'>
+</span>
+/ 40
+</p>
+</div>
+</div>
+
+</div>
+<ql-drawer-container class='js-lab-state' data-analytics-payload='{&quot;label&quot;:&quot;Vertex Pipelines: Qwik Start&quot;,&quot;lab_name&quot;:&quot;Vertex Pipelines: Qwik Start&quot;,&quot;classroom_name&quot;:null,&quot;deployment&quot;:&quot;google-run&quot;}' data-credits='0.0' data-focus-id='21234' data-lab-billing-limit='0.0' data-lab-duration='5400' data-parent='catalog' data-recaptcha-enabled id='lab-container'>
+<ql-drawer id='terminal-drawer' slot='drawer' style='width: calc(100% - 480px)'>
+<iframe allow='clipboard-read' class='terminal' id='embedded-resource'></iframe>
+</ql-drawer>
+<ql-drawer-content class='js-lab-wrapper' id='lab-content' slot='drawer-content'>
+<ql-drawer-container id='lab-content-container'>
+<ql-drawer id='control-panel-drawer' open slot='drawer' width='320'>
+<ql-lab-control-panel class='ql-lab-control-panel__max-height control-panel js-lab-control-panel' connectionFiles='[]' labControlButton='{&quot;disabled&quot;:false,&quot;pending&quot;:false,&quot;running&quot;:false}' labDetails='[]' labTimer='{&quot;ticking&quot;:false,&quot;secondsRemaining&quot;:5400}' studentResources='[]'>
+<script src="https://www.recaptcha.net/recaptcha/api.js?render=6LeVI8IUAAAAAJNdox5eTkYrw9SbvhZ1TFyv3iHr"   ></script>
+        <script>
+          // Define function so that we can call it again later if we need to reset it
+          // This executes reCAPTCHA and then calls our callback.
+          function executeRecaptchaForStartLab() {
+            grecaptcha.ready(function() {
+              grecaptcha.execute('6LeVI8IUAAAAAJNdox5eTkYrw9SbvhZ1TFyv3iHr', {action: 'start_lab'}).then(function(token) {
+                setInputWithRecaptchaResponseTokenForStartLab('g-recaptcha-response-data-start-lab', token)
+              });
+            });
+          };
+          // Invoke immediately
+          executeRecaptchaForStartLab()
+
+          // Async variant so you can await this function from another async function (no need for
+          // an explicit callback function then!)
+          // Returns a Promise that resolves with the response token.
+          async function executeRecaptchaForStartLabAsync() {
+            return new Promise((resolve, reject) => {
+             grecaptcha.ready(async function() {
+                resolve(await grecaptcha.execute('6LeVI8IUAAAAAJNdox5eTkYrw9SbvhZ1TFyv3iHr', {action: 'start_lab'}))
+              });
+            })
+          };
+
+                    var setInputWithRecaptchaResponseTokenForStartLab = function(id, token) {
+            var element = document.getElementById(id);
+            element.value = token;
+          }
+
+        </script>
+<input type="hidden" name="g-recaptcha-response-data[start_lab]" id="g-recaptcha-response-data-start-lab" data-sitekey="6LeVI8IUAAAAAJNdox5eTkYrw9SbvhZ1TFyv3iHr" class="g-recaptcha g-recaptcha-response "/>
+
+<div aria-live='polite' class='hidden' id='recaptcha-v2-start-lab' slot='recaptcha'>
+<script src="https://www.recaptcha.net/recaptcha/api.js" async defer ></script>
+<div data-sitekey="6LeOI8IUAAAAAPkHlMAE9NReCD_1WD81iYlBlCnV" data-callback="recaptchaComplete" data-expired-callback="expireV2Token" class="g-recaptcha "></div>
+          <noscript>
+            <div>
+              <div style="width: 302px; height: 422px; position: relative;">
+                <div style="width: 302px; height: 422px; position: absolute;">
+                  <iframe
+                    src="https://www.recaptcha.net/recaptcha/api/fallback?k=6LeOI8IUAAAAAPkHlMAE9NReCD_1WD81iYlBlCnV"
+                    name="ReCAPTCHA"
+                    style="width: 302px; height: 422px; border-style: none; border: 0; overflow: hidden;">
+                  </iframe>
+                </div>
+              </div>
+              <div style="width: 300px; height: 60px; border-style: none;
+                bottom: 12px; left: 25px; margin: 0px; padding: 0px; right: 25px;
+                background: #f9f9f9; border: 1px solid #c1c1c1; border-radius: 3px;">
+                <textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                  class="g-recaptcha-response"
+                  style="width: 250px; height: 40px; border: 1px solid #c1c1c1;
+                  margin: 10px 25px; padding: 0px; resize: none;">
+                </textarea>
+              </div>
+            </div>
+          </noscript>
+
+</div>
+</ql-lab-control-panel>
+</ql-drawer>
+<ql-drawer-content id='lab-instructions' slot='drawer-content'>
+<ql-snackbar id='alert-snackbar'></ql-snackbar>
+<div class='alert alert--fake js-alert'>
+<p class='alert__message js-alert-message' role='alert'></p>
+<ql-icon-button class='alert__close js-alert-close' icon='clear'></ql-icon-button>
+<iframe class='l-ie-iframe-fix' tabindex='-1'></iframe>
+</div>
+<div class='lab-content__renderable-instructions js-lab-content'>
+<div class='lab-preamble'>
+<h1 class='lab-preamble__title'>
+Vertex Pipelines: Qwik Start
+</h1>
+<div class='lab-preamble__details subtitle-headline-1'>
+<span>1 hour 30 minutes</span>
+<span>5 Credits</span>
+<div class='lab__rating'>
+<a aria-label="Lab Reviews" href="/focuses/21234/reviews?parent=catalog"><div class='rateit' data-rateit-readonly='true' data-rateit-value='4.4085'></div>
+
+</a></div>
+</div>
+</div>
+<div class='lab-outline-place-holder'></div>
+
+<div class='markdown-lab-instructions js-markdown-instructions' id='markdown-lab-instructions'>
+
+<h2 id="step1">GSP965</h2>
+<p><img alt="Google Cloud self-paced labs logo" src="https://cdn.qwiklabs.com/GMOHykaqmlTHiqEeQXTySaMXYPHeIvaqa2qHEzw6Occ%3D"></p>
+<h2 id="step2">Overview</h2>
+<p>Pipelines help you automate and reproduce your ML workflow. Vertex AI integrates the ML offerings across Google Cloud into a seamless development experience. Previously, models trained with AutoML and custom models were accessible via separate services. Vertex AI combines both into a single API, along with other new products. Vertex AI also includes a variety of MLOps products, like Vertex Pipelines. In this lab, you will learn how to create and run ML pipelines with Vertex Pipelines.</p>
+<h3>Why are ML pipelines useful?</h3>
+<p>Before diving in, first understand why you would want to use a pipeline. Imagine you're building out a ML workflow that includes processing data, training a model, hyperparameter tuning, evaluation, and model deployment. Each of these steps may have different dependencies, which may become unwieldy if you treat the entire workflow as a monolith. As you begin to scale your ML process, you might want to share your ML workflow with others on your team so they can run it and contribute code. Without a reliable, reproducible process, this can become difficult. With pipelines, each step in your ML process is its own container. This lets you develop steps independently and track the input and output from each step in a reproducible way. You can also schedule or trigger runs of your pipeline based on other events in your Cloud environment, like when new training data is available.</p>
+<h4>What you'll learn</h4>
+<ul>
+<li>
+<p>Use the Kubeflow Pipelines SDK to build scalable ML pipelines</p>
+</li>
+<li>
+<p>Create and run a 3-step intro pipeline that takes text input</p>
+</li>
+<li>
+<p>Create and run a pipeline that trains, evaluates, and deploys an AutoML classification model</p>
+</li>
+<li>
+<p>Use pre-built components for interacting with Vertex AI services, provided through the google_cloud_pipeline_components library</p>
+</li>
+<li>
+<p>Schedule a pipeline job with Cloud Scheduler</p>
+</li>
+</ul>
+<h2 id="step3">Setup and requirements</h2>
+<h3>Before you click the Start Lab button</h3>
+<p>Read these instructions. Labs are timed and you cannot pause them. The timer, which starts when you click <strong>Start Lab</strong>, shows how long Google Cloud resources will be made available to you.</p>
+<p>This hands-on lab lets you do the lab activities yourself in a real cloud environment, not in a simulation or demo environment. It does so by giving you new, temporary credentials that you use to sign in and access Google Cloud for the duration of the lab.</p>
+<p>To complete this lab, you need:</p>
+<ul>
+<li>Access to a standard internet browser (Chrome browser recommended).</li>
+</ul>
+<ql-warningbox>
+<strong>Note:</strong> Use an Incognito or private browser window to run this lab. This prevents any conflicts between your personal account and the Student account, which may cause extra charges incurred to your personal account.
+</ql-warningbox>
+<ul>
+<li>Time to complete the lab---remember, once you start, you cannot pause a lab.</li>
+</ul>
+<ql-warningbox>
+<strong>Note:</strong> If you already have your own personal Google Cloud account or project, do not use it for this lab to avoid extra charges to your account.
+</ql-warningbox>
+<h3>How to start your lab and sign in to the Google Cloud Console</h3>
+<ol>
+<li>
+<p>Click the <strong>Start Lab</strong> button. If you need to pay for the lab, a pop-up opens for you to select your payment method.
+On the left is the <strong>Lab Details</strong> panel with the following:</p>
+<ul>
+<li>The <strong>Open Google Console</strong> button</li>
+<li>Time remaining</li>
+<li>The temporary credentials that you must use for this lab</li>
+<li>Other information, if needed, to step through this lab</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Open Google Console</strong>.
+The lab spins up resources, and then opens another tab that shows the <strong>Sign in</strong> page.</p>
+<p><strong><em>Tip:</em></strong> Arrange the tabs in separate windows, side-by-side.</p>
+<ql-infobox>
+<strong>Note: </strong>If you see the <strong>Choose an account</strong> dialog, click <strong>Use Another Account</strong>.        
+ </ql-infobox>
+</li>
+<li>
+<p>If necessary, copy the <strong>Username</strong> from the <strong>Lab Details</strong> panel and paste it into the <strong>Sign in</strong> dialog. Click <strong>Next</strong>.</p>
+</li>
+<li>
+<p>Copy the <strong>Password</strong> from the <strong>Lab Details</strong> panel and paste it into the <strong>Welcome</strong> dialog. Click <strong>Next</strong>.</p>
+<ql-infobox>
+<strong>Important: </strong>You must use the credentials from the left panel. Do not use your Google Cloud Skills Boost credentials. 
+ </ql-infobox>
+<ql-warningbox>
+<strong>Note: </strong>Using your own Google Cloud account for this lab may incur extra charges.
+ </ql-warningbox>
+</li>
+<li>
+<p>Click through the subsequent pages:</p>
+<ul>
+<li>Accept the terms and conditions.</li>
+<li>Do not add recovery options or two-factor authentication (because this is a temporary account).</li>
+<li>Do not sign up for free trials.</li>
+</ul>
+</li>
+</ol>
+<p>After a few moments, the Cloud Console opens in this tab.</p>
+<ql-infobox>
+<strong>Note:</strong> You can view the menu with a list of Google Cloud Products and Services by clicking the <strong>Navigation menu</strong> at the top-left.
+<img alt="Navigation menu icon" src="https://cdn.qwiklabs.com/nUxFb6oRFr435O3t6V7WYJAjeDFcrFb16G9wHWp5BzU%3D">
+</ql-infobox>
+<h2 id="step4">Task 1. Create a Vertex Notebooks instance</h2>
+<ol>
+<li>
+<p>Click on the <strong>Navigation Menu</strong>.</p>
+</li>
+<li>
+<p>Navigate to <strong>Vertex AI</strong>, then to <strong>Workbench</strong>.</p>
+</li>
+<li>
+<p>On the Notebook instances page, navigate to the <strong>User-Managed Notebooks</strong> tab and wait until <code>ai-notebook</code> is fully created.</p>
+</li>
+</ol>
+<p><img alt="Expanded Navigation menu with Workbench option highlighted" src="https://cdn.qwiklabs.com/tPe%2FH2obDoTBvIYert33Svv3CnM5gGrJ6Q2JYrvbi1Y%3D"></p>
+<ql-infobox><strong>Note: </strong>It should take a few minutes for the notebook to be fully created.</ql-infobox>
+<ol start="4">
+<li>Once the instance has been created, select <strong>Open JupyterLab:</strong>
+</li>
+</ol>
+<p><img alt="Open Jupyterlab link highlighted on the instance page" src="https://cdn.qwiklabs.com/YnesQNBOaMqxtV4b1XtWg6%2BIJk0UFE4wYdQge9212k8%3D"></p>
+<ql-activity-tracking step="1">
+    Check if the notebook is created
+</ql-activity-tracking>
+<h2 id="step5">Task 2. Vertex Pipelines setup</h2>
+<p>There are a few additional libraries you'll need to install in order to use Vertex Pipelines:</p>
+<ul>
+<li>
+<p><strong>Kubeflow Pipelines</strong>: This is the SDK used to build the pipeline. Vertex Pipelines supports running pipelines built with both Kubeflow Pipelines or TFX.</p>
+</li>
+<li>
+<p><strong>Google Cloud Pipeline Components</strong>: This library provides pre-built components that make it easier to interact with Vertex AI services from your pipeline steps.</p>
+</li>
+</ul>
+<h3>Step 1: Create Python notebook and install libraries</h3>
+<ol>
+<li>From the Launcher menu in your Notebook instance, create a notebook by selecting <strong>Python 3</strong>:</li>
+</ol>
+<p><img alt="Python 3 tile highlighted in the Notebook section " src="https://cdn.qwiklabs.com/dqzVLWiTijotvPSZ8rc%2FY75cMN9HnvOeVYv3ogQ9a0w%3D"></p>
+<ol start="2">
+<li>
+<p>You can access the Launcher menu by clicking on the <strong>+</strong> sign in the top left of your notebook instance.</p>
+</li>
+<li>
+<p>To install both services needed for this lab, first set the user flag in a notebook cell:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+USER_FLAG = "--user"
+</ql-code-block>
+<ol start="4">
+<li>
+<p>Then run the following from your notebook:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+!pip3 install {USER_FLAG} google-cloud-aiplatform==1.0.0 --upgrade
+!pip3 install {USER_FLAG} kfp google-cloud-pipeline-components==0.1.1 --upgrade
+</ql-code-block>
+<ol start="5">
+<li>
+<p>After installing these packages you'll need to restart the kernel:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+import os
+if not os.getenv("IS_TESTING"):
+    # Automatically restart kernel after installs
+    import IPython
+    app = IPython.Application.instance()
+    app.kernel.do_shutdown(True)
+</ql-code-block>
+<ol start="6">
+<li>
+<p>Finally, check that you have correctly installed the packages. The KFP SDK version should be &gt;=1.6:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+!python3 -c "import kfp; print('KFP SDK version: {}'.format(kfp.__version__))"
+!python3 -c "import google_cloud_pipeline_components; print('google_cloud_pipeline_components version: {}'.format(google_cloud_pipeline_components.__version__))"
+</ql-code-block>
+<h3>Step 2: Set your project ID and bucket</h3>
+<p>Throughout this lab you'll reference your Cloud Project ID and the bucket you created earlier. Next you'll create variables for each of those.</p>
+<ol>
+<li>
+<p>If you don't know your project ID you may be able to get it by running the following:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+import os
+PROJECT_ID = ""
+# Get your Google Cloud project ID from gcloud
+if not os.getenv("IS_TESTING"):
+    shell_output=!gcloud config list --format 'value(core.project)' 2&gt;/dev/null
+    PROJECT_ID = shell_output[0]
+    print("Project ID: ", PROJECT_ID)
+</ql-code-block>
+<ol start="2">
+<li>
+<p>Then create a variable to store your bucket name.</p>
+</li>
+</ol>
+<ql-code-block language="python">
+BUCKET_NAME="gs://" + PROJECT_ID + "-bucket"
+</ql-code-block>
+<h3>Step 3: Import libraries</h3>
+<ul>
+<li>
+<p>Add the following to import the libraries you'll be using throughout this lab:</p>
+</li>
+</ul>
+<ql-code-block language="python">
+from typing import NamedTuple
+import kfp
+from kfp import dsl
+from kfp.v2 import compiler
+from kfp.v2.dsl import (Artifact, Dataset, Input, InputPath, Model, Output,
+                        OutputPath, ClassificationMetrics, Metrics, component)
+from kfp.v2.google.client import AIPlatformClient
+from google.cloud import aiplatform
+from google_cloud_pipeline_components import aiplatform as gcc_aip
+</ql-code-block>
+<h3>Step 4: Define constants</h3>
+<ul>
+<li>
+<p>The last thing you need to do before building the pipeline is define some constant variables. <code>PIPELINE_ROOT</code> is the Cloud Storage path where the artifacts created by your pipeline will be written. You're using <code>us-central1</code> as the region here, but if you used a different <code>region</code> when you created your bucket, update the REGION variable in the code below:</p>
+</li>
+</ul>
+<ql-code-block language="python">
+PATH=%env PATH
+%env PATH={PATH}:/home/jupyter/.local/bin
+REGION="us-central1"
+PIPELINE_ROOT = f"{BUCKET_NAME}/pipeline_root/"
+PIPELINE_ROOT
+</ql-code-block>
+<p>After running the code above, you should see the root directory for your pipeline printed. This is the Cloud Storage location where the artifacts from your pipeline will be written. It will be in the format of <code>gs://&lt;bucket_name&gt;/pipeline_root/</code>.</p>
+<h2 id="step6">Task 3. Creating your first pipeline</h2>
+<ul>
+<li>
+<p>Create a short pipeline using the KFP SDK. This pipeline doesn't do anything ML related (don't worry, you'll get there!), this exercise is to teach you:</p>
+<ul>
+<li>How to create custom components in the KFP SDK</li>
+<li>How to run and monitor a pipeline in Vertex Pipelines</li>
+</ul>
+</li>
+</ul>
+<p>You'll create a pipeline that prints out a sentence using two outputs: a product name and an emoji description. This pipeline will consist of three components:</p>
+<ul>
+<li>
+<p><code>product_name</code>: This component will take a product name as input, and return that string as output.</p>
+</li>
+<li>
+<p><code>emoji</code>: This component will take the text description of an emoji and convert it to an emoji. For example, the text code for ✨ is "sparkles". This component uses an emoji library to show you how to manage external dependencies in your pipeline.</p>
+</li>
+<li>
+<p><code>build_sentence</code>: This final component will consume the output of the previous two to build a sentence that uses the emoji. For example, the resulting output might be "Vertex Pipelines is ✨".</p>
+</li>
+</ul>
+<h3>Step 1: Create a Python function based component</h3>
+<p>Using the KFP SDK, you can create components based on Python functions. First build the <code>product_name</code> component, which simply takes a string as input and returns that string.</p>
+<ul>
+<li>
+<p>Add the following to your notebook:</p>
+</li>
+</ul>
+<ql-code-block language="python">
+@component(base_image="python:3.9", output_component_file="first-component.yaml")
+def product_name(text: str) -&gt; str:
+    return text
+</ql-code-block>
+<p>Take a closer look at the syntax here:</p>
+<ul>
+<li>
+<p>The <code>@component</code> decorator compiles this function to a component when the pipeline is run. You'll use this anytime you write a custom component.</p>
+</li>
+<li>
+<p>The <code>base_image</code> parameter specifies the container image this component will use.</p>
+</li>
+<li>
+<p>The <code>output_component_file</code> parameter is optional, and specifies the yaml file to write the compiled component to. After running the cell you should see that file written to your notebook instance. If you wanted to share this component with someone, you could send them the generated yaml file and have them load it with the following:</p>
+</li>
+</ul>
+<ql-code-block language="python">
+product_name_component = kfp.components.load_component_from_file('./first-component.yaml')
+</ql-code-block>
+<p>The <code>-&gt; str</code> after the function definition specifies the output type for this component.</p>
+<h3>Step 2: Create two additional components</h3>
+<ol>
+<li>
+<p>To complete the pipeline, create two more components. The first one takes a string as input, and converts this string to its corresponding emoji if there is one. It returns a tuple with the input text passed, and the resulting emoji:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+@component(packages_to_install=["emoji"])
+def emoji(
+    text: str,
+) -&gt; NamedTuple(
+    "Outputs",
+    [
+        ("emoji_text", str),  # Return parameters
+        ("emoji", str),
+    ],
+):
+    import emoji
+    emoji_text = text
+    emoji_str = emoji.emojize(':' + emoji_text + ':', language='alias')
+    print("output one: {}; output_two: {}".format(emoji_text, emoji_str))
+    return (emoji_text, emoji_str)
+</ql-code-block>
+<p>This component is a bit more complex than the previous one. Here's what's new:</p>
+<ul>
+<li>
+<p>The <code>packages_to_install</code> parameter tells the component any external library dependencies for this container. In this case, you're using a library called emoji.</p>
+</li>
+<li>
+<p>This component returns a <code>NamedTuple</code> called <code>Outputs</code>. Notice that each of the strings in this tuple have keys: <code>emoji_text</code> and <code>emoji</code>. You'll use these in your next component to access the output.</p>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p>The final component in this pipeline will consume the output of the first two and combine them to return a string:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+@component
+def build_sentence(
+    product: str,
+    emoji: str,
+    emojitext: str
+) -&gt; str:
+    print("We completed the pipeline, hooray!")
+    end_str = product + " is "
+    if len(emoji) &gt; 0:
+        end_str += emoji
+    else:
+        end_str += emojitext
+    return(end_str)
+</ql-code-block>
+<p>You might be wondering: how does this component know to use the output from the previous steps you defined?</p>
+<p>Good question! You will tie it all together in the next step.</p>
+<h3>Step 3: Putting the components together into a pipeline</h3>
+<p>The component definitions defined above created factory functions that can be used in a pipeline definition to create steps.</p>
+<ol>
+<li>
+<p>To set up a pipeline, use the <code>@dsl.pipeline</code> decorator, give the pipeline a name and description, and provide the root path where your pipeline's artifacts should be written. By artifacts, it means any output files generated by your pipeline. This intro pipeline doesn't generate any, but your next pipeline will.</p>
+</li>
+<li>
+<p>In the next block of code you define an <code>intro_pipeline</code> function. This is where you specify the inputs to your initial pipeline steps, and how steps connect to each other:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p><code>product_task</code> takes a product name as input. Here you're passing "Vertex Pipelines" but you can change this to whatever you'd like.</p>
+</li>
+<li>
+<p><code>emoji_task</code> takes the text code for an emoji as input. You can also change this to whatever you'd like. For example, "party_face" refers to the 🥳 emoji. Note that since both this and the <code>product_task</code> component don't have any steps that feed input into them, you manually specify the input for these when you define your pipeline.</p>
+</li>
+<li>
+<p>The last step in the pipeline - <code>consumer_task</code> has three input parameters:</p>
+<ul>
+<li>The output of <code>product_task</code>. Since this step only produces one output, you can reference it via <code>product_task.output.</code>
+</li>
+<li>The <code>emoji</code> output of the <code>emoji_task</code> step. See the <code>emoji</code> component defined above where you named the output parameters.</li>
+<li>Similarly, the <code>emoji_text</code> named output from the <code>emoji</code> component. In case your pipeline is passed text that doesn't correspond with an emoji, it'll use this text to construct a sentence.</li>
+</ul>
+</li>
+</ul>
+<ql-code-block language="python">
+@dsl.pipeline(
+    name="hello-world",
+    description="An intro pipeline",
+    pipeline_root=PIPELINE_ROOT,
+)
+# You can change the `text` and `emoji_str` parameters here to update the pipeline output
+def intro_pipeline(text: str = "Vertex Pipelines", emoji_str: str = "sparkles"):
+    product_task = product_name(text)
+    emoji_task = emoji(emoji_str)
+    consumer_task = build_sentence(
+        product_task.output,
+        emoji_task.outputs["emoji"],
+        emoji_task.outputs["emoji_text"],
+    )
+</ql-code-block>
+<h3>Step 4: Compile and run the pipeline</h3>
+<ol>
+<li>
+<p>With your pipeline defined, you're ready to compile it. The following will generate a JSON file that you'll use to run the pipeline:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+compiler.Compiler().compile(
+    pipeline_func=intro_pipeline, package_path="intro_pipeline_job.json"
+)
+</ql-code-block>
+<ol start="2">
+<li>
+<p>Next, instantiate an API client:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+api_client = AIPlatformClient(
+    project_id=PROJECT_ID,
+    region=REGION,
+)
+</ql-code-block>
+<ol start="3">
+<li>
+<p>Finally, run the pipeline:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+response = api_client.create_run_from_job_spec(
+    job_spec_path="intro_pipeline_job.json",
+    # pipeline_root=PIPELINE_ROOT  # this argument is necessary if you did not specify PIPELINE_ROOT as part of the pipeline definition.
+)
+</ql-code-block>
+<p>Running the pipeline should generate a link to view the pipeline run in your console. It should look like this when complete:</p>
+<p><img alt="Console screen with pipeline run displayed between build-sentence and emoji, and between build-sentence and product-name" src="https://cdn.qwiklabs.com/k5Jzue01zuwdjgGZFEe3OCIcoFjihCpuheBlT2hE2RI%3D"></p>
+<ol start="4">
+<li>This pipeline will take <strong>5-6 minutes</strong> to run. When complete, you can click on the <code>build-sentence</code> component to see the final output:</li>
+</ol>
+<p><img alt="Build sentence component displaying final output" src="https://cdn.qwiklabs.com/87NMfxoU7BzYjC88xiZzh3dN7m52D2S0prI3Lsz3w1Q%3D"></p>
+<p>Now that you're familiar with how the KFP SDK and Vertex Pipelines works, you're ready to build a pipeline that creates and deploys an ML model using other Vertex AI services.</p>
+<ql-activity-tracking step="2">
+    Check if your emoji pipeline has completed
+</ql-activity-tracking>
+<h2 id="step7">Task 4. Creating an end-to-end ML pipeline</h2>
+<p>It's time to build your first ML pipeline. In this pipeline, you'll use the UCI Machine Learning Dry Beans dataset, from: KOKLU, M. and OZKAN, I.A., (2020), "Multiclass Classification of Dry Beans Using Computer Vision and Machine Learning Techniques."In Computers and Electronics in Agriculture, 174, 105507. DOI.</p>
+<ql-infobox><strong>Note: </strong>This pipeline will take over 2 hours to complete. So <b>you will not need to wait the entire duration of the pipeline to complete the lab</b>. Follow the steps until your pipeline job has <b>started</b>.</ql-infobox>
+<p>This is a tabular dataset, and in your pipeline you'll use the dataset to train, evaluate, and deploy an AutoML model that classifies beans into one of 7 types based on their characteristics.</p>
+<p>This pipeline will:</p>
+<ul>
+<li>Create a Dataset in Vertex AI</li>
+<li>Train a tabular classification model with AutoML</li>
+<li>Get evaluation metrics on this model</li>
+<li>Based on the evaluation metrics, decide whether to deploy the model using conditional logic in Vertex Pipelines</li>
+<li>Deploy the model to an endpoint using Vertex Prediction</li>
+</ul>
+<p>Each of the steps outlined will be a component. Most of the pipeline steps will use pre-built components for Vertex AI services via the <code>google_cloud_pipeline_components</code> library yoy imported earlier in this codelab.</p>
+<p>In this section, we'll define one custom component first. Then, we'll define the rest of the pipeline steps using pre-built components. Pre-built components make it easier to access Vertex AI services, like model training and deployment.</p>
+<blockquote>
+<p>The majority of time for this step is for the AutoML training piece of this pipeline, which will take about an hour.</p>
+</blockquote>
+<h3>Step 1: A custom component for model evaluation</h3>
+<p>The custom component you'll define will be used towards the end of the pipeline once model training has completed. This component will do a few things:</p>
+<ul>
+<li>Get the evaluation metrics from the trained AutoML classification model</li>
+<li>Parse the metrics and render them in the Vertex Pipelines UI</li>
+<li>Compare the metrics to a threshold to determine whether the model should be deployed</li>
+</ul>
+<p>Before defining the component, understand its input and output parameters. As input, this pipeline takes some metadata on your Cloud project, the resulting trained model (you'll define this component later), the model's evaluation metrics, and a <code>thresholds_dict_str</code>.</p>
+<p>The <code>thresholds_dict_str</code> is something you'll define when you run your pipeline. In the case of this classification model, this will be the area under the ROC curve value for which you should deploy the model. For example, if you pass in 0.95, that means you'd only like your pipeline to deploy the model if this metric is above 95%.</p>
+<p>The evaluation component returns a string indicating whether or not to deploy the model.</p>
+<ul>
+<li>
+<p>Add the following in a notebook cell to create this custom component:</p>
+</li>
+</ul>
+<ql-code-block language="python">
+@component(
+    base_image="gcr.io/deeplearning-platform-release/tf2-cpu.2-3:latest",
+    output_component_file="tables_eval_component.yaml", # Optional: you can use this to load the component later
+    packages_to_install=["google-cloud-aiplatform"],
+)
+def classif_model_eval_metrics(
+    project: str,
+    location: str,  # "us-central1",
+    api_endpoint: str,  # "us-central1-aiplatform.googleapis.com",
+    thresholds_dict_str: str,
+    model: Input[Model],
+    metrics: Output[Metrics],
+    metricsc: Output[ClassificationMetrics],
+) -&gt; NamedTuple("Outputs", [("dep_decision", str)]):  # Return parameter.
+    """This function renders evaluation metrics for an AutoML Tabular classification model.
+    It retrieves the classification model evaluation generated by the AutoML Tabular training
+    process, does some parsing, and uses that info to render the ROC curve and confusion matrix
+    for the model. It also uses given metrics threshold information and compares that to the
+    evaluation results to determine whether the model is sufficiently accurate to deploy.
+    """
+    import json
+    import logging
+    from google.cloud import aiplatform
+    # Fetch model eval info
+    def get_eval_info(client, model_name):
+        from google.protobuf.json_format import MessageToDict
+        response = client.list_model_evaluations(parent=model_name)
+        metrics_list = []
+        metrics_string_list = []
+        for evaluation in response:
+            print("model_evaluation")
+            print(" name:", evaluation.name)
+            print(" metrics_schema_uri:", evaluation.metrics_schema_uri)
+            metrics = MessageToDict(evaluation._pb.metrics)
+            for metric in metrics.keys():
+                logging.info("metric: %s, value: %s", metric, metrics[metric])
+            metrics_str = json.dumps(metrics)
+            metrics_list.append(metrics)
+            metrics_string_list.append(metrics_str)
+        return (
+            evaluation.name,
+            metrics_list,
+            metrics_string_list,
+        )
+    # Use the given metrics threshold(s) to determine whether the model is
+    # accurate enough to deploy.
+    def classification_thresholds_check(metrics_dict, thresholds_dict):
+        for k, v in thresholds_dict.items():
+            logging.info("k {}, v {}".format(k, v))
+            if k in ["auRoc", "auPrc"]:  # higher is better
+                if metrics_dict[k] &lt; v:  # if under threshold, don't deploy
+                    logging.info(
+                        "{} &lt; {}; returning False".format(metrics_dict[k], v)
+                    )
+                    return False
+        logging.info("threshold checks passed.")
+        return True
+    def log_metrics(metrics_list, metricsc):
+        test_confusion_matrix = metrics_list[0]["confusionMatrix"]
+        logging.info("rows: %s", test_confusion_matrix["rows"])
+        # log the ROC curve
+        fpr = []
+        tpr = []
+        thresholds = []
+        for item in metrics_list[0]["confidenceMetrics"]:
+            fpr.append(item.get("falsePositiveRate", 0.0))
+            tpr.append(item.get("recall", 0.0))
+            thresholds.append(item.get("confidenceThreshold", 0.0))
+        print(f"fpr: {fpr}")
+        print(f"tpr: {tpr}")
+        print(f"thresholds: {thresholds}")
+        metricsc.log_roc_curve(fpr, tpr, thresholds)
+        # log the confusion matrix
+        annotations = []
+        for item in test_confusion_matrix["annotationSpecs"]:
+            annotations.append(item["displayName"])
+        logging.info("confusion matrix annotations: %s", annotations)
+        metricsc.log_confusion_matrix(
+            annotations,
+            test_confusion_matrix["rows"],
+        )
+        # log textual metrics info as well
+        for metric in metrics_list[0].keys():
+            if metric != "confidenceMetrics":
+                val_string = json.dumps(metrics_list[0][metric])
+                metrics.log_metric(metric, val_string)
+        # metrics.metadata["model_type"] = "AutoML Tabular classification"
+    logging.getLogger().setLevel(logging.INFO)
+    aiplatform.init(project=project)
+    # extract the model resource name from the input Model Artifact
+    model_resource_path = model.uri.replace("aiplatform://v1/", "")
+    logging.info("model path: %s", model_resource_path)
+    client_options = {"api_endpoint": api_endpoint}
+    # Initialize client that will be used to create and send requests.
+    client = aiplatform.gapic.ModelServiceClient(client_options=client_options)
+    eval_name, metrics_list, metrics_str_list = get_eval_info(
+        client, model_resource_path
+    )
+    logging.info("got evaluation name: %s", eval_name)
+    logging.info("got metrics list: %s", metrics_list)
+    log_metrics(metrics_list, metricsc)
+    thresholds_dict = json.loads(thresholds_dict_str)
+    deploy = classification_thresholds_check(metrics_list[0], thresholds_dict)
+    if deploy:
+        dep_decision = "true"
+    else:
+        dep_decision = "false"
+    logging.info("deployment decision is %s", dep_decision)
+    return (dep_decision,)
+</ql-code-block>
+<h3>Step 2: Adding Google Cloud pre-built components</h3>
+<p>In this step you'll define the rest of your pipeline components and see how they all fit together.</p>
+<ol>
+<li>
+<p>First, define the display name for your pipeline run using a timestamp:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+import time
+DISPLAY_NAME = 'automl-beans{}'.format(str(int(time.time())))
+print(DISPLAY_NAME)
+</ql-code-block>
+<ol start="2">
+<li>
+<p>Then copy the following into a new notebook cell:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+@kfp.dsl.pipeline(name="automl-tab-beans-training-v2",
+                  pipeline_root=PIPELINE_ROOT)
+def pipeline(
+    bq_source: str = "bq://aju-dev-demos.beans.beans1",
+    display_name: str = DISPLAY_NAME,
+    project: str = PROJECT_ID,
+    gcp_region: str = "us-central1",
+    api_endpoint: str = "us-central1-aiplatform.googleapis.com",
+    thresholds_dict_str: str = '{"auRoc": 0.95}',
+):
+    dataset_create_op = gcc_aip.TabularDatasetCreateOp(
+        project=project, display_name=display_name, bq_source=bq_source
+    )
+    training_op = gcc_aip.AutoMLTabularTrainingJobRunOp(
+        project=project,
+        display_name=display_name,
+        optimization_prediction_type="classification",
+        budget_milli_node_hours=1000,
+        column_transformations=[
+            {"numeric": {"column_name": "Area"}},
+            {"numeric": {"column_name": "Perimeter"}},
+            {"numeric": {"column_name": "MajorAxisLength"}},
+            {"numeric": {"column_name": "MinorAxisLength"}},
+            {"numeric": {"column_name": "AspectRation"}},
+            {"numeric": {"column_name": "Eccentricity"}},
+            {"numeric": {"column_name": "ConvexArea"}},
+            {"numeric": {"column_name": "EquivDiameter"}},
+            {"numeric": {"column_name": "Extent"}},
+            {"numeric": {"column_name": "Solidity"}},
+            {"numeric": {"column_name": "roundness"}},
+            {"numeric": {"column_name": "Compactness"}},
+            {"numeric": {"column_name": "ShapeFactor1"}},
+            {"numeric": {"column_name": "ShapeFactor2"}},
+            {"numeric": {"column_name": "ShapeFactor3"}},
+            {"numeric": {"column_name": "ShapeFactor4"}},
+            {"categorical": {"column_name": "Class"}},
+        ],
+        dataset=dataset_create_op.outputs["dataset"],
+        target_column="Class",
+    )
+    model_eval_task = classif_model_eval_metrics(
+        project,
+        gcp_region,
+        api_endpoint,
+        thresholds_dict_str,
+        training_op.outputs["model"],
+    )
+    with dsl.Condition(
+        model_eval_task.outputs["dep_decision"] == "true",
+        name="deploy_decision",
+    ):
+        deploy_op = gcc_aip.ModelDeployOp(  # noqa: F841
+            model=training_op.outputs["model"],
+            project=project,
+            machine_type="n1-standard-4",
+        )
+</ql-code-block>
+<p>What's happening in this code:</p>
+<ul>
+<li>
+<p>First, just as in the previous pipeline, you define the input parameters this pipeline takes. You need to set these manually since they don't depend on the output of other steps in the pipeline.</p>
+</li>
+<li>
+<p>The rest of the pipeline uses a few pre-built components for interacting with Vertex AI services:</p>
+<ul>
+<li>
+<code>TabularDatasetCreateOp</code> creates a tabular dataset in Vertex AI given a dataset source either in Cloud Storage or BigQuery. In this pipeline, you're passing the data via a BigQuery table URL.</li>
+<li>
+<code>AutoMLTabularTrainingJobRunOp</code> kicks off an AutoML training job for a tabular dataset. You pass a few configuration parameters to this component, including the model type (in this case, classification), some data on the columns, how long you'd like to run training for, and a pointer to the dataset. Notice that to pass in the dataset to this component, you're providing the output of the previous component via <code>dataset_create_op.outputs["dataset"]</code> .</li>
+<li>
+<code>ModelDeployOp</code> deploys a given model to an endpoint in Vertex AI. There are additional configuration options available, but here you're providing the endpoint machine type, project, and model you'd like to deploy. You're passing in the model by accessing the outputs of the training step in your pipeline.</li>
+</ul>
+</li>
+<li>
+<p>This pipeline also makes use of <strong>conditional logic</strong>, a feature of Vertex Pipelines that lets you define a condition, along with different branches based on the result of that condition. Remember that when you defined the pipeline you passed a <code>thresholds_dict_str</code> parameter. This is the accuracy threshold you're using to determine whether to deploy your model to an endpoint. To implement this, make use of the <code>Condition</code> class from the KFP SDK. The condition passed in is the output of the custom eval component you defined earlier in this lab. If this condition is true, the pipeline will continue to execute the <code>deploy_op</code> component. If accuracy doesn't meet the predefined threshold, the pipeline will stop here and won't deploy a model.</p>
+</li>
+</ul>
+<h3>Step 3: Compile and run the end-to-end ML pipeline</h3>
+<ol>
+<li>
+<p>With the full pipeline defined, it's time to compile it:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+compiler.Compiler().compile(
+    pipeline_func=pipeline, package_path="tab_classif_pipeline.json"
+)
+</ql-code-block>
+<ol start="2">
+<li>
+<p>Next, kick off a pipeline run:</p>
+</li>
+</ol>
+<ql-code-block language="python">
+response = api_client.create_run_from_job_spec(
+    "tab_classif_pipeline.json", pipeline_root=PIPELINE_ROOT,
+    parameter_values={"project": PROJECT_ID,
+                      "display_name": DISPLAY_NAME}
+)
+</ql-code-block>
+<ol start="3">
+<li>Click on the link shown after running the cell above to see your pipeline in the console. <strong>This pipeline will take a little over an hour to run</strong>. Most of the time is spent in the AutoML training step. The completed pipeline will look something like this:</li>
+</ol>
+<p><img alt="Console displaying Completed AutoML pipeline" src="https://cdn.qwiklabs.com/Y%2BSqksizjHLX3Z84cImy0UwltxfTFS%2BNdDJO2OFWnNc%3D"></p>
+<ol start="4">
+<li>If you toggle the "Expand artifacts" button at the top, you'll be able to see details for the different artifacts created from your pipeline. For example, if you click on the <code>dataset</code> artifact, you'll see details on the Vertex AI dataset that was created. You can click the link here to go to the page for that dataset:</li>
+</ol>
+<p><img alt="Artifact info screen displaying the URI link" src="https://cdn.qwiklabs.com/pr1mOrRoPAsX1C9si89gyOfO%2BnuXtbaXb%2BOLfUNrXY4%3D"></p>
+<ol start="5">
+<li>Similarly, to see the resulting metric visualizations from your custom evaluation component, click on the artifact called <strong>metricsc</strong>. On the right side of your dashboard, you'll be able to see the confusion matrix for this model:</li>
+</ol>
+<p><img alt="Dashboard displaying the metricsc confusion matrix" src="https://cdn.qwiklabs.com/VkxiarEZCtgKvb%2BEVll3zcMms%2FPto97xgcNMzahby5Y%3D"></p>
+<ol start="6">
+<li>To see the model and endpoint created from this pipeline run, go to the models section and click on the model named <code>automl-beans</code>. There you should see this model deployed to an endpoint:</li>
+</ol>
+<p><img alt="Deploy and Test tabbed page displaying the model endpoint" src="https://cdn.qwiklabs.com/BHUW134YTdOXOYvOc%2BMSyXLtNSxWa131M3kVKXL4Yvs%3D"></p>
+<ol start="7">
+<li>
+<p>You can also access this page by clicking on the <strong>endpoint</strong> artifact in your pipeline graph.</p>
+</li>
+<li>
+<p>In addition to looking at the pipeline graph in the console, you can also use Vertex Pipelines for <strong>Lineage Tracking</strong>.</p>
+</li>
+<li>
+<p>Lineage tracking means tracking artifacts created throughout your pipeline. This can help you understand where artifacts were created and how they are being used throughout an ML workflow. For example, to see the lineage tracking for the dataset created in this pipeline, click on the dataset artifact and then <strong>View Lineage</strong>:</p>
+</li>
+</ol>
+<p><img alt="Artifact info page with View Lineage button highlighted" src="https://cdn.qwiklabs.com/CgQqwIugpYZyJ4fTj0j3vE6o79B76SUtLGKc38pbqnU%3D"></p>
+<p>This shows all the places this artifact is being used:</p>
+<p><img alt="Console displaying Lineage details and Model pop up" src="https://cdn.qwiklabs.com/zegpLpYlPxLBqC33fha5LcTDU6eUIhxlHnVyWN2tqhc%3D"></p>
+<ql-infobox><strong>Note: </strong>Wait until the training job in your pipeline has started and then check your progress below.</ql-infobox>
+<ql-activity-tracking step="3">
+    Check if your end-to-end ML pipeline training job has started
+</ql-activity-tracking>
+<h3>Step 4: Comparing metrics across pipeline runs</h3>
+<ul>
+<li>
+<p>If you run this pipeline multiple times, you may want to compare metrics across runs. You can use the <code>aiplatform.get_pipeline_df()</code> method to access run metadata. Here, we'll get metadata for all runs of this pipeline and load it into a Pandas DataFrame:</p>
+</li>
+</ul>
+<ql-code-block language="python">
+pipeline_df = aiplatform.get_pipeline_df(pipeline="automl-tab-beans-training-v2")
+small_pipeline_df = pipeline_df.head(2)
+small_pipeline_df
+</ql-code-block>
+<p>You've now learned how to build, run, and get metadata for an end-to-end ML pipeline on Vertex Pipelines.</p>
+<h2 id="step8">Congratulations!</h2>
+<p>In this lab, you created and ran an emoji pipeline. You have also learned how to build, run, and get metadata for an end-to-end ML pipeline on Vertex Pipelines.</p>
+<h3>Finish your quest</h3>
+<p>This self-paced lab is part of the <a href="https://www.cloudskillsboost.google/quests/183" target="_blank">Building Machine Learning Solutions with Vertex AI</a> skill badge Quest.A quest is a series of related labs that form a learning path. Completing this quest earns you a badge to recognize your achievement. You can make your badge or badges public and link to them in your online resume or social media account. Enroll in a quest and get immediate completion credit. See the <a href="http://cloudskillsboost.google/catalog" target="_blank">Google Cloud Skills Boost catalog</a> to see all available quests.</p>
+<h3>Take your next lab</h3>
+<p>Continue the Building and Deploying Machine Learning Solutions with Vertex AI quest with the next lab, <a href="https://google.qwiklabs.com/" target="_blank">Building and Deploying Machine Learning Solutions with Vertex AI: Challenge Lab</a>.</p>
+<h3>Next steps / learn more</h3>
+<p>Try out the same scenario in your own Google Cloud Project using Developer Relations' Codelab!</p>
+<ul>
+<li><a href="https://codelabs.developers.google.com/vertex-pipelines-intro" target="_blank">Intro to Vertex Pipelines by Sara Robinson</a></li>
+</ul>
+<h3>Google Cloud training and certification</h3>
+<p>...helps you make the most of Google Cloud technologies. <a href="https://cloud.google.com/training/courses" target="_blank">Our classes</a> include technical skills and best practices to help you get up to speed quickly and continue your learning journey. We offer fundamental to advanced level training, with on-demand, live, and virtual options to suit your busy schedule. <a href="https://cloud.google.com/certification/" target="_blank">Certifications</a> help you validate and prove your skill and expertise in Google Cloud technologies.</p>
+<p><strong>Manual Last Updated October 17, 2022</strong></p>
+<p><strong>Lab Last Tested October 4, 2021</strong></p>
+<p>Copyright 2023 Google LLC All rights reserved. Google and the Google logo are trademarks of Google LLC. All other company and product names may be trademarks of the respective companies with which they are associated.</p>
+
+</div>
+</div>
+
+
+<div class='lab-content__end-lab-button js-end-lab-button-container hidden'>
+<ql-lab-control-button class='js-end-lab-button' running></ql-lab-control-button>
+</div>
+<!-- / TODO: Move recommendations into the end lab modal -->
+<div class='lab-content__renderable-instructions'>
+<div class='lab-content__recommendation'>
+<!-- # TODO: Change classes so that this doesn't stack vertically -->
+<section class='upcoming-cards'>
+<h2 class='ql-headline-4'>Continue questing</h2>
+<div class='activity-cards'>
+<ql-activity-card aria-label='Vertex Pipelines: Qwik Start' name='Vertex Pipelines: Qwik Start' path='/focuses/21234?parent=catalog' progress='0.0' type='lab'></ql-activity-card>
+
+</div>
+</section>
+
+</div>
+
+</div>
+</ql-drawer-content>
+<ql-drawer end id='outline-drawer' open slot='drawer' width='320'>
+<div aria-label='Lab Table of Contents' role='navigation'>
+<ul class='lab-content__outline js-lab-content-outline'>
+<li><a href="#step1">GSP965</a></li><li><a href="#step2">Overview</a></li><li><a href="#step3">Setup and requirements</a></li><li><a href="#step4">Task 1. Create a Vertex Notebooks instance</a></li><li><a href="#step5">Task 2. Vertex Pipelines setup</a></li><li><a href="#step6">Task 3. Creating your first pipeline</a></li><li><a href="#step7">Task 4. Creating an end-to-end ML pipeline</a></li><li><a href="#step8">Congratulations!</a></li>
+</ul>
+</div>
+</ql-drawer>
+</ql-drawer-container>
+</ql-drawer-content>
+</ql-drawer-container>
+
+
+
+</div>
+</main>
+
+<span class='hidden' id='flash-sibling-before'></span>
+<ql-snackbar></ql-snackbar>
+
+<div class='cookie-bar'>
+<span>
+This site uses cookies from Google to deliver its services and to analyze traffic.
+</span>
+<div class='buttons'>
+<a class='button' href='https://policies.google.com/technologies/cookies' target='_blank'>
+Learn More.
+</a>
+<button class='button button--inverted js-accept-cookies'>
+Ok, Got it.
+</button>
+</div>
+</div>
+
+<div class='modal fade' id='lab-details-modal'>
+<div class='modal-container'>
+<div class='modal-content mdl-shadow--24dp'>
+<div class='modal-body'>
+<p class='l-mbm'>
+In this lab you will create ML Pipelines using Vertex AI
+</p>
+<p>
+This lab is included in the quest
+<a href="/quests/183">Build and Deploy Machine Learning Solutions on Vertex AI</a>.
+If you complete this lab you&#39;ll receive credit for it when you enroll in this quest.
+</p>
+<p class='small-label l-mbs'>
+<strong>
+Duration:
+</strong>
+1m setup
+&middot;
+90m access
+&middot;
+90m completion
+</p>
+<p class='small-label l-mbs'>
+<strong>AWS Region:</strong>
+[] <strong></strong>
+</p>
+<p class='small-label l-mbs'>
+<span><strong>Levels: </strong>intermediate</span>
+</p>
+<p class='small-label'>
+<strong>
+Permalink:
+</strong>
+<a href="https://www.cloudskillsboost.google/catalog_lab/4078">https://www.cloudskillsboost.google/catalog_lab/4078</a>
+</p>
+</div>
+<div class='modal-actions'>
+<a class='button button--text' data-dismiss='modal'>
+Got It
+</a>
+</div>
+
+
+</div>
+</div>
+<iframe class='l-ie-iframe-fix' tabindex='-1' title='modal'></iframe>
+</div>
+<ql-dialog headline='How satisfied are you with this lab?&lt;span aria-hidden=&quot;true&quot;&gt;*&lt;/span&gt;' id='lab-review-dialog'>
+<form class="simple_form js-lab-review-form" id="new_lab_review" action="/lab_reviews" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" autocomplete="off" /><div aria-labelledby='lab-review-dialog' aria-required='true' aria-valuemax='5' aria-valuemin='0' aria-valuenow='0' class='rateit js-rateit' data-rateit-max='5' data-rateit-min='0' data-rateit-resetable='false' data-rateit-step='1' data-rateit-value='0' id='lab-review-rateit' role='slider' tabindex='0'></div>
+<div class='l-mtm'>
+
+<div class="control-group hidden lab_review_user_id"><div class="controls"><input class="hidden" autocomplete="off" type="hidden" value="9690557" name="lab_review[user_id]" id="lab_review_user_id" /></div></div>
+<div class="control-group hidden lab_review_classroom_id"><div class="controls"><input class="hidden" autocomplete="off" type="hidden" name="lab_review[classroom_id]" id="lab_review_classroom_id" /></div></div>
+<div class="control-group hidden lab_review_lab_id"><div class="controls"><input class="hidden" autocomplete="off" type="hidden" value="4078" name="lab_review[lab_id]" id="lab_review_lab_id" /></div></div>
+<div class="control-group hidden lab_review_focus_id"><div class="controls"><input class="hidden" autocomplete="off" type="hidden" name="lab_review[focus_id]" id="lab_review_focus_id" /></div></div>
+<div class="control-group hidden lab_review_rating"><div class="controls"><input class="hidden js-rating-input" autocomplete="off" type="hidden" name="lab_review[rating]" id="lab_review_rating" /></div></div>
+<div class="control-group text optional lab_review_comment"><label class="text optional control-label" for="lab_review_comment">Additional Comments</label><div class="controls"><textarea class="text optional" name="lab_review[comment]" id="lab_review_comment">
+</textarea></div></div>
+</div>
+</form><ql-button disabled id='submit' label='Submit' slot='action' text></ql-button>
+</ql-dialog>
+
+<ql-dialog headline='All done? If you end this lab, you will lose all your work. You may not be able to restart the lab if there is a quota limit. Are you sure you want to end this lab?' icon='error_outline' id='js-lab-are-you-sure-dialog'>
+<ql-button id='js-are-you-sure-button' label='Submit' slot='action' text></ql-button>
+</ql-dialog>
+
+
+<script>
+  $(function() {
+    ql.surveys.pageView();
+  });
+</script>
+<script>
+  $(function() {
+    ql.initMaterialInputs();
+    initChosen();
+    initSearch();
+    initTabs();
+    ql.list.init();
+    ql.favoriting.init();
+    ql.header.myAccount.init();
+    initTooltips();
+    ql.autocomplete.init();
+    ql.modals.init();
+    ql.toggleButtons.init();
+    ql.analytics.init();
+    ql.favoriting.init();
+  ql.chat.init();
+  ql.jumpContent.init();
+  ql.labControlPanel.addRecaptchaErrorHandler();
+  initLabContent();
+  ql.labOutline.links.init();
+  initLabReviewModal();
+  initLabReviewTranslations( {"star_amount_1":"1 of 5 stars","star_amount_2":"2 of 5 stars","star_amount_3":"3 of 5 stars","star_amount_4":"4 of 5 stars","star_amount_5":"5 of 5 stars"} )
+  ql.labAssessment.init();
+  ql.labData.init();
+  initLabTranslations( {"are_you_sure":"All done? If you end this lab, you will lose all your work. You may not be able to restart the lab if there is a quota limit. Are you sure you want to end this lab?","in_progress":"*In Progress*","ending":"*Ending*","starting":"*Starting, please wait*","end_concurrent_labs":"Sorry, you can only run one lab at a time. To start this lab, please confirm that you want all of your existing labs to end.","copied":"Copied","no_resource":"Error retrieving resource.","no_support":"No Support","mac_press":"Press ⌘-C to copy","thanks_review":"Thanks for reviewing this lab.","windows_press":"Press Ctrl-C to copy","days":"days"} );
+  ql.labRun.init();
+  ql.navPanel.init();
+  ql.navigation.init();
+  
+  });
+</script>
+
+</body>
+</html>
+
