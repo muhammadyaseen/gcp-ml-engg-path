@@ -94,17 +94,71 @@ As you begin to scale your ML process, you might want to share your ML workflow 
 ![](Pasted%20image%2020230401114059.png)
 
 #### Task 1. Create a Vertex Notebooks instance
+
 #### Task 2. Vertex Pipelines setup
+
 ##### Step 1: Create Python notebook and install libraries
+```bash
+USER_FLAG=--user
+
+pip3 install {USER_FLAG} google-cloud-aiplatform==1.0.0 --upgrade
+pip3 install {USER_FLAG} kfp google-cloud-pipeline-components==0.1.1 --upgrade
+```
+
+
 ##### Step 2: Set your project ID and bucket
+Create vars to save project id and bucker name
+```python
+PROJECT_ID=...
+BUCKET_NAME="gs://" + PROJECT_ID + "-bucket"
+```
+
 ##### Step 3: Import libraries
+Required libraries
+```python
+
+from typing import NamedTuple
+import kfp
+from kfp import dsl
+from kfp.v2 import compiler
+from kfp.v2.dsl import (Artifact, Dataset, Input, InputPath, Model, Output,
+                        OutputPath, ClassificationMetrics, Metrics, component)
+from kfp.v2.google.client import AIPlatformClient
+from google.cloud import aiplatform
+from google_cloud_pipeline_components import aiplatform as gcc_aip
+```
+
 ##### Step 4: Define constants
+
+```python
+PATH=%env PATH
+%env PATH={PATH}:/home/jupyter/.local/bin
+REGION="us-central1"
+
+# Cloud Storage path where the artifacts created by the pipeline will be written
+PIPELINE_ROOT = f"{BUCKET_NAME}/pipeline_root/"
+PIPELINE_ROOT
+```
+
+
 #### Task 3. Creating your first pipeline
-##### Step 1 - Create a Python function based component
+
+Relevant: [ML Ops Course - AI Pipelines on GCP](ml-ops-fundamentals.md#^b72b49)
+
+We will create a short pipeline using the KFP SDK. This pipeline doesn't do anything ML related. This pipelines prints out a sentence using two outputs: a product name and an emoji description. This pipeline will consist of three components:
+1. `product_name`: This component will take a product name as input, and return that string as output. 
+2. `emoji`: This component will take the text description of an emoji and convert it to an emoji. This component uses an emoji library to show you how to manage external dependencies in your pipeline
+3. `build_sentence`: This final component will consume the output of the previous two to build a sentence that uses the emoji.
+
+We will do this task in 4 steps.
+
+##### Step 1: Create a Python function based component
 ##### Step 2: Create two additional components
 ##### Step 3: Putting the components together into a pipeline
 ##### Step 4: Compile and run the pipeline
+
 #### Task 4. Creating an end-to-end ML pipeline
+
 ##### Step 1: A custom component for model evaluation
 ##### Step 2: Adding Google Cloud pre-built components
 ##### Step 3: Compile and run the end-to-end ML pipeline

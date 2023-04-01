@@ -121,6 +121,9 @@ Parallel Jobs
 CronJobs
 
 # Intro to AI Platform Pipelines
+
+^b72b49
+
 ## AI Pipelines: Overview
 Covers the basics of AI platform pipelines, a Google Cloud product to build ML Pipelines, and how it is different from the regular ML Ops pipelines. AI Platform Pipelines makes ML Ops easy, seamless and scalable with Google Cloud Services.
 
