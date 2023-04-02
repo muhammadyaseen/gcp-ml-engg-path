@@ -16,3 +16,7 @@
 
 # ML Pipelines with MLflow
 
+MLflow is composed of four components: tracking, projects, models, and registry.
+
+
+

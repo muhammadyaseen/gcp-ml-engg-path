@@ -297,10 +297,12 @@ You've now learned how to build, run, and get metadata for an end-to-end ML pipe
 
 ![](Pasted%20image%2020230401141650.png)
 
-#### Task 1. Create an Vertex Notebooks instance
+#### Task 1. Create a Vertex Notebooks instance
 #### Task 2. Download the challenge notebook
 #### Task 3. Build and train your model locally in a Vertex notebook
 #### Task 4. Use Cloud Build to build and submit your model container to Google Cloud Artifact Registry
 #### Task 5. Define a pipeline using the KFP SDK
 #### Task 6. Query deployed model on Vertex Endpoint for online predictions
 
+This is what a successful run looks like: took about 40mins
+![](Pasted%20image%2020230402141403.png)
