@@ -14,6 +14,18 @@
 
 # Continuous Training with Cloud Composer
 
+## What is Cloud Composer
+![](Pasted%20image%2020230407125159.png)
+![](Pasted%20image%2020230407125239.png)
+![](Pasted%20image%2020230407125518.png)
+
+Airflow serves similar role as Prefect (there's one more software, but i don't recall the name right now)
+
+How does Composer compare to Vertex AI Pipelines, Kubeflow Pipelines, Dataflow etc? When would one use one over the other?
+
+## Core Concepts of Apache Airflow
+
+
 # ML Pipelines with MLflow
 
 MLflow is composed of four components: tracking, projects, models, and registry.
