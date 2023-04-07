@@ -12,6 +12,42 @@
 
 # Continuous Training with multiple SDKs, KubeFlow & AI Platform Pipelines
 
+## Containerized Training Applications
+
+We'll see:
+- how to containerize training applications built with other popular machine learning frameworks, such as PyTorch, scikit-learn, and XGBoost. 
+- Then, you'll learn how to deploy these containers as ops in a Kubeflow pipeline.
+- You'll also see that you can train TensorFlow, PyTorch, scikit, and XGBoost models in parallel inside of a Kubeflow pipeline.
+
+So what's the process of containerizing a TensorFlow training application?
+3 step process:
+- **Step 1:** First, we simply create a training script, and this script contains the code that actually ingests data, trains the model, and then saves the model.
+- **Step 2:** The next step is to package the training script into a Docker image. This is where we define the dependencies of our training script
+- **Step 3:** The third step is to actually build and push this image to the Container Registry. And as you know, we can do this with the `gcloud build submit --tag $IMG_URI $IMG_NAME` command.
+
+## Containerizing PyTorch, Sci-Kit, and XGBoost Apps
+
+What if we have a different framework? like scikit, pytorch, xgboost?
+![](images/Pasted%20image%2020230407161736.png)
+
+## Kubeflow and Vertex AI Pipelines
+How to use multiple models from multiple different frameworks in a Kubeflow pipeline?
+For ex, we may load train and eval data from BQ and then train 4 models, each from a different framework as shown in the following pipeline:
+
+![](images/Pasted%20image%2020230407161906.png)
+
+In that case: We just have to define a list for each op that contains the training arguments corresponding to each specific training op.
+![](images/Pasted%20image%2020230407164547.png)
+Just as we define separate lists for each training op, we also have to define separate training ops themselves that take the corresponding lists as arguments
+![](images/Pasted%20image%2020230407164610.png)
+
+## Continuous Training
+
+Continuous training simply refers to retraining models periodically at set intervals or with specific triggers. In this discussion, we'll focus on retraining periodically or with set intervals. Model performance tends to deteriorate over time.
+![](images/Pasted%20image%2020230407164932.png)
+AI platform pipelines makes it incredibly easy to schedule pipeline runs. When setting up a run in the UI, we can either choose a one-off run, which just simply runs the pipeline once, or a recurring run, where we can easily schedule periodic or set interval runs of our pipeline.
+![](images/Pasted%20image%2020230407165032.png)
+
 # Continuous Training with Cloud Composer
 
 ## What is Cloud Composer
