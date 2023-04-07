@@ -48,6 +48,15 @@ Continuous training simply refers to retraining models periodically at set inter
 AI platform pipelines makes it incredibly easy to schedule pipeline runs. When setting up a run in the UI, we can either choose a one-off run, which just simply runs the pipeline once, or a recurring run, where we can easily schedule periodic or set interval runs of our pipeline.
 ![](images/Pasted%20image%2020230407165032.png)
 
+## Lab: Continuous Training with TensorFlow, PyTorch, XGBoost, and Scikit Learn Models with Kubeflow and Vertex AI Pipelines
+
+![](images/Pasted%20image%2020230407170343.png)
+
+#### Task 1-4. Create Cloud Storage Bucket, Enable Services, Create AI Platform Notebook
+#### Task 5-7. Clone the lab repo, and follow along in notebook
+
+Note: I downloaded the completed notebook and save it in `notebooks/lab-cts-train-multiple-frameworks.ipynb`
+
 # Continuous Training with Cloud Composer
 
 ## What is Cloud Composer
