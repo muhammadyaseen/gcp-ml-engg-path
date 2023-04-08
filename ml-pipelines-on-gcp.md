@@ -120,8 +120,19 @@ There are 6 stages:
 ![](images/Pasted%20image%2020230408112043.png)
 
 ## Continuous Training Pipelines using Cloud Composer (model)
+After the data is prepared, we're ready to start training our model. If we're using a TensorFlow, XGboost or scikit-learn model, we can train directly on AI platform
+
+![](images/Pasted%20image%2020230408112204.png)
+![](images/Pasted%20image%2020230408112232.png)
+![](images/Pasted%20image%2020230408112245.png)
+![](images/Pasted%20image%2020230408112351.png)
+![](images/Pasted%20image%2020230408112444.png)
 
 ## Apache Airflow, Containers, and TFX
+How we can use Airflow and Cloud Composer to orchestrate container based workloads and TFX pipelines? If we have tasks with non-PyPI dependencies, or if the tasks are already containerized, we can run the containers as Airflow task
+![](images/Pasted%20image%2020230408112740.png)
+If you have already written your ML pipeline using TFX, then you don't need to do much. TFX includes an Airflow DAG runner for running your TFX pipelines via Airflow.
+![](images/Pasted%20image%2020230408112814.png)
 
 ## Lab - Continuous Training Pipelines with Cloud Composer
 
