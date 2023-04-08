@@ -53,9 +53,19 @@ AI platform pipelines makes it incredibly easy to schedule pipeline runs. When s
 ![](images/Pasted%20image%2020230407170343.png)
 
 #### Task 1-4. Create Cloud Storage Bucket, Enable Services, Create AI Platform Notebook
+
+AI Platform > Pipelines > New Instance > Configure Kubeflow > Create New Cluster > Deploy
+
 #### Task 5-7. Clone the lab repo, and follow along in notebook
 
-Note: I downloaded the completed notebook and save it in `notebooks/lab-cts-train-multiple-frameworks.ipynb`
+Note: I downloaded the completed notebook and saved it in `notebooks/lab-cts-train-multiple-frameworks.ipynb`
+
+This is what a successful run looks like:
+
+![](images/Pasted%20image%2020230408105338.png)
+
+
+In this section we learned how to do manual pipeline runs, in the next section we will see an automated workflow orchestration service i.e. Cloud Composer / Airflow.
 
 # Continuous Training with Cloud Composer
 
@@ -64,11 +74,58 @@ Note: I downloaded the completed notebook and save it in `notebooks/lab-cts-trai
 ![](Pasted%20image%2020230407125239.png)
 ![](Pasted%20image%2020230407125518.png)
 
-Airflow serves similar role as Prefect (there's one more software, but i don't recall the name right now)
-
-How does Composer compare to Vertex AI Pipelines, Kubeflow Pipelines, Dataflow etc? When would one use one over the other?
+**Airflow serves similar role as Prefect (there's one more software, but i don't recall the name right now) How does Composer compare to Vertex AI Pipelines, Kubeflow Pipelines, Dataflow etc? When would one use one over the other?**
 
 ## Core Concepts of Apache Airflow
+
+**DAG**: A DAG is a collection of the tasks you want to run, represented by the nodes of the graph, organized in such a way that reflects the relationships and dependencies, represented by the edges of the graph. In Airflow, we use a Python SDK to define the DAGs, the task and dependencies, as code. Every DAG has:
+- a definition, 
+- operators, 
+- and definitions of the operator relationships
+
+**DAG Run**: A DAG run is a physical instance of that DAG, containing task instances that run for a specific execution date. The execution date is the logical date and time that the DAG run and its task instances are running for. The Airflow scheduler, which is managed by Composer within a Kubernetes pod, will often create the DAG runs. However, they can also be created by external triggers. DAG can have multiple runs, even concurrently, each with different execution dates.
+
+**Tasks**: Tasks define a unit of work in your workflow. What are these tasks? They are parameterized implementations of operators that we will discuss in the next section
+
+**Operators**: are usually, but not always, atomic. This means that they can work alone and they don't need to share resources with any other operators. The DAG will make sure that operators run in the correct order. Other than those dependencies, operators do generally run independently. In Airflow you can leverage XComms if you do need to pass information between different operators. Airflow supports three main types of operators:
+- operators that perform an action or tell another system to perform an action
+- transfer operators that move data from one system to another, for example, BigQuery to Cloud storage
+- sensors that will keep running until a specific criterion is met, such as a file sensor that waits until a file is present at a certain location before triggering any downstream task.
+
+Task and operator example:
+![](images/Pasted%20image%2020230408111320.png)
+
+Airflow DAG is defined in a Python script. The scripts have five main sections
+![](images/Pasted%20image%2020230408111040.png)
+
+And any code outside of the DAG definition will then be run every second, so keep that in mind.
+
+Setting Op dependency / order:
+![](images/Pasted%20image%2020230408111446.png)
+
+Now that we have a DAG ready to go, how do we create and access our environment to run it? We can access the composer environment via the Google Cloud Console, Google Cloud SDK CLI, or via rest APIs.
+
+
+## Continuous Training Pipelines using Cloud Composer (data)
+
+Now that we know how to create our DAGs using the Airflow Python SDK Creator Composer environment and access the Airflow web server. Let's focus on what we need to work on for building continuous training pipelines in Airflow and running them on Cloud Composer.
+
+There are 6 stages:
+![](images/Pasted%20image%2020230408111747.png)
+
+![](images/Pasted%20image%2020230408111832.png)
+![](images/Pasted%20image%2020230408111852.png)
+![](images/Pasted%20image%2020230408111923.png)
+![](images/Pasted%20image%2020230408111957.png)
+![](images/Pasted%20image%2020230408112043.png)
+
+## Continuous Training Pipelines using Cloud Composer (model)
+
+## Apache Airflow, Containers, and TFX
+
+## Lab - Continuous Training Pipelines with Cloud Composer
+
+
 
 
 # ML Pipelines with MLflow
