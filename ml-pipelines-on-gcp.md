@@ -136,8 +136,11 @@ If you have already written your ML pipeline using TFX, then you don't need to d
 
 ## Lab - Continuous Training Pipelines with Cloud Composer
 
+![](images/Pasted%20image%2020230408112940.png)
 
-
+#### Task 1. Provision Google Cloud resources
+#### Task 2. Write DAG in Apache Airflow
+#### Task 3. Run DAG in Apache Airflow
 
 # ML Pipelines with MLflow
 
