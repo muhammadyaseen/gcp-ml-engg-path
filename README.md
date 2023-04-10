@@ -1,6 +1,7 @@
 My notes from the following [Google Cloud ML Engineering Path](https://www.cloudskillsboost.google/paths/17) courses:
 1. Google Cloud Big Data and ML Fundamentals
-2. MLOps Fundamentals
+2. Machine Learning Operations (MLOps) Fundamentals
+3. Build and Deploy ML Solutions on Vertex AI
 
 ![images/gcp.png](images/gcp.png)
 
