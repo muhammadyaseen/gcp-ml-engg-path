@@ -76,6 +76,7 @@ In this section we learned how to do manual pipeline runs, in the next section w
 
 **Airflow serves similar role as Prefect (there's one more software, but i don't recall the name right now) How does Composer compare to Vertex AI Pipelines, Kubeflow Pipelines, Dataflow etc? When would one use one over the other?**
 
+blogpost: [Kubeflow Pipelines vs. Cloud Composer for Orchestration](https://datatonic.com/insights/kubeflow-pipelines-cloud-composer-data-orchestration/)
 ## Core Concepts of Apache Airflow
 
 **DAG**: A DAG is a collection of the tasks you want to run, represented by the nodes of the graph, organized in such a way that reflects the relationships and dependencies, represented by the edges of the graph. In Airflow, we use a Python SDK to define the DAGs, the task and dependencies, as code. Every DAG has:
@@ -139,8 +140,17 @@ If you have already written your ML pipeline using TFX, then you don't need to d
 ![](images/Pasted%20image%2020230408112940.png)
 
 #### Task 1. Provision Google Cloud resources
+
+Enable ML service, create buckets, PubSub topics, and Cloud Composer environment
+
 #### Task 2. Write DAG in Apache Airflow
+
+
 #### Task 3. Run DAG in Apache Airflow
+
+Navigation > Big Data > Composer
+
+#### Task 4. Exploring your DAG run in the Airflow UI
 
 # ML Pipelines with MLflow
 
