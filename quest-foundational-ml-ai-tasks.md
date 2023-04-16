@@ -214,7 +214,8 @@ curl -s -H 'Content-Type: application/json' \
 
 #### Task 1: Run a simple Dataflow job
 #### Task 2: Run a simple Dataproc job
-#### Task 3: Run a simple Dataprep job
-#### Task 4: AI
+#### Task 3: Use Google Cloud Speech API
+#### Task 4: Use Google Cloud NL API
+
 
 
