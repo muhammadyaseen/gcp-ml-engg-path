@@ -162,11 +162,34 @@ Learn to create an API Key, Create and Call Speech API request
 
 #### Task 1. Create an API key
 Go to API & Services and Create and API key. This need so that we can access resources within our project.
+1.  To create an API key, click **Navigation menu** > **APIs & services** > **Credentials**.
+2.  Then click **Create credentials**.
+3.  In the drop down menu, select **API key**.
 
 #### Task 2. Create your Speech API request
-Create a json file with required format.
+Create a `.json` file with required format.
+```json
+{
+  "config": {
+      "encoding":"FLAC",
+      "languageCode": "en-US"
+  },
+  "audio": {
+      "uri":"gs://cloud-samples-tests/speech/brooklyn.flac"
+  }
+}
+```
+
+In `config`, you tell the Speech API how to process the request. The `encoding` parameter tells the API which type of audio encoding you're using while the file is being sent to the API. `FLAC` is the encoding type for .raw files.
+In the `audio` object, you pass the API the uri of the audio file in Cloud Storage.
+
 #### Task 3. Call the Speech API
-Query the SPeech API endpoint and provide the json file as data. It returns a json response
+Query the Speech API endpoint and provide the json file as data. It returns a json response
+
+```bash
+curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json \
+"https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}"
+```
 
 ## Lab # 7 - Video Intelligence: Qwik Start
 
@@ -213,9 +236,48 @@ curl -s -H 'Content-Type: application/json' \
 ## Lab # 8 - Perform Foundational Data, ML, and AI Tasks in Google Cloud: Challenge Lab
 
 #### Task 1: Run a simple Dataflow job
+Use the Dataflow batch template **Text Files on Cloud Storage to BigQuery** under "Process Data in Bulk (batch)" to transfer data from a Cloud Storage bucket to a BQ Table.
+
+1. create bucket `bq mk `
+2. create table `gsutil mb gs://<name>`
+3. create dataflow job and run
 #### Task 2: Run a simple Dataproc job
 #### Task 3: Use Google Cloud Speech API
+
+```json
+{
+        "config": {
+                "encoding": "FLAC",
+                "languageCode": "en-US"
+        },
+        "audio": {
+                "uri": "gs://cloud-training/gsp323/task3.flac"
+        }
+}
+```
+
+```bash
+export API_KEY=key
+
+curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json \
+"https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > task3-gcp-number.result
+
+gsutil cp task3-gcp-number.result $LAB_BUCKET/
+
+```
+
+
 #### Task 4: Use Google Cloud NL API
 
+```bash
+export LAB_BUCKET=gs://name
 
+export TEXT="Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat."
+
+gcloud ml language analyze-entities --content="Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat." > task4-cnl-number.result
+
+gsutil cp task4-cnl-number.result $LAB_BUCKET/
+
+
+```
 
