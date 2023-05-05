@@ -260,7 +260,7 @@ Use the Dataflow batch template **Text Files on Cloud Storage to BigQuery** un
 export API_KEY=key
 
 curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json \
-"https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > task3-gcp-number.result
+"https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > task3-gcs-554.result
 
 gsutil cp task3-gcp-number.result $LAB_BUCKET/
 
