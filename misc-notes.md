@@ -44,3 +44,29 @@ There are 2 types of notebooks. You have to select a `region` to create NBs.
 
 ## Vertex AI Pipelines
 https://codelabs.developers.google.com/vertex-pipelines-intro#0
+
+
+## Deploying a FastAPI + Streamlit app on a Google Compute Engine Instance using docker-compose
+
+1. Create a Compute Engine VM, make sure to enable HTTP + HTTPs access while creating it.
+2. Log into the VM via SSH and install `docker` on it. You can use the steps from [official Docker guide for installation on Debian OS](https://docs.docker.com/engine/install/debian/) for this.
+3. Next, create an Artifact repository, this will be used to store container images. It can be done in the cloud console or via `gclound`. In case of gcloud, the command is as follows 
+```bash
+gcloud artifacts repositories create $ARTIFACT_REGISTRY_NAME \
+--repository-format=docker \
+--location=$REGION \
+--description="Artifact registry description"
+```
+5. Enable Google Cloud Build API for your project. This will also setup a required Service Account that will be required by the Cloud Build service to access Cloud Storage.
+6. Now we have to build our containers. For this, on your local machine where you have the source code, change into the directory which contains the Dockerfile and run 
+```bash
+gcloud builds submit . \
+--tag <region>-docker.pkg.dev/<project_name>/<artifcat reg name>/image_name:tag
+```
+This will start the building process and push the container to the repo you created earlier.
+9. Now, we need to log in to the VM and pull our containers. For that, we first have to authenticate with the AR on our CE instance. You can create a key for the service account and download it to ur local PC. Then do `touch key.json` and then `vim key.json` then paste the content of the file into the repo. Detailed instructions for repo auth are [here](https://cloud.google.com/artifact-registry/docs/docker/authentication#json-key)
+10. Once authenticated, we can pull the images. But we don't need to do so directly. We can simply write a docker compose file with `image` property and then use `docker compose up` which will automatically pull the images and start the containers. 
+11. You will have to use `sudo docker` to run commands otherwise you'll get `permission denied` errors.
+12. Use `gclound builds submit . AR repo` to push both the frontend and backend to the AR
+13. Write a docker compose file on the VM then do `sudo docker compose up`. 
+14. Congratulations now you have ur app running on a VM instance.
