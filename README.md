@@ -8,7 +8,8 @@ My notes from the following [Google Cloud ML Engineering Path](https://www.cloud
 
 ![images/gcp.png](images/gcp.png)
 
-[My Google Cloud Skill Boost Public Profile](https://www.cloudskillsboost.google/public_profiles/d85f8295-b522-4522-964c-f0fcf9375090)
-[My LinkedIn Profile](https://www.linkedin.com/in/muhammad-yaseen-aftab/)
+About me:
+- [My Google Cloud Skill Boost Public Profile](https://www.cloudskillsboost.google/public_profiles/d85f8295-b522-4522-964c-f0fcf9375090)
+- [My LinkedIn Profile](https://www.linkedin.com/in/muhammad-yaseen-aftab/)
 
 **Note**: The content is best viewed in [Obsidion](https://obsidian.md/).
