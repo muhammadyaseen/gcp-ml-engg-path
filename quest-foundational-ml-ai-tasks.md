@@ -131,7 +131,8 @@ Cloud Natural Language API features: syntax analysis, Entity Recognition, Sentim
 
 #### Task 1. Create an API key
 
-Console: Go to API & Services and Create and API key. This need so that we can access resources within our project.
+Console: API & Services > Create an API key. 
+This is needed so that we can access resources within our project.
 
 Cmdline: 
 1. Get the project ID: `export GOOGLE_CLOUD_PROJECT=$(gcloud config get-value core/project)`
@@ -238,10 +239,16 @@ curl -s -H 'Content-Type: application/json' \
 #### Task 1: Run a simple Dataflow job
 Use the Dataflow batch template **Text Files on Cloud Storage to BigQuery** under "Process Data in Bulk (batch)" to transfer data from a Cloud Storage bucket to a BQ Table.
 
-1. create bucket `bq mk `
-2. create table `gsutil mb gs://<name>`
+1. create bucket `gsutil mb gs://<name>`
+2. create table: `bq mk ` OR from UI
 3. create dataflow job and run
 #### Task 2: Run a simple Dataproc job
+
+Dataproc is essentially managed Hadoop and Spark Cluster.
+We create a cluster: Dataproc > Create Cluster > On Compute Engine
+Once created, we login to the worked node and put necessary data files there.
+Go to the create cluster page > Submit Job > Job Type = Spark . Then provide path to JAR files containing the code to run and any arguments etc.
+
 #### Task 3: Use Google Cloud Speech API
 
 ```json
@@ -257,7 +264,7 @@ Use the Dataflow batch template **Text Files on Cloud Storage to BigQuery** un
 ```
 
 ```bash
-export API_KEY=key
+export API_KEY=(created for UI)
 
 curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json \
 "https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > task3-gcs-554.result

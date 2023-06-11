@@ -57,7 +57,7 @@ gcloud artifacts repositories create $ARTIFACT_REGISTRY_NAME \
 --location=$REGION \
 --description="Artifact registry description"
 ```
-5. Enable Google Cloud Build API for your project. This will also setup a required Service Account that will be required by the Cloud Build service to access Cloud Storage.
+5. Enable Google Cloud Build API for your project. This will also setup a required Service Account that will be required by the Cloud Build service to access Cloud Storage. Detail info on the SA can be found [here](https://cloud.google.com/build/docs/cloud-build-service-account)
 ![](images/Pasted%20image%2020230506160400.png)
 7. Now we have to build our containers. For this, on your local machine where you have the source code, change into the directory which contains the Dockerfile and run 
 ```bash
@@ -67,7 +67,7 @@ gcloud builds submit . \
 This will start the building process and push the container to the repo you created earlier.
 9. Give the CE Service Account principal the additional of Artifact Registry Writer so that we can push and pull containers from the repo after authentication.
 ![](images/Pasted%20image%2020230506160334.png)
-11. Now, we need to log in to the VM and pull our containers. For that, we first have to authenticate with the AR on our CE instance using an account that has read/write permissions on our AR. You can create a key for the CE service account (that we granted AR Writer role earlier) and download it to ur local PC. Then do `touch key.json` and then `vim key.json` then paste the content of the file into the repo. Detailed instructions for repo auth are [here](https://cloud.google.com/artifact-registry/docs/docker/authentication#json-key) e.g. `cat key.json | docker login -u _json_key --pasword-stdin https://europe-west3-docker.pkg.dev`
+11. Now, we need to log in to the VM and pull our containers. For that, we first have to authenticate with the AR on our CE instance using an account that has read/write permissions on our AR. You can create a key for the CE service account (that we granted AR Writer role earlier) and download it to ur local PC (IAM and Admin > Service Accounts > Add Key). Then do `touch key.json` and then `vim key.json` then paste the content of the file into the repo. Detailed instructions for repo auth are [here](https://cloud.google.com/artifact-registry/docs/docker/authentication#json-key) e.g. `cat key.json | docker login -u _json_key --pasword-stdin https://europe-west3-docker.pkg.dev`
 12. Once authenticated, we can pull the images. But we don't need to do so directly. We can simply write a docker compose file with `image` property and then use `docker compose up` which will automatically pull the images and start the containers. 
 13. You will have to use `sudo docker` to run commands otherwise you'll get `permission denied` errors.
 14. Congratulations now you have your app running on a VM instance.
