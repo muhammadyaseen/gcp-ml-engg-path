@@ -4,6 +4,16 @@
 
 # 01. Introduction to TFX Pipelines
 
+## 01.01 - Tensorflow Extended (TFX)
+
+
+
+## 01.02 - TFX Concepts
+## 01.03 - TFX standard Data components
+## 01.04 - TFX standard Model components
+## 01.05 - TFX Pipeline Nodes
+## 01.06 - TFX Libraries
+
 # 02.  Pipeline orchestration with TFX
 
 # 03. Custom components and CI/CD for TFX pipelines
@@ -162,7 +172,7 @@ export REGION=us-central1
 export ZONE=us-central1-a
 gsutil mb -l ${REGION} gs://${BUCKET_NAME}
 ```
-PubSub topics, 
+PubSub topics, (why?)
 `gcloud pubsub topics create chicago-taxi-pipeline`
 
 Create a BigQuery dataset for storing preprocessed data for training and a table for storing training metrics
@@ -202,10 +212,19 @@ We are creating two Ops, one for train and the other for test.
 **TODO 5**: Correct ordering. The `bq_check_data_op` should have four downstream tasks: `publish_if_failed_check_op`, `python_new_version_name_op`, `bq_train_data_op`, `bq_valid_data_op`. Define these dependencies to finish the Python script.
 
 #### Task 3. Run DAG in Apache Airflow
+In this task you will copy your newly completed DAG into a Cloud Storage bucket, which will be automatically synced with your Cloud Composer environment. Afterwards you will check that your DAG was loaded correctly and start a DAG run.
 
-Navigation > Big Data > Composer
+Check if env is ready: Navigation > Big Data > Composer
+
+Define Airflow vars:
 
 #### Task 4. Exploring your DAG run in the Airflow UI
+
+![](images/Pasted%20image%2020230611121946.png)
+
+![](images/Pasted%20image%2020230611122018.png)
+
+![](images/Pasted%20image%2020230611122044.png)
 
 # 07. ML Pipelines with MLflow
 
