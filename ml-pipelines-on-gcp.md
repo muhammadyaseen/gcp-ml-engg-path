@@ -138,23 +138,68 @@ If we're using a TensorFlow, XGboost, or scikit-learn model, we can train direct
 ## Apache Airflow, Containers, and TFX
 How we can **use Airflow and Cloud Composer to orchestrate container based workloads** and TFX pipelines? 
 
-**For container workloads:**
+**01. For container workloads:**
 If we have tasks with non-PyPI dependencies, or if the tasks are already containerized, we can run the containers as Airflow task.
 ![](images/Pasted%20image%2020230408112740.png)
-**For TFX Pipelines:**
+**02. For TFX Pipelines:**
 If you have already written your ML pipeline using TFX, then you don't need to do much. TFX includes an Airflow DAG runner for running your TFX pipelines via Airflow.
 ![](images/Pasted%20image%2020230408112814.png)
 
 ## Lab - Continuous Training Pipelines with Cloud Composer
+In this lab you will learn how to write an Airflow DAG for continuous training and deploy the DAG within a Cloud Composer environment. You will also learn how to explore and monitor your DAG runs using the Apache Airflow webserver.
 
 ![](images/Pasted%20image%2020230408112940.png)
 
 #### Task 1. Provision Google Cloud resources
 
-Enable ML service, create buckets, PubSub topics, and Cloud Composer environment
+Enable ML services, 
+`gcloud services enable ml.googleapis.com`
+
+create buckets, 
+```bash
+export BUCKET_NAME=${DEVSHELL_PROJECT_ID}
+export REGION=us-central1
+export ZONE=us-central1-a
+gsutil mb -l ${REGION} gs://${BUCKET_NAME}
+```
+PubSub topics, 
+`gcloud pubsub topics create chicago-taxi-pipeline`
+
+Create a BigQuery dataset for storing preprocessed data for training and a table for storing training metrics
+```bash
+bq mk -d chicago_taxi_ct
+bq mk --table chicago_taxi_ct.model_metrics version_name:STRING,rmse:FLOAT
+
+```
+
+and Cloud Composer environment
+```bash
+
+gcloud composer environments create demo-environment \
+    --location $REGION \
+    --zone $ZONE \
+    --python-version 3 \
+    --image-version composer-1.20.8-airflow-1.10.15
+
+```
 
 #### Task 2. Write DAG in Apache Airflow
 
+We will be working through the Python script defining our continuous training DAG in Airflow.
+The [Apache Airflow Concepts](https://airflow.apache.org/docs/stable/concepts.html) and [Google Cloud Operators](https://airflow.apache.org/docs/stable/howto/operator/gcp/index.html) documentation may be helpful in the following exercises.
+
+**TODO 1**: Define basic DAG params e.g. name and args
+
+**TODO 2**: Define SQL queries for extracting the training and validation datasets
+
+This uses BigQuery. We read data and store it in relevant BQ tables.
+We are creating two Ops, one for train and the other for test.
+
+**TODO 3**: use the python callable `set_new_version_name` to set an Airflow Variable
+
+**TODO 4**: Using the query (`model_check_sql`) , finish defining the task `bq_check_rmse_query_op` to ensure that the model meets our threshold of an RMSE of 10.0 by defining the `pass_value` argument appropriately. Set the `task_id` to `bq_value_check_rmse_task`
+
+**TODO 5**: Correct ordering. The `bq_check_data_op` should have four downstream tasks: `publish_if_failed_check_op`, `python_new_version_name_op`, `bq_train_data_op`, `bq_valid_data_op`. Define these dependencies to finish the Python script.
 
 #### Task 3. Run DAG in Apache Airflow
 
