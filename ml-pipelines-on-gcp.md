@@ -6,10 +6,55 @@
 
 ## 01.01 - Tensorflow Extended (TFX)
 
+TensorFlow Extended is Google's production machine learning platform based on TensorFlow.
+It provides a flexible configuration framework and shared libraries to integrate common machine learning tests implemented as components needed to define, launch, and monitor your machine learning system. TFX makes ML ops easier through all phases of the ML project lifecycle from prototyping to production. 
+
+It is designed to orchestrate your machine learning workflow with portability to multiple environments and orchestration frameworks in mind. This includes Apache Airflow, Apache Beam and Coop Flow.
+
+![](images/Pasted%20image%2020230611122840.png)
+
+A possible mapping of different components to GCP Services.
+
+![](images/Pasted%20image%2020230611122900.png)
+
+![](images/Pasted%20image%2020230611122920.png)
 
 
 ## 01.02 - TFX Concepts
+
+A **TFX component** is an implementation of the machine learning task in your pipeline. They are designed to be modular and extensible, while incorporating Google's machine learning best practices on tasks such as data partitioning, validation and transformation.
+
+Each step of your **TFX pipeline**, again called a **component**, produces and consumes structured data representations called **artifacts**. Subsequent components in your workflow may use these artifacts as inputs. In this way, TFX lets you transfer data between components during continuous execution of your pipeline.
+![](images/Pasted%20image%2020230611131731.png)
+
+Components are composed of **five elements**:
+
+![](images/Pasted%20image%2020230611131814.png)
+
+Component instances produce artifacts as outputs, and typically depend on artifacts produced by upstream component instances, as inputs, for example of transform data is an artifact. It depends on the training data artifact ingested into your pipeline, and serves as input to your model during model training.
+
+![](images/Pasted%20image%2020230611132246.png)
+
+ First, a driver reads the component specification for runtime parameters, and retrieve the required artifacts from the ML metadata store for the component. 
+ 
+ Second, and executer performs the actual computation on the retrieved input artifacts in generates the output artifacts. 
+ 
+ Finally, the publisher reads the component specification to log the pipeline component run and ML metadata and write the components output artifacts to the artifact store. 
+
+![](images/Pasted%20image%2020230611132305.png)
+
+ TFX pipelines are a sequence of components linked together by a directed acyclical graph of the relationships between artifact dependencies. They communicate through input and output channels.
+![](images/Pasted%20image%2020230611132336.png)
+Orchestrators ensure consistency with pipeline execution order, component logging, retries and failure recovery, and intelligent parallelization of component data processing
+
+The ML metadata library stores the metadata in a relational back end. For notebook prototypes, this can be local SQL lite database and for production cloud deployments, this could be a managed MySQL or Postgres database. ML metadata does not store the actual pipeline artifacts. TFX automatically organizes and stores the artifacts on local file systems on a remote cloud storage file system for a consistent organization across your machine learning projects.
+
+![](images/Pasted%20image%2020230611132414.png)
+For most machine learning cases with TFX, you will only interact with the integrated front end layer and don't need to engage directly with the orchestrator, shared libraries, and ML metadata unless you need additional customization.
+
 ## 01.03 - TFX standard Data components
+
+
 ## 01.04 - TFX standard Model components
 ## 01.05 - TFX Pipeline Nodes
 ## 01.06 - TFX Libraries
