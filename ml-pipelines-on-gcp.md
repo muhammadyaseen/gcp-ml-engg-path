@@ -2,15 +2,15 @@
 
 **Synopsis**: In this course, you will be learning from ML Engineers and Trainers who work with the state-of-the-art development of ML pipelines here at Google Cloud. The first few modules will cover about TensorFlow Extended (or TFX), which is Google’s production machine learning platform based on TensorFlow for management of ML pipelines and metadata. You will learn about pipeline components and pipeline orchestration with TFX. You will also learn how you can automate your pipeline through continuous integration and continuous deployment, and how to manage ML metadata. Then we will change focus to discuss how we can automate and reuse ML pipelines across multiple ML frameworks such as tensorflow, pytorch, scikit learn, and xgboost. You will also learn how to use another tool on Google Cloud, Cloud Composer, to orchestrate your continuous training pipelines. And finally, we will go over how to use MLflow for managing the complete machine learning life cycle.
 
-# Introduction to TFX Pipelines
+# 01. Introduction to TFX Pipelines
 
-# Pipeline orchestration with TFX
+# 02.  Pipeline orchestration with TFX
 
-# Custom components and CI/CD for TFX pipelines
+# 03. Custom components and CI/CD for TFX pipelines
 
-# ML Metadata with TFX
+# 04. ML Metadata with TFX
 
-# Continuous Training with multiple SDKs, KubeFlow & AI Platform Pipelines
+# 05. Continuous Training with multiple SDKs, KubeFlow & AI Platform Pipelines
 
 ## Containerized Training Applications
 
@@ -67,16 +67,18 @@ This is what a successful run looks like:
 
 In this section we learned how to do manual pipeline runs, in the next section we will see an automated workflow orchestration service i.e. Cloud Composer / Airflow.
 
-# Continuous Training with Cloud Composer
 
-## What is Cloud Composer
+# 06. Continuous Training with Cloud Composer
+
+## What is Cloud Composer?
 ![](Pasted%20image%2020230407125159.png)
 ![](Pasted%20image%2020230407125239.png)
 ![](Pasted%20image%2020230407125518.png)
 
-**Airflow serves similar role as Prefect (there's one more software, but i don't recall the name right now) How does Composer compare to Vertex AI Pipelines, Kubeflow Pipelines, Dataflow etc? When would one use one over the other?**
+**Airflow serves similar role as Prefect (there's one more software, but i don't recall the name right now) How does Composer compare to Vertex AI Pipelines, Kubeflow Pipelines, Dataflow etc? When would one use one over the other? Can they be used together?**
 
 blogpost: [Kubeflow Pipelines vs. Cloud Composer for Orchestration](https://datatonic.com/insights/kubeflow-pipelines-cloud-composer-data-orchestration/)
+
 ## Core Concepts of Apache Airflow
 
 **DAG**: A DAG is a collection of the tasks you want to run, represented by the nodes of the graph, organized in such a way that reflects the relationships and dependencies, represented by the edges of the graph. In Airflow, we use a Python SDK to define the DAGs, the task and dependencies, as code. Every DAG has:
@@ -88,30 +90,33 @@ blogpost: [Kubeflow Pipelines vs. Cloud Composer for Orchestration](https://data
 
 **Tasks**: Tasks define a unit of work in your workflow. What are these tasks? They are parameterized implementations of operators that we will discuss in the next section
 
-**Operators**: are usually, but not always, atomic. This means that they can work alone and they don't need to share resources with any other operators. The DAG will make sure that operators run in the correct order. Other than those dependencies, operators do generally run independently. In Airflow you can leverage XComms if you do need to pass information between different operators. Airflow supports three main types of operators:
+**Operators**: are usually, but not always, atomic. This means that they can work alone and they don't need to share resources with any other operators. The DAG will make sure that operators run in the correct order. 
+Other than those dependencies, operators do generally run independently. In Airflow you can leverage XComms if you do need to pass information between different operators. Airflow supports **three main types** of operators:
 - operators that perform an action or tell another system to perform an action
 - transfer operators that move data from one system to another, for example, BigQuery to Cloud storage
 - sensors that will keep running until a specific criterion is met, such as a file sensor that waits until a file is present at a certain location before triggering any downstream task.
 
-Task and operator example:
+Some concrete examples are DatflowOp, DataprocOp, BigQueryOp etc.
+
+**Task and operator example:**
 ![](images/Pasted%20image%2020230408111320.png)
 
-Airflow DAG is defined in a Python script. The scripts have five main sections
+Airflow DAG is defined in a Python script. The scripts have **five main sections**
 ![](images/Pasted%20image%2020230408111040.png)
 
-And any code outside of the DAG definition will then be run every second, so keep that in mind.
+And _any code outside of the DAG definition will then be run every second_, so keep that in mind.
 
 Setting Op dependency / order:
 ![](images/Pasted%20image%2020230408111446.png)
 
+**Creating Cloud Composer Environmnet:**
 Now that we have a DAG ready to go, how do we create and access our environment to run it? We can access the composer environment via the Google Cloud Console, Google Cloud SDK CLI, or via rest APIs.
 
-
-## Continuous Training Pipelines using Cloud Composer (data)
+## Continuous Training Pipelines using Cloud Composer (Stages 1-4: Data)
 
 Now that we know how to create our DAGs using the Airflow Python SDK Creator Composer environment and access the Airflow web server. Let's focus on what we need to work on for building continuous training pipelines in Airflow and running them on Cloud Composer.
 
-There are 6 stages:
+**There are 6 stages:**
 ![](images/Pasted%20image%2020230408111747.png)
 
 ![](images/Pasted%20image%2020230408111832.png)
@@ -120,8 +125,9 @@ There are 6 stages:
 ![](images/Pasted%20image%2020230408111957.png)
 ![](images/Pasted%20image%2020230408112043.png)
 
-## Continuous Training Pipelines using Cloud Composer (model)
-After the data is prepared, we're ready to start training our model. If we're using a TensorFlow, XGboost or scikit-learn model, we can train directly on AI platform
+## Continuous Training Pipelines using Cloud Composer (Stages 5-6: Model)
+After the data is prepared, we're ready to start training our model. 
+If we're using a TensorFlow, XGboost, or scikit-learn model, we can train directly on AI platform
 
 ![](images/Pasted%20image%2020230408112204.png)
 ![](images/Pasted%20image%2020230408112232.png)
@@ -130,8 +136,12 @@ After the data is prepared, we're ready to start training our model. If we're us
 ![](images/Pasted%20image%2020230408112444.png)
 
 ## Apache Airflow, Containers, and TFX
-How we can use Airflow and Cloud Composer to orchestrate container based workloads and TFX pipelines? If we have tasks with non-PyPI dependencies, or if the tasks are already containerized, we can run the containers as Airflow task
+How we can **use Airflow and Cloud Composer to orchestrate container based workloads** and TFX pipelines? 
+
+**For container workloads:**
+If we have tasks with non-PyPI dependencies, or if the tasks are already containerized, we can run the containers as Airflow task.
 ![](images/Pasted%20image%2020230408112740.png)
+**For TFX Pipelines:**
 If you have already written your ML pipeline using TFX, then you don't need to do much. TFX includes an Airflow DAG runner for running your TFX pipelines via Airflow.
 ![](images/Pasted%20image%2020230408112814.png)
 
@@ -152,7 +162,7 @@ Navigation > Big Data > Composer
 
 #### Task 4. Exploring your DAG run in the Airflow UI
 
-# ML Pipelines with MLflow
+# 07. ML Pipelines with MLflow
 
 MLflow is composed of four components: tracking, projects, models, and registry.
 
