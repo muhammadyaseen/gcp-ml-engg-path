@@ -86,8 +86,38 @@ As outputs, the Transform component emits a SavedModel artifact that encapsulate
 ![](images/Pasted%20image%2020230611134025.png)
 
 ## 01.04 - TFX standard Model components
+
+Standard TFX components for Model Management.
+![](images/Pasted%20image%2020230611143146.png)
+
+![](images/Pasted%20image%2020230611143205.png)
+![](images/Pasted%20image%2020230611143227.png)
+
+![](images/Pasted%20image%2020230611143245.png)
+
+![](images/Pasted%20image%2020230611143305.png)
+![](images/Pasted%20image%2020230611143326.png)
+
+![](images/Pasted%20image%2020230611143340.png)
+
+ 
 ## 01.05 - TFX Pipeline Nodes
+
+Pipeline nodes are special purpose classes for performing advanced metadata operation such as importing external artifacts into ML metadata, performing queries of current ML metadata based on artifact properties and their history.
+
+The most common pipeline node is the ImporterNode, which is a special node that registers an external resource into the ML metadata library So downstream nodes can use the registered artifact as input. The primary use case for this node is to bring in external artifacts like a schema into the TFX pipeline for use by the transform and trainer components.
+
+![](images/Pasted%20image%2020230611140011.png)
+
+The next type of pipeline node is a ResolverNode. ResolverNode is a special TFX node that handles special artifact resolution logistics that will be used as inputs for downstream nodes. The model resolver is only required if you're performing model validation in addition to evaluation.
+
+![](images/Pasted%20image%2020230611140036.png)
+![](images/Pasted%20image%2020230611140054.png)
+
 ## 01.06 - TFX Libraries
+The diagram on the slide illustrates the relationships between TFX libraries and pipeline component
+
+![](images/Pasted%20image%2020230611142851.png)
 
 # 02.  Pipeline orchestration with TFX
 
