@@ -138,6 +138,105 @@ The diagram on the slide illustrates the relationships between TFX libraries and
 
 ![](images/Pasted%20image%2020230611142851.png)
 
+## 01.07 - Lab: TFX Standard Components Walkthrough
+
+In this lab, you will work with the Covertype Data Set and use TFX to analyze, understand, and pre-process the dataset and train, analyze, validate, and deploy a multi-class classification model to predict the type of forest cover from cartographic features.
+![](images/Pasted%20image%2020230612104236.png)
+
+#### Task 1. Enable Cloud Services
+
+```bash
+# Set the project id to your Google Cloud Project
+
+PROJECT_ID=Project ID
+gcloud config set project $PROJECT_ID
+
+# enable the required cloud services:
+
+gcloud services enable \
+cloudbuild.googleapis.com \
+container.googleapis.com \
+cloudresourcemanager.googleapis.com \
+iam.googleapis.com \
+containerregistry.googleapis.com \
+containeranalysis.googleapis.com \
+ml.googleapis.com \
+dataflow.googleapis.com
+
+# add the Editor permission for your Cloud Build service account:
+
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+CLOUD_BUILD_SERVICE_ACCOUNT="${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com"
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:$CLOUD_BUILD_SERVICE_ACCOUNT \
+  --role roles/editor
+
+# create a custom service account to give CAIP training job access to AI Platform Vizier service for pipeline hyperparameter tuning:
+
+SERVICE_ACCOUNT_ID=tfx-tuner-caip-service-account
+gcloud iam service-accounts create $SERVICE_ACCOUNT_ID  \
+  --description="A custom service account for CAIP training job to access AI Platform Vizier service for pipeline hyperparameter tuning." \
+  --display-name="TFX Tuner CAIP Vizier"
+
+# Grant your AI Platform service account additional access permissions to the AI Platform Vizier service for pipeline hyperparameter tuning
+
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+CAIP_SERVICE_ACCOUNT="service-${PROJECT_NUMBER}@cloud-ml.google.com.iam.gserviceaccount.com"
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:$CAIP_SERVICE_ACCOUNT \
+  --role=roles/storage.objectAdmin
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+ --member serviceAccount:$CAIP_SERVICE_ACCOUNT \
+ --role=roles/ml.admin
+
+# 6. Grant service account access to Storage admin role:
+
+SERVICE_ACCOUNT_ID=tfx-tuner-caip-service-account
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+--member=serviceAccount:${SERVICE_ACCOUNT_ID}@${PROJECT_ID}.iam.gserviceaccount.com \
+--role=roles/storage.objectAdmin
+
+# 7. Grant service acount access to AI Platform Vizier role:
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+--member=serviceAccount:${SERVICE_ACCOUNT_ID}@${PROJECT_ID}.iam.gserviceaccount.com \
+--role=roles/ml.admin
+
+# Grant your project's AI Platform Google-managed service account the Service Account Admin role for your AI Platform service account:
+
+gcloud iam service-accounts add-iam-policy-binding \
+ --role=roles/iam.serviceAccountAdmin \
+ --member=serviceAccount:service-${PROJECT_NUMBER}@cloud-ml.google.com.iam.gserviceaccount.com \
+${SERVICE_ACCOUNT_ID}@${PROJECT_ID}.iam.gserviceaccount.com
+
+
+```
+#### Task 2. Create AI Platform Pipelines Instance
+
+AI Platform > Pipelines > New Instance > Configure > Create New Cluster > (after creation) > Deploy
+
+This creates a Kubeflow Pipelines cluster
+
+#### Task 3. Create AI Platform Notebook Instance
+
+AI Platform > Workbench > Notebook > TF Enterprise w/o GPU
+
+#### Task 4. Clone example repo 
+
+`git clone https://github.com/GoogleCloudPlatform/mlops-on-gcp`
+
+`cd mlops-on-gcp/workshops/tfx-caip-tf23` 
+`./install.sh`
+
+Open `lab-01.ipynb`
+
+#### Task 5. Run your training job in Cloud 
+
+Follow along in the notebook.
+**Note:** The completed notebook has been saved as:
+
+
 # 02.  Pipeline orchestration with TFX
 
 # 03. Custom components and CI/CD for TFX pipelines
