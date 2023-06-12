@@ -138,6 +138,12 @@ The diagram on the slide illustrates the relationships between TFX libraries and
 
 ![](images/Pasted%20image%2020230611142851.png)
 
+
+**Useful links**:
+
+- [Simple TFX Pipeline Tutorial using Penguin dataset](https://www.tensorflow.org/tfx/tutorials/tfx/penguin_simple)
+- [TFX User Guide](https://www.tensorflow.org/tfx/guide)
+
 ## 01.07 - Lab: TFX Standard Components Walkthrough
 
 In this lab, you will work with the Covertype Data Set and use TFX to analyze, understand, and pre-process the dataset and train, analyze, validate, and deploy a multi-class classification model to predict the type of forest cover from cartographic features.
@@ -239,9 +245,24 @@ Follow along in the notebook.
 
 # 02.  Pipeline orchestration with TFX
 
+## 02.01 - TFX Orchestrators
+## 02.02 - Apache Beam
+## 02.03 - TFX on Cloud AI Platform
+## 02.04 - Lab: TFX on Cloud AI Platform Pipeline
+
+
 # 03. Custom components and CI/CD for TFX pipelines
 
+## 03.01 - TFX Custom Components - Python Functions
+## 03.02 - TFX Custom Components - Containers + Subclassed
+## 03.03 - CI/CD for TFX Pipeline workflows 
+## 03.04 - Lab: Intro CI/CD Lab Walkthrough
+
 # 04. ML Metadata with TFX
+
+## 04.01 - TFX Pipeline Metadata
+## 04.02 - TFX Pipeline Metadata model
+## 04.03 - Lab: TFX Pipeline Metadata
 
 # 05. Continuous Training with multiple SDKs, KubeFlow & AI Platform Pipelines
 
