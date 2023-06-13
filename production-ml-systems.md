@@ -17,9 +17,8 @@ Serving design decision:
 one of the goals: minimize latency
 
 Static serving: pre-computed labels stored in look-up tables Dynamic serving: computes label on demand
+![](Pasted%20image%2020230613145959.png)
 
-there's a space time trade-off 
-![](Pasted%20image%2020230204191816.png)
 We will look at:
 
 ![](Pasted%20image%2020230613112010.png)
@@ -68,12 +67,79 @@ A registry may capture governance data required for auditing purposes, such as w
 **Using Google Cloud Monitoring:** To understand other performance metrics, you can configure Google's Cloud monitoring to monitor your model's traffic patterns, error rates, latency, and resource utilization.
 
 ## 02.05 - Training design decisions
-## 02.06 - Serving design decisions
+
+Well, when making decisions about training, you have to decide whether the phenomenon you're modeling is more like physics or like fashion. When training your model, there are two paradigms: **Static vs Dynamic training** (like Physics vs Fashion) 
+
+- In dynamic environments like fashion, we'll have to constantly re-train our models.
+- Part of the reason the dynamic is harder to build and test is that new data may have all sorts of bugs in it. (this is later discussed in Adaptable ML systems)
+- Static is simpler to build and test, but will probably become stale
+- Dynamic training can make use of 3 potential architectures (Cloud Functions, App Engine, Dataflow)
+![](Pasted%20image%2020230613150614.png)
+
+**3 potential architectures for dynamic training**
+
+1. File arrives in Cloud Storage -> Launch Cloud Func -> Start Train job on AI platform -> AI platform produces new model -> Deploy
+2. User web request -> start AI platform training job -> New model -> Deploy
+3. Streaming topic ingested into Pub/Sub topic -> Consumed by Dataflow and aggregated -> Write agg data in BigQuery -> AIP job launched on new data in BQ -> New model  -> Deploy
+
+**Streaming (Pub/Sub), structured batch (BigQuery), unstructured batch (Cloud Storage)**
+
+## 02.06 - Serving/Inference design decisions (R)
+
+Just as the use case determines appropriate training architecture, it also determines the appropriate serving architecture. One of the goals: **minimize latency**.
+
+Remarkably, _the solution for serving models_ is very similar to what we do to optimize IO performance. We use a cache. In this case, instead of faster memory, we'll use a table.
+
+- **Static serving** then computes the label ahead of time and serves by looking it up in the table.
+- **Dynamic serving** in contrast computes the label on demand. 
+
+There's a space-time trade-off. 
+
+![](Pasted%20image%2020230204191816.png)
+_Static serving is space intensive_, resulting in higher storage costs because we store precomputed predictions with a low, fixed latency and lower maintenance costs. _Dynamic serving, however, is compute intensive_. It has lower storage costs, higher maintenance, and variable latency. 
+
+The choice of whether to use static or dynamic serving is determined by considering how important costs are with regard to latency, storage, and CPU.
+
+it might be helpful to consider static and dynamic serving through another lens: **Peakedness and Cardinality**.
+
+Taken together peakedness and cardinality create a space. 
+- When the cardinality is sufficiently low, we can store the entire expected prediction workload.
+- When the cardinality is high because the size of the input space is large and the workload is not very peaked, you probably want to use dynamic training.
+- In practice though, a hybrid of static and dynamic is often chosen, where you statically cache some of the predictions while responding on demand for the long tail.
+- The striped area above the curve and not inside the blue rectangle is suitable for a hybrid solution, with the most frequently requested predictions cached and the tail computed on demand
+
+![](Pasted%20image%2020230613151332.png)
+
+
 ## 02.07 - Designing from scratch
 ## 02.08 - Using Vertex AI
 ## 02.09 - Lab: Structured Data Prediction using Vertex AI Platform
 
 # 03. Designing Adaptable Systems
+
+## 03.01 - Intro
+## 03.02 - Adapting to data
+## 03.03 - Changing Distribution
+## 03.03 - Right and Wrong Decisions
+## 03.02 - System Failure
+## 03.02 - Concept Drift
+## 03.02 - Actions to mitigate Concept Drift
+## 03.02 - Tensorflow Data Validation
+## 03.02 - Components of Tensorflow Data Validation
+## 03.02 - Lab - Intro to Tensorflow Data Validation
+## 03.02 - Lab - Advanced Visualizations with Tensorflow Data Validation
+## 03.02 - Mitigating train-serve skew thru design
+## 03.02 - Lab - Serving ML Predictions in Batch and Real Time
+## 03.02 - Diagnosing a production model
+
 # 04. Designing High-Performance ML Systems
 # 05. Building Hybrid ML Systems
+
+## 05.01 - ML on Hybrid Cloud
+## 05.02 - Kubeflow
+## 05.03 - Lab - Kubeflow Pipelines on Vertex AI 2.5
+## 05.04 - Tensorflow Lite
+## 05.05 - Optimizing Tensorflow for Mobile
+
+
 
