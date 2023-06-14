@@ -2,7 +2,7 @@
 
 # MLOps Fundamentals
 
-# When and Why do we need MLOps ?
+# 01. When and Why do we need MLOps ?
 
 **ML froms Ops POV**: 
 - Everything from defining the problem to scaling the solution
@@ -17,7 +17,7 @@ It attempts to answer Data Scientist's challenges:
 ![](images/Pasted%20image%2020230208163752.png)
 ![](images/Pasted%20image%2020230208163853.png)
 
-# Understanding the Main K8s components
+# 02. Understanding the Main K8s components
 
 ## Intro to Containers
 **Containers**: isolated user space (above kernel) for running application
@@ -120,7 +120,7 @@ Jobs and CronJobs
 Parallel Jobs
 CronJobs
 
-# Intro to AI Platform Pipelines
+# 03. Intro to AI Platform Pipelines
 
 ^b72b49
 
@@ -164,7 +164,7 @@ Tech stack behind pipelines. TFX is focused on TensorFlow while Kubeflow is gene
 
 ![](images/Pasted%20image%2020230223140550.png)
 
-# Training, Tuning, and Serving on AI Platform
+# 04. Training, Tuning, and Serving on AI Platform
 ## System and Concept Overview
 ![](images/Pasted%20image%2020230224162605.png)
 Specify the training configurations, such as the hyperparameter ranges to be tuned, into a `config.yaml` file.
@@ -244,7 +244,7 @@ Finally, the last step of our lesson is to set a prediction request that can be 
 ## Lab
 We can creata k8s cluster and then deploy  AI Platform pipelines instance into it which installs the relevant pipeline related software on it e.g. KFP sdk etc.
 
-# Kubeflow Pipelines on AI Platform
+# 05. Kubeflow Pipelines on AI Platform
 ## Intro Kubeflow
 Kubeflow was developed to use Kubernetes to standardize and streamline the DevOps work around machine learning. Kubeflow pipeline can be used to automate the training and tuning process for ML models. Instead of having to trigger every single step of the process manually from the Jupiter Lab Notebook, we can trigger the entire process with a single click after we have expressed the various steps as a Kubeflow Pipeline. Kubeflow provides out of the box support to a lot of common ML frameworks like TensorFlow, PyTorch, Caffe, and XGboost.
 
@@ -317,7 +317,7 @@ How to compile the pipeline, upload the result of the compilation  to the Kubefl
 
 
 
-# CI/CD for Kubeflow Pipelines on AI Platform
+# 06. CI/CD for Kubeflow Pipelines on AI Platform
 
 ## Concept Overview
 In last section, we saw how to build an automated Kubeflow Pipeline.
