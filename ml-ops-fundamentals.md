@@ -122,7 +122,7 @@ CronJobs
 
 # 03. Intro to AI Platform Pipelines
 
-## 03.01 - AI Pipelines: Overview
+## 03.01 - Overview
 Covers the basics of AI platform pipelines, a Google Cloud product to build ML Pipelines, and how it is different from the regular ML Ops pipelines. AI Platform Pipelines makes ML Ops easy, seamless and scalable with Google Cloud Services.
 
 We will also discuss what is the technical stack behind this product and what is the ecosystem around it that makes it very collaborative and scalable.
@@ -162,7 +162,11 @@ Tech stack behind pipelines. TFX is focused on TensorFlow while Kubeflow is gene
 
 ![](images/Pasted%20image%2020230223140550.png)
 ## 03.06 - Lab: Running AI Platform Pipelines
+Prebuilt pipeline is available in the lab / account. We just have to run it.
 
+AI Platform > Pipelines > New Instance > Configure > Create New Cluster > Deploy
+
+![](Pasted%20image%2020230615092600.png)
 # 04. Training, Tuning, and Serving on AI Platform
 
 ## 04.01 - System and Concept Overview
@@ -243,7 +247,110 @@ Finally, the last step of our lesson is to set a prediction request that can be 
 ![](images/Pasted%20image%2020230224200400.png)
 ## 04.07 - Lab: Using Customer Containers with AI Platform Training
 
+**Synopsis:** In this lab, you develop a multi-class classification model, package the model as a Docker image, and run the model on AI Platform Training as a training application. The training application trains a multi-class classification model that predicts the type of forest cover from cartographic data. The dataset used in the lab is based on the Covertype Data Set from the UCI Machine Learning Repository.
+The code is instrumented using the hypertune package. Therefore, it can be used with an AI Platform hyperparameter tuning job to search for the best combination of hyperparameter values by optimizing the metrics you specify.
+
+![](Pasted%20image%2020230615094314.png)
+
 We can create a k8s cluster and then deploy AI Platform pipelines instance into it which installs the relevant pipeline related software on it e.g. KFP sdk etc.
+
+#### Task 1: Enable Cloud services
+```bash
+export PROJECT_ID=$(gcloud config get-value core/project)
+gcloud config set project $PROJECT_ID
+
+gcloud services enable \
+cloudbuild.googleapis.com \
+container.googleapis.com \
+cloudresourcemanager.googleapis.com \
+iam.googleapis.com \
+containerregistry.googleapis.com \
+containeranalysis.googleapis.com \
+ml.googleapis.com \
+dataflow.googleapis.com
+
+# Editor permission for your Cloud Build service accoun
+
+PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+CLOUD_BUILD_SERVICE_ACCOUNT="${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com"
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:$CLOUD_BUILD_SERVICE_ACCOUNT \
+  --role roles/editor
+```
+
+#### Task 2: Create an instance of AI Platform Pipelines 
+
+AI Platform > Pipelines > New Instance > Configure > Create New Cluster > Deploy
+
+Or do this
+```bash
+gcloud container clusters create cluster-1 --zone us-central1-a --release-channel stable --machine-type n1-standard-2 --scopes=https://www.googleapis.com/auth/cloud-platform
+```
+
+Then go to AI Platform > Pipelines > New Instance > Configure > (select this cluster) > Deploy
+
+#### Task 3: Create an instance of Vertex AI Platform Notebooks 
+
+The instance is configured using a custom container image that includes all Python packages required for this lab.
+
+```bash
+# In Cloud shell
+
+cd
+mkdir tmp-workspace
+cd tmp-workspace
+
+gsutil cp gs://cloud-training/OCBL203/requirements.txt .
+
+# Create a Dockerfile that defines your custom container image:
+gsutil cp gs://cloud-training/OCBL203/Dockerfile .  
+
+# Build the image and push it to your project's Container Registry:
+IMAGE_NAME=kfp-dev
+TAG=latest
+IMAGE_URI="gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${TAG}"
+gcloud builds submit --timeout 15m --tag ${IMAGE_URI} .
+```
+
+**Creating a Notebook Instance from cmd line:**
+
+```bash
+ZONE=us-central1-a
+INSTANCE_NAME=ai-notebook
+
+IMAGE_FAMILY="common-container"
+IMAGE_PROJECT="deeplearning-platform-release"
+INSTANCE_TYPE="n1-standard-4"
+METADATA="proxy-mode=service_account,container=$IMAGE_URI"
+gcloud compute instances create $INSTANCE_NAME \
+  --zone=$ZONE \
+  --image-family=$IMAGE_FAMILY \
+  --machine-type=$INSTANCE_TYPE \
+  --image-project=$IMAGE_PROJECT \
+  --maintenance-policy=TERMINATE \
+  --boot-disk-device-name=${INSTANCE_NAME}-disk \
+  --boot-disk-size=100GB \
+  --boot-disk-type=pd-ssd \
+  --scopes=cloud-platform,userinfo-email \
+  --metadata=$METADATA
+
+```
+
+Then Open the Notebook
+
+#### Task 4: Clone the mlops-on-gcp repo within your Vertex AI Platform Notebooks instance
+
+`git clone https://github.com/GoogleCloudPlatform/mlops-on-gcp`
+
+
+#### Task 5: Navigate to the mlops-on-gcp notebook
+
+Go to **mlops-on-gcp > on_demand > kfp-caip-sklearn > lab-01-caip-containers > exercises >lab-01.ipynb**.
+
+Follow the instructions in the notebook.
+
+The notebook is saved in `notebooks/ml-ops-course/using-custom-containers-with-ai-platform-training.ipynb`
+
 
 # 05. Kubeflow Pipelines on AI Platform
 ## Intro Kubeflow
@@ -316,7 +423,23 @@ How to compile the pipeline, upload the result of the compilation  to the Kubefl
 4. Step four, is to upload the pipeline to the KF cluster. We can do that from the Kubeflow UI or we can do it programmatically by using the KFP pipeline upload command line.
 5. We can use the KFP run submit command to run the pipeline.
 
+## 05.07 - Lab: Continuous Training Pipeline with Kubeflow Pipeline and Cloud AI Platform
 
+**Synopsis:** In this lab, you build, deploy, and run a Kubeflow Pipeline (KFP) that orchestrates BigQuery and AI Platform services to train, tune, and deploy a Scikit-learn model.
+
+![](Pasted%20image%2020230615100225.png)
+
+
+#### Task 1: Create an Instance of AI Platform Pipelines
+#### Task 2: Create an Instance of Vertex AI Notebook
+#### Task 3: Clone the repo within Vertex AI Notebook Instance
+#### Task 4: Navigate to the mlops-on-gcp notebook
+
+Go to **mlops-on-gcp > on_demand > kfp-caip-sklearn > lab-02-kfp-pipeline > lab-02.ipynb**.
+
+Follow the instructions in the notebook.
+
+The notebook is saved in `notebooks/ml-ops-course/cts-training-pipeline-with-kubeflow-and-ai-platform.ipynb`
 
 # 06. CI/CD for Kubeflow Pipelines on AI Platform
 
@@ -356,8 +479,8 @@ Now that we know how to specify the configuration actions for Cloud Build and ho
 
 Cloud Build can manage multiple actions on GitHub (push, tag, pull request etc). We want to configure Cloud Build to execute the build using these triggers. The first step towards this automation is to link the GitHub repo with the Google Cloud Project. The next step is to specify the Cloud Build, what action to take when one of these triggers is detected and we set this up within Cloud Build. Once done, After you've tagged your code and pushed your tag to GitHub, the build will complete. Everything is triggered automatically. 
 
-## 06.05 - Lab: CI/CD for a Kubeflow pipeline 
+## 06.05 - Lab: CI/CD for a Kubeflow pipelines on AI Platform 
 
-
+Add
 
 

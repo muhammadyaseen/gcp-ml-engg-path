@@ -240,7 +240,8 @@ Open `lab-01.ipynb`
 #### Task 5. Run your training job in Cloud 
 
 Follow along in the notebook.
-**Note:** The completed notebook has been saved as:
+**Note:** The completed notebook has been saved as: `notebooks/ml-pipelines-on-gcp/structured-data-prediction-using-vertex-ai-platform`
+
 
 
 # 02.  Pipeline orchestration with TFX
