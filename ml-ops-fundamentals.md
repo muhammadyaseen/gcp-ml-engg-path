@@ -245,7 +245,7 @@ Next, we run a similar command, which is `gcloud ai-platform versions create` to
 
 Finally, the last step of our lesson is to set a prediction request that can be done easily through the command `gcloud ai-platform predict`. For the prediction, it is necessary to specify both the model in its version which were created previously.
 ![](images/Pasted%20image%2020230224200400.png)
-## 04.07 - Lab: Using Customer Containers with AI Platform Training
+## 04.07 - Lab: Using Custom Containers with AI Platform Training
 
 **Synopsis:** In this lab, you develop a multi-class classification model, package the model as a Docker image, and run the model on AI Platform Training as a training application. The training application trains a multi-class classification model that predicts the type of forest cover from cartographic data. The dataset used in the lab is based on the Covertype Data Set from the UCI Machine Learning Repository.
 The code is instrumented using the hypertune package. Therefore, it can be used with an AI Platform hyperparameter tuning job to search for the best combination of hyperparameter values by optimizing the metrics you specify.
@@ -255,6 +255,7 @@ The code is instrumented using the hypertune package. Therefore, it can be use
 We can create a k8s cluster and then deploy AI Platform pipelines instance into it which installs the relevant pipeline related software on it e.g. KFP sdk etc.
 
 #### Task 1: Enable Cloud services
+
 ```bash
 export PROJECT_ID=$(gcloud config get-value core/project)
 gcloud config set project $PROJECT_ID
@@ -353,7 +354,7 @@ The notebook is saved in `notebooks/ml-ops-course/using-custom-containers-with-a
 
 
 # 05. Kubeflow Pipelines on AI Platform
-## Intro Kubeflow
+## 05.01 - Intro Kubeflow
 Kubeflow was developed to use Kubernetes to standardize and streamline the DevOps work around machine learning. Kubeflow pipeline can be used to automate the training and tuning process for ML models. Instead of having to trigger every single step of the process manually from the Jupiter Lab Notebook, we can trigger the entire process with a single click after we have expressed the various steps as a Kubeflow Pipeline. Kubeflow provides out of the box support to a lot of common ML frameworks like TensorFlow, PyTorch, Caffe, and XGboost.
 
 ML processes can be split into sequence of more or less standard steps. These steps can be arranged in a pipeline of tasks that are organized into a DAG. Kubeflow is composable, portable, and standard, which means that you can create a component, reuse it in a different pipeline, and share it with your colleagues. To sum up, Kubeflow allows you to orchestrate the entire machine learning workflow. You can share and re-use the components in a very standardized way, that allows for rapid and reliable experimentation.
@@ -498,4 +499,6 @@ Cloud Build can manage multiple actions on GitHub (push, tag, pull request etc).
 In the notebook interface, navigate to **mlops-on-gcp > on_demand > kfp-caip-sklearn > lab-03-kfp-cicd > exercises**, and open **lab-03.ipynb**.
 
 The completed notebook has been saved in:  `notebooks/ml-ops-course/ci-cd-for-kubeflow-pipeline.ipynb`
+
+
 
