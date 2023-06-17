@@ -2,23 +2,6 @@
 
 # 01. Intro to Advanced ML on Google Cloud
 
-Static vs Dynamic training (like physica vs fashion) In dynamic environments like fashion, we'll have to constantly re-train our models
-
-Dynamic training can make use of 3 potential architectures (Cloud Funciton, App Enginer, DataFlow)
-
-3 use-cases for dynamic training
-
-1. file arrives in Cloud Storage -> Launch Cloud Func -> Start Train job on AI platform -> AI platform produces new model
-2. user web request -> start AI plt tr job -> new model
-3. Pub/Sub topic -> consumed by Dataflow and aggregated -> write agg data in BigQuery -> AIP job launched on new data in BQ -> new model
-
-Serving design decision:
-
-one of the goals: minimize latency
-
-Static serving: pre-computed labels stored in look-up tables Dynamic serving: computes label on demand
-![](Pasted%20image%2020230613145959.png)
-
 We will look at:
 
 ![](Pasted%20image%2020230613112010.png)
@@ -112,8 +95,41 @@ Taken together peakedness and cardinality create a space.
 
 
 ## 02.07 - Designing from scratch
+
 ## 02.08 - Using Vertex AI
+
+With Vertex AI, you can access a dashboard, datasets, features, labeling tasks, notebooks, pipelines, training, experiments, models, endpoints, batch predictions, and metadata. Vertex AI is Google Cloud’s unified ML platform and provides services like:
+
+**Notebooks** for prototyping and model development.
+
+**Feature Store:** Uploaded datasets are stored in a Cloud Storage bucket that acts as an input for both AutoML and custom training jobs. In the feature store, the timestamps are an attribute of the feature values, not a separate resource type. If all feature values were generated at the same time, you don’t need to have a timestamp column.
+
+**Training pipelines** are the primary model training workflow in Vertex AI, which can use training pipelines to create an AutoML-trained model or a custom-trained model. For custom-trained models, training pipelines orchestrate custom training jobs and hyperparameter tuning in conjunction with steps like adding a dataset or uploading the model to Vertex AI for prediction serving Both custom jobs and hyperparameter tuning, however, are only used by custom-trained models.
+
+**Models** are built from datasets or unmanaged data sources. Many different types of machine learning models are available with Vertex AI. A new model can be trained, or an existing model can be imported. After the model has been imported into Vertex AI, it can be deployed to an endpoint and then used to request predictions. AutoML can be used to train a new model with minimal technical effort.
+
+**Endpoints** are machine learning models made available for online prediction requests. An endpoint is an HTTPS endpoint that clients can call to receive the inferencing (scoring) output of a trained model. They can provide timely predictions from many users, for example, in response to an application request you must define an endpoint in Vertex AI by giving it a name and location and deciding whether the access is Standard, which makes the endpoint available for prediction serving through a REST API. Multiple models can be deployed to an endpoint, and a single model can be deployed to multiple endpoints to split traffic. You might deploy a single model to multiple endpoints to test out a new model before serving it to all traffic. Either way, it’s important to emphasize that a model must be deployed to an endpoint before that model can be used to serve online predictions.
+
 ## 02.09 - Lab: Structured Data Prediction using Vertex AI Platform
+
+**Synopsis:** In this lab you train, evaluate, and deploy a machine learning model to predict a baby's weight.
+
+![](images/Pasted%20image%2020230617100355.png)
+
+#### Task 1. Create storage bucket
+#### Task 2. Launch Vertex AI Notebooks
+#### Task 3. Clone course repo within your Vertex AI notebooks instance
+
+`git clone https://github.com/GoogleCloudPlatform/training-data-analyst`
+
+#### Task 4. Structured data prediction using Vertex AI Platform
+
+1. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > production_ml > babyweight**, and open **train_deploy.ipynb**.
+
+Follow NB instructions.
+
+**Note**: The completed notebook is saved in `notebooks/production-ml-systems/structured-data-prediction-using-vertex-ai-platform.ipynb`
+
 
 # 03. Designing Adaptable Systems
 

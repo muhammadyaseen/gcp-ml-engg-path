@@ -240,8 +240,7 @@ Open `lab-01.ipynb`
 #### Task 5. Run your training job in Cloud 
 
 Follow along in the notebook.
-**Note:** The completed notebook has been saved as: `notebooks/ml-pipelines-on-gcp/structured-data-prediction-using-vertex-ai-platform`
-
+**Note:** This lab is broken at the moment on Qwicklab
 
 
 # 02.  Pipeline orchestration with TFX
@@ -313,7 +312,7 @@ AI Platform > Pipelines > New Instance > Configure Kubeflow > Create New Cluster
 
 #### Task 5-7. Clone the lab repo, and follow along in notebook
 
-Note: I downloaded the completed notebook and saved it in `notebooks/lab-cts-train-multiple-frameworks.ipynb`
+Note: I downloaded the completed notebook and saved it in `notebooks/ml-pipelines-on-gcp/cts-train-with-multiple-frmwks-with-kubeflow-and-ai-platform-pipelines.ipynb`
 
 This is what a successful run looks like:
 
