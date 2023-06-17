@@ -479,8 +479,23 @@ Now that we know how to specify the configuration actions for Cloud Build and ho
 
 Cloud Build can manage multiple actions on GitHub (push, tag, pull request etc). We want to configure Cloud Build to execute the build using these triggers. The first step towards this automation is to link the GitHub repo with the Google Cloud Project. The next step is to specify the Cloud Build, what action to take when one of these triggers is detected and we set this up within Cloud Build. Once done, After you've tagged your code and pushed your tag to GitHub, the build will complete. Everything is triggered automatically. 
 
-## 06.05 - Lab: CI/CD for a Kubeflow pipelines on AI Platform 
+## 06.05 - Lab: CI/CD for Kubeflow pipelines on AI Platform 
 
-Add
+**Synopsis:** n this lab, you develop a Cloud Build CI/CD workflow that automatically builds and deploys a Kubeflow Pipeline (KFP). You also integrate your workflow with GitHub by setting up a trigger that starts the workflow when a new tag is applied to the GitHub repo that hosts the pipeline's code.
 
+![](images/Pasted%20image%2020230617090932.png)
+
+#### Task 1: Create an instance of AI Platform Pipelines
+
+#### Task 2: Create an instance of Vertex AI Platform Notebooks
+
+#### Task 3: Clone the mlops-on-gcp repo within your Vertex AI Platform Notebooks instance
+
+`git clone https://github.com/GoogleCloudPlatform/mlops-on-gcp`
+
+#### Task 4: Navigate to the mlops-on-gcp notebook
+
+In the notebook interface, navigate to **mlops-on-gcp > on_demand > kfp-caip-sklearn > lab-03-kfp-cicd > exercises**, and open **lab-03.ipynb**.
+
+The completed notebook has been saved in:  `notebooks/ml-ops-course/ci-cd-for-kubeflow-pipeline.ipynb`
 
