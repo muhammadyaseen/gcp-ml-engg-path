@@ -149,6 +149,25 @@ Follow NB instructions.
 ## 03.02 - Diagnosing a production model
 
 # 04. Designing High-Performance ML Systems
+
+## 04.01 - Intro
+## 04.02 - Training
+## 04.03 - Predictions
+## 04.04 - Why distributed training is needed
+## 04.05 - Distributed training architectures
+## 04.06 - Tensorflow Distributed training strategies
+## 04.07 - Mirrored strategy
+## 04.08 - Multi-worker Mirrored strategy
+## 04.09 - TPU strategy
+## 04.10 - Parameter server strategy
+## 04.11 - Lab: Distributed Training with Keras
+## 04.12 - Lab: Distributed Training with GPUs on Cloud AI Platform
+## 04.13 - Training on large datasets with `tf.data` API
+## 04.14 - TPU Speed Data Pipelines
+## 04.15 - Inference
+## 04.16 - Quiz
+
+
 # 05. Building Hybrid ML Systems
 
 ## 05.01 - ML on Hybrid Cloud
