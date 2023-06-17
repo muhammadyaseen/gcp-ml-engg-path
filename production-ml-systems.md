@@ -134,19 +134,155 @@ Follow NB instructions.
 # 03. Designing Adaptable Systems
 
 ## 03.01 - Intro
+
+Welcome to Designing Adaptable ML systems. In this module, we'll explore how to: recognize the ways that a model is dependent on data, make cost-conscious engineering decisions, know when to roll back a model to an earlier version, debug the causes of observed model behavior, and implement a pipeline that is immune to one type of dependency.
+
 ## 03.02 - Adapting to data
+
+When it comes to adapting to change, consider which of these four is most likely to change?
+![](images/Pasted%20image%2020230617163355.png)
+
+**The answer is that all of them can, and often do, change.**
+
+Let's see how this happens, and what to do about it with a couple example scenarios
+
+- an upstream model whose output u were consuming changes
+- the data logging format chages
+- some features are added w/o proper scrutiny, they are not causal but only correlated. 
+
 ## 03.03 - Changing Distribution
-## 03.03 - Right and Wrong Decisions
-## 03.02 - System Failure
-## 03.02 - Concept Drift
-## 03.02 - Actions to mitigate Concept Drift
-## 03.02 - Tensorflow Data Validation
-## 03.02 - Components of Tensorflow Data Validation
-## 03.02 - Lab - Intro to Tensorflow Data Validation
-## 03.02 - Lab - Advanced Visualizations with Tensorflow Data Validation
-## 03.02 - Mitigating train-serve skew thru design
-## 03.02 - Lab - Serving ML Predictions in Batch and Real Time
-## 03.02 - Diagnosing a production model
+
+The statistical term for changes in the likelihood of observed values like model inputs is changes in the distribution. And it turns out that the distribution of the data can change for all sorts of reasons.
+
+There's another name for when models are asked to make predictions on points in feature space that are far away from the training data, and that’s extrapolation. Extrapolation means to generalize outside the bounds of what we’ve previously seen. Interpolation is the opposite. It means to generalize within the bounds of what we’ve previously seen. Interpolation is always much easier.
+
+You can protect yourself from changing distributions using a few different methods.
+
+- The first thing you can do is be vigilant through monitoring. You can look at the descriptive summaries of your inputs and compare them to what the model has seen. If, for example, the mean or the variance has changed substantially, then you can analyze this new segment of the input space, to see if the relationships learned still hold.
+-  You can also look to see whether the model’s residuals, that is the difference between its predictions and the labels, has changed as a function of your inputs. If, for example, you used to have small errors at one slice of the input and large in another, and now it’s switched, this could be evidence of a change in the relationship.
+- Finally, if you have reason to believe that the relationship is changing over time, you can force the model to treat more recent observations as more important by writing a custom loss function, or by retraining the model on the most recent data.
+
+## 03.04 Lab : Adapting to Data
+
+One of the engineers acknowledges this but still insists that it’s worth spending time doing an extensive ablation analysis, where the value of an individual feature is computed by comparing it to
+a model trained without it. What might this engineer be concerned about? The engineer might be concerned about legacy and bundled features. 
+- Legacy features are older features that were added because they were valuable at the time. But since then, better features have been added, which have made them redundant without our knowledge
+- Bundled features on the other hand, are features that were added as part of a bundle, which collectively are valuable but individually may not be. Both of these features represent additional unnecessary data dependencies.
+
+![](images/Pasted%20image%2020230617164322.png)
+
+## 03.05 - Right and Wrong Decisions
+
+Some decisions about data are a matter of weighing cost versus benefit, like short-term performance goals against long-term maintainability. Others, though, are about right and wrong.
+
+We refer to this idea where the label is somehow leaking into the training data as **data leakage**. Data leakage is related to a broader class of problems we’ve seen before in the last specialization, where we talked about models learning unacceptable strategies. Previously, we learned that when there’s class imbalances, a model might learn to predict the majority class. In this case, the model has learned to use a feature that wouldn’t actually be known and which cannot be plausibly causally related to the label.
+
+**Cancer example:**
+
+Hospital name as feature.
+
+Hospital name is very predictive of the outcome label, but causally unrelated to the actual relationship b/w symptoms and disease. We shouldn't include this as a training feature.
+
+**Author political affiliation example:**
+
+Wrong way to split
+
+![](images/Pasted%20image%2020230617165048.png)
+
+Right way to split
+
+![](images/Pasted%20image%2020230617165113.png)
+
+
+
+## 03.06 - System Failure
+
+**Scenario 1**
+Here’s another slightly different scenario. You've trained a product recommendation model based on users’ click and purchase behavior on your ecommerce site.
+
+It's impossible to have models unlearn things that have already been learned, but one thing you can do is roll back the model's state to a time prior to the data pollution. In order to do this, you will need infrastructure that automatically creates and saves models as well as their meta information.
+
+**Scenario 2**
+
+Another scenario. You’ve trained a static product recommendation model which alone will determine which products users see when they are on the home page and when they are viewing individual products.
+
+What went wrong? Well, your model is not updating to new users, new products, and new patterns in user preference. Because the model only knows about your older products, it continues to recommend them long after they’ve fallen out of favor. Ultimately, users simply ignored the recommendations altogether, and made do with the site’s search functionality.
+
+The solution here is to dynamically retrain your model on newer data, and also to understand the limits of your model.
+
+**Scenario 3**
+Here’s one other scenario. You’ve deployed a statically-trained fraud detection model and its performance starts off good but quickly degrades. 
+
+What’s gone wrong here? In adversarial environments, where one party is trying to beat another, it’s particularly important to dynamically retrain the model, to keep up with the most recent strategies.
+
+## 03.07 - Concept Drift
+
+Why do machine learning models lose their predictive power over time?
+
+traditional machine learning algorithms were developed  with certain assumptions
+
+![](images/Pasted%20image%2020230617174626.png)
+
+Drift is the change in an entity with respect to a baseline.
+
+01:02In the case of production ML models, this is the change between the real-time production data and a baseline data set, likely the training set, that is representative of the task the
+
+01:13model is intended to perform
+
+But production data can diverge or drift from the
+
+01:38baseline data over time due  to changes in the real world. There are several types of drift in ML models. 
+
+![](images/Pasted%20image%2020230617174847.png)
+
+
+![](images/Pasted%20image%2020230617174901.png)
+
+In this supervised learning  classification example, when the distribution of the label changes,
+
+04:59it could mean that the relationship between features and labels is changing as well. At the very least, it’s likely that our model’s predictions, which will typically match  the distribution of the labels
+
+05:10on the data on which it was trained, will be significantly less accurate.
+
+![](images/Pasted%20image%2020230617175126.png)
+
+![](images/Pasted%20image%2020230617175251.png)
+
+![](images/Pasted%20image%2020230617175302.png)
+![](images/Pasted%20image%2020230617175350.png)
+
+Concept drift can occur due to shifts
+
+08:13in the feature space and /  or the decision boundary, so we need to be aware of these during production. If the data is changing, or if the relationship between the features
+
+08:23and the label is changing, this is going to cause issues with our model
+There are 4 different types of concept drift.
+
+![](images/Pasted%20image%2020230617175453.png)
+
+## 03.08 - Actions to mitigate Concept Drift
+
+both data drift and concept drift lead to model drift
+
+![](images/Pasted%20image%2020230617175607.png)
+
+![](images/Pasted%20image%2020230617175637.png)
+
+Also, for concept drift, you can design your systems to detect changes. Periodically updating your static model with more recent historical data, for example, is a common way to mitigate concept drift.
+
+Remember, concept drift is the change in relationships between the model inputs and the model output. After your diagnosis and mitigation efforts, retraining or refreshing the model over time will help to maintain model quality.
+
+![](images/Pasted%20image%2020230617175741.png)
+
+## 03.09 - Tensorflow Data Validation
+
+
+## 03.10 - Components of Tensorflow Data Validation
+## 03.11 - Lab - Intro to Tensorflow Data Validation
+## 03.12 - Lab - Advanced Visualizations with Tensorflow Data Validation
+## 03.13 - Mitigating train-serve skew thru design
+## 03.14 - Lab - Serving ML Predictions in Batch and Real Time
+## 03.15 - Diagnosing a production model
 
 # 04. Designing High-Performance ML Systems
 
@@ -172,22 +308,15 @@ Follow NB instructions.
 
 ## 05.01 - Intro
 
-You will learn how to build hybrid machine learning models,
+You will learn how to build hybrid machine learning models, and how to optimize TensorFlow graphs for mobile. Let's start by discussing a technology called Kubeflow, which helps us build hybrid cloud machine learning models. But why are we discussing hybrid in the first place?
 
-00:15and how to optimize TensorFlow graphs for mobile. Let's start by discussing a technology called Kubeflow, which helps us build hybrid cloud machine learning models. But why are we discussing hybrid in the first place?
+**Why would you need anything other than Google Cloud?** There are times, when you cannot be fully cloud native. What kinds of situations? You may not be able to do machine learning solely on the cloud. Perhaps you are tied to on-premises infrastructure, and your ultimate goal is to move to the public cloud, but it's gonna take a few years. 
 
-Why would you need anything other than Google Cloud?
+Perhaps there are constraints about being able to move your training data off your on-premise cluster or data center. So you have to make do with the system that you have. 
 
-There are times, however,
+Or maybe the data that is being produced is produced by a system that is running on a different cloud or the model predictions need to be consumed by an application on some other cloud. So you need a multi-cloud solution, not a solution that is solely GCP. 
 
-02:07when you cannot be fully cloud native. What kinds of situations? You may not be able to do machine learning solely on the cloud. Perhaps you are tied to on-premises infrastructure,
-
-02:22and your ultimate goal is to move to the public cloud, but it's gonna take a few years. Perhaps there are constraints about being able to move your training data
-
-02:33off your on-premise cluster or data center. So you have to make do with the system that you have. Or maybe the data that is being produced is produced by a system that is running on a different cloud
-Or the model predictions need to be consumed by an application on some other cloud. So you need a multi-cloud solution, not a solution that is solely GCP. Or maybe you are running machine learning on the edge
-
-03:05and connectivity constraints force you to have to do your predictions on the edge-- on the device itself. And so you have to do inference on the edge. This is a very common situation if you're doing Internet of Things.
+Or maybe you are running machine learning on the edge and connectivity constraints force you to have to do your predictions on the edge-- on the device itself. And so you have to do inference on the edge. This is a very common situation if you're doing Internet of Things.
 
 So here, for example, is Cisco's hybrid cloud architecture. Cisco partnered with Google Cloud to bridge their private cloud infrastructure and their existing applications with Google Cloud Platform
 
