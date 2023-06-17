@@ -170,11 +170,141 @@ Follow NB instructions.
 
 # 05. Building Hybrid ML Systems
 
-## 05.01 - ML on Hybrid Cloud
-## 05.02 - Kubeflow
-## 05.03 - Lab - Kubeflow Pipelines on Vertex AI 2.5
-## 05.04 - Tensorflow Lite
-## 05.05 - Optimizing Tensorflow for Mobile
+## 05.01 - Intro
+
+You will learn how to build hybrid machine learning models,
+
+00:15and how to optimize TensorFlow graphs for mobile. Let's start by discussing a technology called Kubeflow, which helps us build hybrid cloud machine learning models. But why are we discussing hybrid in the first place?
+
+Why would you need anything other than Google Cloud?
+
+There are times, however,
+
+02:07when you cannot be fully cloud native. What kinds of situations? You may not be able to do machine learning solely on the cloud. Perhaps you are tied to on-premises infrastructure,
+
+02:22and your ultimate goal is to move to the public cloud, but it's gonna take a few years. Perhaps there are constraints about being able to move your training data
+
+02:33off your on-premise cluster or data center. So you have to make do with the system that you have. Or maybe the data that is being produced is produced by a system that is running on a different cloud
+Or the model predictions need to be consumed by an application on some other cloud. So you need a multi-cloud solution, not a solution that is solely GCP. Or maybe you are running machine learning on the edge
+
+03:05and connectivity constraints force you to have to do your predictions on the edge-- on the device itself. And so you have to do inference on the edge. This is a very common situation if you're doing Internet of Things.
+
+So here, for example, is Cisco's hybrid cloud architecture. Cisco partnered with Google Cloud to bridge their private cloud infrastructure and their existing applications with Google Cloud Platform
+
+Kubeflow helps you migrate between cloud and on-prem environments.
+
+## 05.02 - ML on Hybrid Cloud
+
+In order to build hybrid machine learning systems that work well both on-premises and in the cloud, your machine learning framework has to support three things:
+
+![](images/Pasted%20image%2020230617122134.png)
+
+**Composability**
+Each machine learning stage-- data analysis, training, model validation, monitoring-- these are all independent systems. Everyone has a different way to handle these. When we say "composability," it's about the ability to compose a bunch of microservices together and the option to use what makes sense for your problem.
+
+**Portability**
+But now that you've built your specific framework, you want to move it around. And that's where we get into portability. The stack that you use is likely made up of all these components-- and probably lots more. you want to move it around. And that's where we get into portability.
+
+**Scalability:**
+scalability in machine learning means so many more things. Accelerators-- GPUs, TPUs, et cetera-- disks, skillsets-- software engineers, researchers, data engineers, data analysts, data scientists, different skillsets-- teams across the org-- because there's teams that are gonna be building the experiments, teams that are gonna be using the experiments, teams that are gonna be monitoring the machine learning models.
+
+## 05.03 - Kubeflow
+
+In this module, you will learn:
+ - how to build hybrid cloud machine learning models with Kubeflow and
+ - how to optimize TensorFlow graphs for mobile
+
+Kubeflow is the machine learning toolkit for Kubernetes, and it brings several benefits. It makes deploying machine learning workflows on Kubernetes simple, portable, and scalable
+
+Kubeflow can actually run on anything, whether it's a phone, a laptop, or an on-premises cluster. Regardless of where it's run, the code remains the same. Some of the configuration settings just change. Portability is at the container level, and you can move to any environment that offers Kubernetes.
+
+## 05.04 - Lab - Kubeflow Pipelines on Vertex AI 2.5
+
+In this lab, you learn how to utilize Vertex AI Pipelines to execute a simple Kubeflow Pipeline SDK derived ML Pipeline.
+
+![](images/Pasted%20image%2020230617160126.png)
+
+The main point of the exercise is that we can run a compiled pipeline (.json) by importing it from GCS via Vertex AI Pipelines.
+
+#### Task 1. Set up the project environment
+
+First we add the Storage Admin Role to the default Compute Engine Service Account
+
+Then run
+
+```bash
+gcloud storage buckets create gs://qwiklabs-gcp-03-ce6ef1ccac82
+touch emptyfile1
+touch emptyfile2
+gcloud storage cp emptyfile1 gs://qwiklabs-gcp-03-ce6ef1ccac82/pipeline-output/emptyfile1
+gcloud storage cp emptyfile2 gs://qwiklabs-gcp-03-ce6ef1ccac82/pipeline-input/emptyfile2
+```
+
+The Pipeline has already been created for you and simply requires a few minor adjustments to allow it to run in your Qwiklabs project. Download the AI Pipeline from the lab assets folder:
+
+`wget https://storage.googleapis.com/cloud-training/dataengineering/lab_assets/ai_pipelines/basic_pipeline.json`
+
+#### Task 2. Configure and inspect the Pipeline code
+
+The Pipeline code is a compilation of two AI operations written in Python. The example is very simple but demonstrates how easy it is orchestrate ML procedures written in a variety of languages (TensorFlow, Python, Java, etc.) into an easy to deploy AI Pipeline. The lab example performs two operations, concatenation and reverse, on two string values.
+
+1. First you must make an adjustment to update the output folder for the AI Pipeline execution
+`sed -i 's/PROJECT_ID/qwiklabs-gcp-03-ce6ef1ccac82/g' basic_pipeline.json`
+
+2. Inspect **basic_pipeline.json** to confirm that the output folder is set to your project:
+`tail -20 basic_pipeline.json`
+
+3. move the updated **basic_pipeline.json** file to the Cloud Storage bucket created earlier so that it can be accessed to run an AI Pipeline job
+`gcloud storage cp basic_pipeline.json gs://qwiklabs-gcp-03-ce6ef1ccac82/pipeline-input/basic_pipeline.json`
+
+#### Task 3. Execute the AI Pipeline
+
+**Vertex AI** > Pipelines > Create Run 
+
+1. From **Run detail**, select **Import from Cloud Storage** and for **Cloud Storage URL** browse to the **pipeline-input** folder you created inside your project's cloud storage bucket. Select the **basic_pipeline.json** file.
+2. Click **Select**.
+3. Leave the remaining default values, click **Continue**. Click Submt
+
+What the run looks like:
+
+![](images/Pasted%20image%2020230617161307.png)
+
+**Concat job info**
+
+![](images/Pasted%20image%2020230617161116.png)
+
+**Reverse job info:**
+![](images/Pasted%20image%2020230617161327.png)
+
+The pipeline file is saved as `production-ml-systems/kfp-basic-pipeline.json`
+
+## 05.05 - Tensorflow Lite
+
+ Mobile TensorFlow makes sense when there's a poor or missing network connection,
+
+00:16or where sending continuous data to a server would be too expensive. The purpose is to help developers make lean mobile apps using TensorFlow, both by continuing to reduce the code footprint,
+
+00:30and by supporting quantization and lower-precision arithmetic that make the models smaller.
+
+a new frontier is confederated learning. The idea is you continuously train the model on the device, and then you combine the model updates from a federation of user devices
+
+01:58to update the overall model.
+
+## 05.06 - Optimizing Tensorflow for Mobile
+
+Let's look at a second scenario where hybrid models are necessary
+
+Take Google Translate, for example, which is composed of several models.
+
+It uses one model to find a sign, another model to read the sign, using optical character recognition, a third model to translate the sign, a fourth model to superimpose the translated text, and a fifth model to select the best font to use.
+
+Dependending on latency and accuracy requirements we might need a hybrid of on device and on cloud inference. This means sometimes embedding the model within the device itself.
+
+TensorFlow Lite makes specific compromises to enable machine learning inference on low-power or under-resourced devices
+
+## 05.07 - Quiz
+
+
 
 
 
