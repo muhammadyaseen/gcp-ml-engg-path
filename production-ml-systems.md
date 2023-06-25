@@ -133,6 +133,10 @@ Follow NB instructions.
 
 # 03. Designing Adaptable Systems
 
+TFX components
+
+![](images/Pasted%20image%2020230625121201.png)
+
 ## 03.01 - Intro
 
 Welcome to Designing Adaptable ML systems. In this module, we'll explore how to: recognize the ways that a model is dependent on data, make cost-conscious engineering decisions, know when to roll back a model to an earlier version, debug the causes of observed model behavior, and implement a pipeline that is immune to one type of dependency.
@@ -275,9 +279,30 @@ Remember, concept drift is the change in relationships between the model inputs 
 ![](images/Pasted%20image%2020230617175741.png)
 
 ## 03.09 - Tensorflow Data Validation
+There are three phases in a pipeline. 
+- Data is ingested and validated, 
+- a model is trained and analyzed, 
+- and the model is then deployed in production
 
+In this video, we’ll provide an overview of TensorFlow Data Validation, which is part of _the ingest and validate data phase_. TensorFlow Data Validation is a library for analyzing and validating machine learning data.
+
+Two common use-cases of TensorFlow Data Validation within a TensorFlow Extended pipelines are:
+- validation of continuously arriving data, and 
+- training-serving skew detection
+
+This brings us to the **three** main components TFDV. 
+- The Statistics Generation component, which generates statistics for feature analysis. 
+- The Schema Generation component, which gives you a description of your data. 
+- And the Example Validator component, which allows you to check for anomalies
+
+In general, any difference between how you generate your training data and your serving data, the data you use to generate predictions, should be reviewed to prevent training-serving skew. Training-serving skew can also occur based on your data distribution in your training, validation, and testing data splits. To summarize, distribution skew occurs when the distribution of feature values for training data is significantly different from serving data and one of the key causes for distribution skew is how data is handled or changed in training vs production.
 
 ## 03.10 - Components of Tensorflow Data Validation
+
+3 Components
+
+![](images/Pasted%20image%2020230625121036.png)
+
 ## 03.11 - Lab - Intro to Tensorflow Data Validation
 ## 03.12 - Lab - Advanced Visualizations with Tensorflow Data Validation
 ## 03.13 - Mitigating train-serve skew thru design

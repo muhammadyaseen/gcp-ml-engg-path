@@ -4,6 +4,10 @@
 
 # 01. Introduction to TFX Pipelines
 
+**TFX Components**
+
+![](images/Pasted%20image%2020230625121201.png)
+
 ## 01.01 - Tensorflow Extended (TFX)
 
 TensorFlow Extended is Google's production machine learning platform based on TensorFlow.
