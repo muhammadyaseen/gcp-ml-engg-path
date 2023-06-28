@@ -1,8 +1,37 @@
 # 01. Introduction to Vertex AI Feature Store
 
 ## 01.01 - Introduction
+
+![](images/Pasted%20image%2020230628090044.png)
+
 ## 01.02 - Feature Store Benefits
+
+
+![](images/Pasted%20image%2020230628090135.png)
+
+![](images/Pasted%20image%2020230628090204.png)
+
+![](images/Pasted%20image%2020230628090230.png)
+
+![](images/Pasted%20image%2020230628090254.png)
+
+
+![](images/Pasted%20image%2020230628090326.png)
+
+![](images/Pasted%20image%2020230628090338.png)
+
+![](images/Pasted%20image%2020230628090353.png)
+
+![](images/Pasted%20image%2020230628090410.png)
+
+![](images/Pasted%20image%2020230628090425.png)
+
 ## 01.03 - Feature Store terminology and concepts
+
+In this lesson, we will define feature store terminology and concepts. A feature store is a top-level container for your features and their values. When you set up a feature store,
+
+00:15permitted users can add and share their features without additional engineering support
+
 ## 01.04 - Feature Store data model
 
 The _Feature Store data model_ includes:
@@ -60,6 +89,10 @@ Recall the source requirements for feature store. You must have a column for ent
 Before you import data, you need to define the corresponding entity type and features. Feature store offers batch ingestion so that you can do a bulk ingestion of values into a feature store. For example, your computed source data might live in locations, such as BigQuery or Cloud Storage, and you can then ingest data from those sources into a feature store so that feature values can be served at a uniform format from the central feature store.
 
 ## 01.06 - Serving Features: Batch and Online
+
+![](images/Pasted%20image%2020230628084315.png)
+
+
 ## 01.07 - PluralSight: Getting Started with GCP and Qwiklabs
 ## 01.08 - Lab: Using Feature Store
 ## 01.09 - Quiz
