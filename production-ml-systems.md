@@ -299,11 +299,43 @@ In general, any difference between how you generate your training data and your 
 
 ## 03.10 - Components of Tensorflow Data Validation
 
-3 Components
+TFDV has 3 Components
 
 ![](images/Pasted%20image%2020230625121036.png)
 
+For the `trip_start_hour` feature:, 
+- it appears there is not that much data in the early morning hours. It appears that the `trip_start_hour` column, where the time window is between `2:00am to 6:00am`, has data missing. 
+- This helps determine the area we need to focus on to fix any data-related problems. We’ll need to get more data, otherwise, the prediction for 4:00am data will be overgeneralized.
+
+- The `StatisticsGen` component generates feature statistics and random samples over training data, which can be used for visualization and validation. 
+- These statistics are being generated from a Pandas DataFrame. You can also generate statistics from a CSV file or a TF.Record formatted file.
+- StatisticsGen generates both numeric and categorical features
+- Notice that for our categorical features, in addition to seeing the  number of missing values, we also see the number of unique values. 
+- TensorFlow Data Validation can also help you identify unbalanced data distributions.
+- There are a number of  `StatisticsGen` **data validation checks** that you should be aware of. These include: Feature min, max, mean, mode, and median, feature correlations, class imbalance, check to see missing values, and histograms of features, for both numerical and categorical. 
+- The SchemaGen TFX pipeline component can specify data types for feature values, whether a feature has to  be present in all examples, allowed value ranges, and other properties.
+- A SchemaGen pipeline component will automatically generate a schema by inferring types, categories, and ranges  from the training data
+ 
+In this example visualization, "type" indicates the feature datatype, "presence" indicates whether the feature must be present in 100% of examples or not, so whether it’s required or optional. "Valency" indicates the number of values required per training example. "Domain" and "Values" indicates the feature domain and its values.
+
+The `ExampleValidator` pipeline component **identifies anomalies** in training and serving data by comparing data statistics computed by the StatisticsGen pipeline component against a schema. It takes the inputs and looks for problems in the data, like missing values, and reports any anomalies.
+
 ## 03.11 - Lab - Intro to Tensorflow Data Validation
+
+**Synopsis:** This lab is an introduction to TensorFlow Data Validation (TFDV), a key component of TensorFlow Extended. This lab serves as a foundation for understanding the features of TFDV and how it can help you understand, validate, and monitor your data.
+
+TFDV can be used for generating schemas and statistics about the distribution of every feature in the dataset. Such information is useful for comparing multiple datasets (e.g., training vs inference datasets) and reporting.
+
+Statistical differences in the features distribution TFDV also offers visualization capabilities for comparing datasets based on the Google PAIR Facets project.
+![](images/Pasted%20image%2020230625122041.png)
+
+#### Task 1. Set up environment
+#### Task 2. Launch Vertex AI Notebooks
+#### Task 3. Clone course repo
+#### Task 4. Follow Intro to TF DV notebook
+1. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > production_ml > labs**, and open **tfdv_basic_spending.ipynb**.
+2. 
+
 ## 03.12 - Lab - Advanced Visualizations with Tensorflow Data Validation
 ## 03.13 - Mitigating train-serve skew thru design
 ## 03.14 - Lab - Serving ML Predictions in Batch and Real Time
