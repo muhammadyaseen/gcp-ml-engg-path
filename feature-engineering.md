@@ -97,6 +97,58 @@ Before you import data, you need to define the corresponding entity type and fea
 ## 01.08 - Lab: Using Feature Store
 ## 01.09 - Quiz
 
+# 02. Raw Data to Features
+
+## 02.01 - Introduction
+## 02.02 - Overview of Feature Engineering
+## 02.03 - Raw Data to Features
+## 02.04 - Good features vs. Bad features
+## 02.05 - Features should be known at prediction time
+## 02.06 - Features should be numeric
+## 02.07 - Features should have enough examples
+## 02.08 - Bringing human insight
+## 02.09 - Representing Features
+## 02.10 - Quiz
+
+# 03. Feature Engineering
+
+## 03.01 - Introduction
+## 03.02 - ML vs. Statistics
+## 03.03 - Basic Feature Engg.
+## 03.04 - Lab: Performing Basic Feature Engg. in BQML
+## 03.05 - Feature Crosses
+## 03.06 - Bucketize & Transform Functions
+## 03.07 - Advance Feature Engg. in BQML
+## 03.08 - Predicting Housing Prices
+## 03.09 - Estimate Taxi Fare
+## 03.10 - Temporal & Geo-Location Features
+## 03.10 - Lab:  Performing Basic Feature Engg. in Keras
+## 03.10 - Quiz
 
 
+# 04. Preprocessing & Feature Creation
+
+## 04.01 - Introduction
+## 04.02 - Apache Beam & Dataflow
+## 04.03 - Dataflow terms and Concepts
+## 04.04 - Quiz
+
+# 05. Feature Crosses
+
+## 05.01 - Introduction
+## 05.02 - What is a Feature Cross
+## 05.03 - Discretization
+## 05.04 - Use Feature Crosses to create a good classifier
+## 05.05 - Too much of a good thing
+## 05.06 - Quiz
+
+# 06. Introduction to TF Transform
+
+## 06.01 - Introduction
+## 06.02 - TF Transform
+## 06.03 - Analyze Phase
+## 06.04 - Transform Phase
+## 06.05 - Supporting Serving
+## 06.06 - Lab: Exploring `tf.transform`
+## 06.07 - Quiz
 
