@@ -108,26 +108,17 @@ It involves the transformation of a given feature with the objective of reducing
 
 The training data used in machine learning can often be enhanced by extraction of features from the raw data collected. In most cases, appropriate transformation of data is an essential prerequisite step before model construction.
 
-Feature engineering can be defined as a process that attempts to create additional relevant features from the existing raw features in the data and to increase the predictive power of the learning algorithm. It can also be defined as the process of combining domain knowledge, intuition and data science skill sets to create features
+Feature engineering can be defined as a process that attempts to create additional relevant features from the existing raw features in the data and to increase the predictive power of the learning algorithm. It can also be defined as the process of combining domain knowledge, intuition and data science skill sets to create features.
 
-feature vectors can be numerical, categorical, bucketized, crossed and hashed.
+Feature vectors can be numerical, categorical, bucketized, crossed and hashed.
 
-how can you get the most out of your data
+Feature Engg asks: How can you get the most out of your data for predictive modeling? This is the problem that the process and practice of feature engineering solves.
 
-03:43for predictive modeling? This is the problem that the process and practice of feature engineering solves
 Studying other feature-engineering problems is highly recommended. The example of seasonal sales, for example, lends itself to time-series features and longitude and latitude features.
 
-feature engineering in reality is an iterative process
+Feature engineering in reality is an _iterative process_. In other words, you create a _baseline model with little to no feature engineering_ as determined by your data types and then add feature engineering to see how your model improves. Feature engineering types include using indicator variables to isolate key information, for example geolocation features for a New York City taxi service where you isolate a certain area for your training data set. 
 
-In other words, you create a baseline model with little to no feature engineering as determined by your data types
-
-09:24and then add feature engineering to see how your model improves. Feature engineering types include using indicator variables to isolate key information, for example geolocation features for a New York City taxi service
-
-09:44where you isolate a certain area for your training data set. It can also include highlighting interactions between two or more features, meaning that you can actually include the sum of two features,
-
-09:58the difference between two features, the product of two features and the quotient of two features
-
-And another example is to transform categorical features into dummy variables.
+It can also include _highlighting interactions between two or more features_, meaning that you can actually include the sum of two features, the difference between two features, the product of two features and the quotient of two features. And another example is to transform categorical features into dummy variables.
 
 ![](Pasted%20image%2020230628173437.png)
 
@@ -145,18 +136,14 @@ You need to have a reasonable hypothesis about why a particular feature might ma
 ## 02.05 - Features should be known at prediction time
 ## 02.06 - Features should be numeric
 ## 02.07 - Features should have enough examples
+
 You need to have enough examples of feature value in the dataset, so it's the value of the feature. You need to have enough examples of this
-Rule of thumb, and this is just a rule of thumb, is that you need to have at least five examples of any value before using it in your model.
-If you have only three auto transactions in your dataset and all three of them are not fraudulent, then essentially a model is going
 
-00:41to learn that nobody can ever commit fraud on auto transactions. And that's going to be a problem. You want to avoid having values of which you don't have enough examples.
+Rule of thumb, and this is just a rule of thumb, is that you need to have at least five examples of any value before using it in your model. If you have only three auto transactions in your dataset and all three of them are not fraudulent, then essentially a model is going to learn that _nobody can ever commit fraud on auto transactions_. And that's going to be a problem. You want to avoid having values of which you don't have enough examples.
 
-If you have a 10% off or a 5% off or a 15% off, you'd probably have at least five examples of these. But what if you have this one special customer to whom
+If you have a 10% off or a 5% off or a 15% off, you'd probably have at least five examples of these. But what if you have this one special customer to whom you give an 85% discount? Can you use that in your dataset? No. You don't have enough samples. That 85% is now way too specific.
 
-01:48you give an 85% discount? Can you use that in your dataset? No. You don't have enough samples. That 85% is now way too specific.
-
-But what if you have continuous numbers? Then you may have to group them up. This is called "discretization." And then see if, when discrete bands, you have at least five examples of each band.
- we're talking about the values of the features, not the values of the labels.
+But what if you have continuous numbers? Then you may have to group them up. This is called "discretization." And then see if, when discrete bands, you have at least five examples of each band. We're talking about the values of the features, not the values of the labels.
  
 ## 02.08 - Bringing human insight
 ## 02.09 - Representing Features
