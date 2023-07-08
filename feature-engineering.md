@@ -152,10 +152,92 @@ But what if you have continuous numbers? Then you may have to group them up. Thi
 # 03. Feature Engineering
 
 ## 03.01 - Introduction
+![](images/Pasted%20image%2020230708102240.png)
+
 ## 03.02 - ML vs. Statistics
+
+- In ML, the idea is that you build a separate model for this situation where you have the data versus when you don't.
+-  Statistics, on the other hand, is about keeping the data that you have and getting the best results out of the data that you have.
+- The difference in philosophy affects how you treat outliers. In ML, you go out and find enough outliers that it becomes something that you can actually train with.
+- Statistics is often used in a limited data regime where ML operates with lots of data.
+- When you don't have enough data, you impute it or replace it by an average.
+
+Now, this example here is of predicting house value. The data set includes latitude and two peaks that you see here, one for SFO and the other for LAX. That's San Francisco and Los Angeles.
+
+![](images/Pasted%20image%2020230708102901.png)
+
+*It doesn't make sense to represent latitude as a floating point feature* in our model. It's because there's no linear relationship exists between latitude and housing values. For example, houses in latitude 35 are not 35, 34 times more expensive than houses at latitude 34. And yet individual latitudes are probably a good indicator of housing values. *So what do we do with that magnitude piece?*
+
+- Well, what if we did this? Instead of having one floating point feature, let's take a look and have 11 distinct boolean features, yes, no, LatitudeBin1, LatitudeBin2 all the way to LatitudeBin11
+- Another option that you see commonly used between data scientists is to have quantile boundaries so that the number of values in each bin is constant.
+- You'll see this a lot in regression problems. Quite a few training cycles will be spent trying to get the unusual instances correct, so you're collapsing a long tail in ML versus removing them from those set and normal statistics.
+
+![](images/Pasted%20image%2020230708103127.png)
+
+![](images/Pasted%20image%2020230708103245.png)
+
+- Now, modern architectures for ML end up taking variable magnitudes into account because of what's called batch normalization. 
+![](images/Pasted%20image%2020230708103335.png)
+
 ## 03.03 - Basic Feature Engg.
+
+  
+Person: BigQuery preprocessing involves two aspects:
+- Representation transformation
+- Feature construction.
+
+![](images/Pasted%20image%2020230708104013.png)
+
+BigQuery ML supports two types of feature preprocessing: 
+- automatic and 
+- manual.
+
+![](images/Pasted%20image%2020230708104043.png)
+
+![](images/Pasted%20image%2020230708104108.png)
+
+**Baselines are often made with no feat. engg.**
+
+![](images/Pasted%20image%2020230708104319.png)
+
+![](images/Pasted%20image%2020230708104246.png)
+
 ## 03.04 - Lab: Performing Basic Feature Engg. in BQML
 ## 03.05 - Feature Crosses
+
+Here are some of the advanced feature engineering preprocessing functions in BigQuery ML:
+
+![](images/Pasted%20image%2020230708105058.png)
+
+- `ML.FEATURE_CROSS(STRUCT(features))` does a feature cross of all the combinations
+- The `TRANSFORM` clause which allows you to specify all preprocessing during model creation. The preprocessing is automatically applied during the prediction and evaluation phases of machine learning.
+- `ML.BUCKETIZE(f, split_points)` where split_points is an array.
+
+**Feature crosses are about memorization**
+
+Memorization is the opposite of generalization, which is what machine learning aims to do. So should you do this? In a real-world ML system, there's a place for both.
+
+**Memorization works when you have** so much data that for any single grid cell within your input space the distribution of data is statistically significant. When that is the case, you can memorize. You are essentially just learning the mean for every grid cell.
+
+If you're familiar with traditional ML, **you may not have heard much about feature crosses because they memorize and only work on large data sets**. You will find feature crosses extremely useful in real-world data sets. Larger data allows you to make your boxes smaller and you can memorize more finely. Feature crosses are a powerful feature preprocessing technique on large data sets.
+
+For ex, if instead of treating the hour of day and day of week as independent inputs, we essentially concatenated them to create a feature cross.
+
+When you do a feature cross, the input is very very sparse
+
+![](images/Pasted%20image%2020230708105552.png)
+
+**Note some observations about sparsity.** 
+- Sparse models contain fewer features and therefore are easier to train on limited data. 
+- Fewer features also means less chance of overfitting. 
+- Fewer features also mean it is easier to explain to users because only the most meaningful features remain
+![](images/Pasted%20image%2020230708105659.png)
+
+In this lab, you'll see examples of both spatial and temporal functions used in preprocessing
+
+- ST_Distance returns the shortest distance in meters between two non-empty geographies.
+- Note that BigQuery ML, by default, assumes that numbers are numeric features and strings are categorical features.
+
 ## 03.06 - Bucketize & Transform Functions
 ## 03.07 - Advance Feature Engg. in BQML
 ## 03.08 - Predicting Housing Prices
