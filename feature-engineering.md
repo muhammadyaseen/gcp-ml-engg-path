@@ -239,6 +239,15 @@ In this lab, you'll see examples of both spatial and temporal functions used in 
 - Note that BigQuery ML, by default, assumes that numbers are numeric features and strings are categorical features.
 
 ## 03.06 - Bucketize & Transform Functions
+
+In this lab, we use the `BUCKETIZE` function to create the pickup and dropoff feature.
+
+- `BUCKETIZE` is a preprocessing function that creates buckets or bins.
+- That is, it bucketizes a continuous numerical feature into a string feature with bucket names as the value.
+
+When the TRANSFORM clause is used, user specifiedtransforms during training will be automatically applied during model serving, prediction, evaluation, et cetera.
+
+
 ## 03.07 - Advance Feature Engg. in BQML
 ## 03.08 - Predicting Housing Prices
 ## 03.09 - Estimate Taxi Fare
