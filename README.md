@@ -5,6 +5,7 @@ My notes from the following [Google Cloud ML Engineering Path](https://www.cloud
 2. Machine Learning Operations (MLOps) Fundamentals
 3. Perform Foundational Data, ML, and AI Tasks in Google Cloud
 4. Build and Deploy ML Solutions on Vertex AI
+5. Feature Engineering on GCP
 
 ![images/gcp2.png](images/gcp2.png)
 
