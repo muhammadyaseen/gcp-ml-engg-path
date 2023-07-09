@@ -318,8 +318,35 @@ Scaling latitude and longitude, it is very important for numeric variables to ge
 
 The pickup and drop-off longitude and latitude data are crucial to predicting the fair amount because fair amounts in New York City taxis are largely determined by the distance traveled. As such, we need to teach the model the Euclidean distance between the pickup and drop-off point.
 
-## 03.10 - Lab:  Performing Basic Feature Engg. in Keras
-## 03.10 - Quiz
+## 03.11 - Lab:  Performing Basic Feature Engg. in Keras
+
+#### Task 1. Enable APIs
+#### Task 2. Launch a Vertex AI Notebooks instance
+#### Task 3. Clone a course repo within your Vertex AI Notebooks instance
+#### Task 4. Performing basic feature engineering in Keras
+
+1. Clone repo:`git clone https://github.com/GoogleCloudPlatform/training-data-analyst`
+2. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > feature_engineering > labs > 3_keras_basic_feat_eng.ipynb**.
+
+**Note:** The completed file has been saved as:
+`notebooks/feat-engg/3_keras_basic_feat_eng.ipynb`
+
+
+## 03.12 - Lab:  Performing Advanced Feature Engg. in Keras
+
+#### Task 1. Enable APIs
+#### Task 2. Launch a Vertex AI Notebooks instance
+#### Task 3. Clone a course repo within your Vertex AI Notebooks instance
+#### Task 4. Performing basic feature engineering in Keras
+
+1. Clone repo:`git clone https://github.com/GoogleCloudPlatform/training-data-analyst`
+2. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > feature_engineering > labs > 4_keras_adv_feat_eng.ipynb**.
+
+**Note:** The completed file has been saved as:
+`notebooks/feat-engg/4_keras_adv_feat_eng.ipynb`
+
+
+## 03.13 - Quiz
 
 ![](images/Pasted%20image%2020230709124851.png)
 ![](images/Pasted%20image%2020230709124909.png)
