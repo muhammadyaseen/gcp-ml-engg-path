@@ -405,5 +405,17 @@ With a pipeline implemented in Python, you can run the code directly in the shel
 ## 06.04 - Transform Phase
 ## 06.05 - Supporting Serving
 ## 06.06 - Lab: Exploring `tf.transform`
+![](images/Pasted%20image%2020230709154515.png)
+
+#### Task 1. Launch a Vertex AI Notebooks instance
+#### Task 2. Clone the course repo within your Vertex AI Notebooks instance
+#### Task 3. Exploring tf.transform
+
+1. Clone repo:`git clone https://github.com/GoogleCloudPlatform/training-data-analyst`
+2. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > feature_engineering > labs >  **5_tftransform_taxifare.ipynb**.
+
+**Note:** The completed file has been saved as:
+`notebooks/feat-engg/5_tftransform_taxifare.ipynb`
+
 ## 06.07 - Quiz
 
