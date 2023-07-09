@@ -97,6 +97,19 @@ Before you import data, you need to define the corresponding entity type and fea
 
 ## 01.07 - PluralSight: Getting Started with GCP and Qwiklabs
 ## 01.08 - Lab: Using Feature Store
+![](images/Pasted%20image%2020230709144607.png)
+
+#### Task 1. Enable All Recommended API
+#### Task 2. Launch a Vertex AI Notebooks instance
+#### Task 3. Clone a course repo within your Vertex AI Notebooks instance
+#### Task 4. Use Feature Store
+
+1. Clone repo: `git clone https://github.com/GoogleCloudPlatform/training-data-analyst`
+2. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > feature_engineering > labs > **6_gapic_feature_store.ipynb**.
+
+**Note:** The completed file has been saved as:
+`notebooks/feat-engg/6_gapic_feature_store.ipynb.ipynb`
+
 ## 01.09 - Quiz
 
 # 02. Raw Data to Features
@@ -213,7 +226,6 @@ BigQuery ML supports two types of feature preprocessing:
 #### Task 3. Clone a course repo within your Vertex AI Notebooks instance
 #### Task 4. Performing basic feature engineering in BQML
 
-# Performing Basic
 
 1. Clone repo:`git clone https://github.com/GoogleCloudPlatform/training-data-analyst`
 2. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > feature_engineering > labs > 1_bqml_basic_feat_eng_bqml-lab.ipynb**.
@@ -317,21 +329,69 @@ The pickup and drop-off longitude and latitude data are crucial to predicting th
 # 04. Preprocessing & Feature Creation
 
 ## 04.01 - Introduction
-## 04.02 - Apache Beam & Dataflow
-## 04.03 - Dataflow terms and Concepts
-## 04.04 - Quiz
 
-# 05. Feature Crosses
-
-## 05.01 - Introduction
 ![](images/Pasted%20image%2020230709131354.png)
 
 In this module, you will learn more about Dataflow, which is a complementary technology to Apache Beam, and both of them can help you build and run preprocessing and feature 
 engineering. 
 In this module, you learn to explain Apache Beam and describe Dataflow.
 
-## 05.02 - What is a Feature Cross
+## 04.02 - Apache Beam & Dataflow
 
+![](images/Pasted%20image%2020230709142420.png)
+
+Google Cloud Dataflow, which is a complementary technology to Apache Beam, and both of them can help you **build and run preprocessing and feature engineering pipelines.**
+
+- As a developer, you don't have to worry about managing the size of the cluster that runs your pipeline. Dataflow can change the amount of computer resources, the number of servers that will run your pipeline and do that elastically depending on the amount of data that your pipeline needs to process
+- So to implement a data processing pipeline, you write your code using the Apache Beam APIs and then deploy the code to Cloud Dataflow.
+- One of the coolest things about Apache Beam is that it supports both batch and streaming data processing using the same pipeline code. In fact, the library's name, Beam, comes from a contraction of batch and stream.
+- In the code on the screen that the read and write operations are done using the beam.io methods. These methods use different **connectors**. For example, the PubSub connector can read the content of the messages that are streamed into the pipeline. Other connectors can read raw text from Google Cloud Storage or file system.
+- The Apache Beam has a variety of connectors to help you use services on Google Cloud like BigQuery
+![](images/Pasted%20image%2020230709142446.png)
+
+## 04.03 - Dataflow terms and Concepts
+
+Let's explore the Apache Beam pipelines in more detail. The pipeline must have a source,
+
+00:22which is where the pipeline gets the input data. The pipeline has a series of steps. Each of the steps in Beam is called a transform. Each transform works on a structure called PCollection.
+
+just remember that every transform gets a PCollection as input and outputs the result to another PCollection
+
+The result of the last transform in a pipeline is important.
+
+00:52It goes to sync, which is the output of the pipeline
+
+To run a pipeline, you need something called a runner. A runner takes the pipeline code and executes. Runners are platform-specific, meaning that there's a dataflow runner
+
+01:08for executing a pipeline on Cloud dataflow. There's another runner if you want to use Apache Spark to run your pipeline. There's also a direct runner that will execute a pipeline on your local computer. If you'd like, you can even implement your own custom runner for your own distributed computing platform
+
+![](images/Pasted%20image%2020230709142514.png)
+
+So how do you implement these pipelines?
+
+![](images/Pasted%20image%2020230709143136.png)
+
+Every time you use the pipe operator you provide a PCollection data structure as input and return a PCollection as output. An important thing to know about PCollections is that unlike many data structures, PCollection does not store all of its data memory. PCollection is like a data structure with pointers to where the dataflow cluster stores your data
+
+![](images/Pasted%20image%2020230709143328.png)
+With different connectors, it's possible to read even from real time streaming data sources, like Google Cloud Pub/Sub or Kafka. One of the connectors is for BigQuery Data Warehouse on GCP. When using the BigQuery connector, you need to specify the SQL statement that BigQuery will evaluate to return back at table with rows of results. The table rows are then passed to the pipeline in a PCollection.
+
+![](images/Pasted%20image%2020230709143353.png)
+
+To export out the result of a pipeline, there are connectors for Cloud Storage, Pub/Sub, BigQuery and more. Of course, you can also just write the results to the file system
+
+![](images/Pasted%20image%2020230709143407.png)
+
+With a pipeline implemented in Python, you can run the code directly in the shell using the Python command. To submit the pipeline as a job, to execute in dataflow on GCP, you need to provide some additional information. You need to include arguments with the name of the GCP project, location in Google Cloud Storage Bucket, where dataflow will keep some staging and temporary data, and you also need to specify the name of the runner, which in this case is that dataflow runner.
+
+![](images/Pasted%20image%2020230709143236.png)
+
+## 04.04 - Quiz
+
+# 05. Feature Crosses
+
+## 05.01 - Introduction
+## 05.02 - What is a Feature Cross
 ## 05.03 - Discretization
 ## 05.04 - Use Feature Crosses to create a good classifier
 ## 05.05 - Too much of a good thing
