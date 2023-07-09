@@ -1,3 +1,5 @@
+**Complete PDF slides in:** `pdfs/feature-engineerng-complete-course-slides.pdf`
+
 # 01. Introduction to Vertex AI Feature Store
 
 ## 01.01 - Introduction
@@ -322,7 +324,14 @@ The pickup and drop-off longitude and latitude data are crucial to predicting th
 # 05. Feature Crosses
 
 ## 05.01 - Introduction
+![](images/Pasted%20image%2020230709131354.png)
+
+In this module, you will learn more about Dataflow, which is a complementary technology to Apache Beam, and both of them can help you build and run preprocessing and feature 
+engineering. 
+In this module, you learn to explain Apache Beam and describe Dataflow.
+
 ## 05.02 - What is a Feature Cross
+
 ## 05.03 - Discretization
 ## 05.04 - Use Feature Crosses to create a good classifier
 ## 05.05 - Too much of a good thing
