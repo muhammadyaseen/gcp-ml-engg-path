@@ -244,14 +244,30 @@ In this lab, we use the `BUCKETIZE` function to create the pickup and dropoff fe
 
 - `BUCKETIZE` is a preprocessing function that creates buckets or bins.
 - That is, it bucketizes a continuous numerical feature into a string feature with bucket names as the value.
-
-When the TRANSFORM clause is used, user specifiedtransforms during training will be automatically applied during model serving, prediction, evaluation, et cetera.
-
+- When the `TRANSFORM` clause is used, user specified transforms during training will be automatically applied during model serving, prediction, evaluation, et cetera.
 
 ## 03.07 - Advance Feature Engg. in BQML
-## 03.08 - Predicting Housing Prices
+## 03.08 - Predict Housing Prices
+
+(much of the video focused on introducing Keras)
+
+The tf.data API makes it possible to handle large amounts of data, read from different data formats, and perform complex transformations. Most machine learning performance is heavily dependent on the representation of the feature vector. As a result, much of the actual effort in deploying machine learning algorithms goes into the design of preprocessing pipelines and data transformations.
+
+Often you don't want to feed a number directly into the model, but instead split its value into different categories based on numerical ranges. Consider our raw data that represents a home's age. Instead of representing the house age as a numeric column, we could split the home age into several buckets using the bucketized column. Notice the one-hot values below describe which age range each row matches.
+
+Combining features into a single feature, better known as feature crosses, enables a model to learn separate weights for each combination of features.
+
 ## 03.09 - Estimate Taxi Fare
+
+(much of the video focused on introducing Keras)
+
+Our next machine-learning problem is to predict taxi fare price in New York City using Keras.
+
+The functional API in Keras is an alternative way of creating models that offers a lot more flexibility, including creating more complex models.
+
 ## 03.10 - Temporal & Geo-Location Features
+
+
 ## 03.10 - Lab:  Performing Basic Feature Engg. in Keras
 ## 03.10 - Quiz
 
