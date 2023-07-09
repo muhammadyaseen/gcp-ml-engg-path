@@ -246,7 +246,7 @@ In this lab, we use the `BUCKETIZE` function to create the pickup and dropoff fe
 - That is, it bucketizes a continuous numerical feature into a string feature with bucket names as the value.
 - When the `TRANSFORM` clause is used, user specified transforms during training will be automatically applied during model serving, prediction, evaluation, et cetera.
 
-## 03.07 - Advance Feature Engg. in BQML
+## 03.07 - Lab: Advance Feature Engg. in BQML
 ## 03.08 - Predict Housing Prices
 
 (much of the video focused on introducing Keras)
@@ -267,10 +267,19 @@ The functional API in Keras is an alternative way of creating models that offers
 
 ## 03.10 - Temporal & Geo-Location Features
 
+There is no information regarding the distance between the pickup and drop-off points. Therefore, we create a new feature that calculates the distance between each pair of pickup and drop-off points. We can do this using the Euclidean distance, which is the straight line distance between any two coordinate points.
+
+Scaling latitude and longitude, it is very important for numeric variables to get scaled before they are fed into the neural network. Here, we use min/max scaling, also called normalization, on the geolocation features.
+
+The pickup and drop-off longitude and latitude data are crucial to predicting the fair amount because fair amounts in New York City taxis are largely determined by the distance traveled. As such, we need to teach the model the Euclidean distance between the pickup and drop-off point.
 
 ## 03.10 - Lab:  Performing Basic Feature Engg. in Keras
 ## 03.10 - Quiz
 
+![](images/Pasted%20image%2020230709124851.png)
+![](images/Pasted%20image%2020230709124909.png)
+![](images/Pasted%20image%2020230709124930.png)
+![](images/Pasted%20image%2020230709124943.png)
 
 # 04. Preprocessing & Feature Creation
 
