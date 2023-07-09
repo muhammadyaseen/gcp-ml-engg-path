@@ -2,6 +2,10 @@
 
 # MLOps Fundamentals
 
+**Complete PDF slides in:** `pdfs/MLOps Fundamentals - Module <n> - <name>.pdf`
+
+Module 2 was missing in the original, don't wreck your brain on why it is missing.
+
 # 01. When and Why do we need MLOps ?
 
 **ML froms Ops POV**: 
