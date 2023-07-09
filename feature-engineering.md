@@ -203,6 +203,22 @@ BigQuery ML supports two types of feature preprocessing:
 ![](images/Pasted%20image%2020230708104246.png)
 
 ## 03.04 - Lab: Performing Basic Feature Engg. in BQML
+
+![](images/Pasted%20image%2020230709125919.png)
+
+#### Task 1. Enable All Recommended API
+#### Task 2. Launch a Vertex AI Notebooks instance
+#### Task 3. Clone a course repo within your Vertex AI Notebooks instance
+#### Task 4. Performing basic feature engineering in BQML
+
+# Performing Basic
+
+1. Clone repo:`git clone https://github.com/GoogleCloudPlatform/training-data-analyst`
+2. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > feature_engineering > labs > 1_bqml_basic_feat_eng_bqml-lab.ipynb**.
+
+**Note:** The completed file has been saved as:
+`notebooks/feat-engg/1_bqml_basic_feat_eng_bqml-lab.ipynb`
+
 ## 03.05 - Feature Crosses
 
 Here are some of the advanced feature engineering preprocessing functions in BigQuery ML:
@@ -247,6 +263,21 @@ In this lab, we use the `BUCKETIZE` function to create the pickup and dropoff fe
 - When the `TRANSFORM` clause is used, user specified transforms during training will be automatically applied during model serving, prediction, evaluation, et cetera.
 
 ## 03.07 - Lab: Advance Feature Engg. in BQML
+
+![](images/Pasted%20image%2020230709130029.png)
+
+#### Task 1. Enable APIs
+#### Task 2. Launch a Vertex AI Notebooks instance
+#### Task 3. Clone a course repo within your Vertex AI Notebooks instance
+#### Task 4. Performing advanced feature engineering in BQML
+
+1. Clone repo:`git clone https://github.com/GoogleCloudPlatform/training-data-analyst`
+2. In the notebook interface, navigate to **training-data-analyst > courses > machine_learning > deepdive2 > feature_engineering > labs > 2_bqml_adv_feat_eng-lab.ipynb**.
+
+**Note:** The completed file has been saved as:
+`notebooks/feat-engg/2_2_bqml_adv_feat_eng-lab.ipynb`
+
+
 ## 03.08 - Predict Housing Prices
 
 (much of the video focused on introducing Keras)
