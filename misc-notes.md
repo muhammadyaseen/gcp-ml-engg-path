@@ -21,23 +21,23 @@ There are 2 types of notebooks. You have to select a `region` to create NBs.
 - **GPU support**: QFD "Managed notebooks instances support GPU accelerators and the ability to sync with a GitHub repository". Cost rises significantly of course.
 - When you create a managed notebooks instance, it is deployed as a Google-managed virtual machine (VM) instance.
 - QFD "Managed notebooks instance includes common data science framework environments. You can also add your own custom container images to your managed notebooks instance." You're greeted with the following when you open jupyter lab.
-![](Pasted%20image%2020230228102731.png)
+![](images/Pasted%20image%2020230228102731.png)
 - You can specify what compute resources your code will run on (can configure vCPUs/GPUs/RAM) form the notebook UI, no need to recreate the instance. This can come in handy to quickly switch from prototyping to running on full data.
 - We can access services like Google Cloud Build, Big Query, AI Platform etc. from the notebook cells as we have seen previously in the 2 courses.
 - You can run multiple notebooks in the instance, all using various kernels. So it is better to think of the "instance" as a machine hosting your 'project', where you have various notebooks for data exploration and cleaning, model building, pipelines etc.
-![](Pasted%20image%2020230228103236.png)
+![](images/Pasted%20image%2020230228103236.png)
 - **Strorage**: When you create an instance, you also attach a Storage with it (min. 100GB Standard Persistent Storage). This is persistent storage. Which means that your notebooks (and other data) will persist, even after you have shutdown the notebook and 'Stopped' the instance. When you 'start' the instance again, you will find all your previous work there. You'll be charged for the storage of course. So make sure to delete the instance once done. In the following I created `my-test-nb` on first run, then stopped the instance, started it again, and created `my-pytorch-nb`.
-![](Pasted%20image%2020230228103325.png)
+![](images/Pasted%20image%2020230228103325.png)
 - For your stopped instance, you will see an 'Open Jupyterlab' link
-![](Pasted%20image%2020230228103901.png)
+![](images/Pasted%20image%2020230228103901.png)
 
 #### User-managed Notebooks
 - After clicking 'New Notebook', you have to select an environment, so it is not completely bare bones. You get basic packages installed depending on the env you choose.
-![](Pasted%20image%2020230228102606.png)
+![](images/Pasted%20image%2020230228102606.png)
 
-![](Pasted%20image%2020230228111210.png)
+![](images/Pasted%20image%2020230228111210.png)
 - As can be seen, the selection of Kernels is very limited compared to the managed notebook. Some of this stuff may be mitigated by installing relevant packages in the boot script etc.
-![](Pasted%20image%2020230228110231.png)
+![](images/Pasted%20image%2020230228110231.png)
 - **Storage and GPU**: You can still attach a GPU and get a persistant storage which keeps your notebooks saved.
 - You can specify your own Docker container. [Details here](https://cloud.google.com/vertex-ai/docs/workbench/user-managed/custom-container)
 - **Imp difference**: Most imp difference when compared to managed notebooks is tht you CANNOT change hardware config (cpu,ram,gpu) on-the-fly. You'll have to create a new instance.
